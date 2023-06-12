@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ production ]
     
 env:
   MIRROR_URL: "git@github.com:EpitechMscProPromo2025/T-YEP-600-PAR-6-1-finalproject-john.aristosa.git"
