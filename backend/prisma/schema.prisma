@@ -28,5 +28,5 @@ model Products {
   fiber Float @default(0)
   salt Float @default(0)
   averageMass Float @default(0)
-  image String?
+  imageBucketId String?
 }
