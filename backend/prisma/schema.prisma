@@ -13,3 +13,20 @@ model User {
   username String
   password String
 }
+
+model Products {
+  id String @default(uuid()) @id
+  title String @unique
+  type String
+  description String?
+  energy Float @default(0)
+  fat Float @default(0)
+  saturatedFat Float @default(0)
+  carbohydrates Float @default(0)
+  sugars Float @default(0)
+  protein Float @default(0)
+  fiber Float @default(0)
+  salt Float @default(0)
+  averageMass Float @default(0)
+  imageBucketId String?
+}
