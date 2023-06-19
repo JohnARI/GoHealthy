@@ -1,0 +1,57 @@
+name: go_healthy
+description: A new Flutter project.
+
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0-63.1.beta <4.0.0'
+
+# To add dependences we run the command "flutter pub add {dependance name}" that we can find on pub.dev
+
+dependencies:
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  flutter_dotenv: ^5.1.0
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^8.0.2
+  http: ^1.0.0
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Linter to analyze your code and make it cleaner (listen to it please :D)
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  # Pour ajouter des assets à l'application il faut ajouter le chemin relatif:
+  assets:
+    # Add assets from the images directory to the application.
+    - .env
+    - assets/images/
+
+  # Pour ajouter des polices de caractères à l'application il faut ajouter le chemin relatif et le nom de la police:
+  # fonts:
+  #   - family: fontNameRegular
+  #     fonts:
+  #       - asset: fonts/fontNameRegular.ttf
+  #       - asset: fonts/fontNameRegularItalic.ttf
+  #         style: italic
+  #   - family: fontNameBold
+  #     fonts:
+  #       - asset: fonts/fontNameBold.ttf
+  #       - asset: fonts/fontWeightBoldItalic.ttf
+  #         weight: 700
+  #         style: italic
