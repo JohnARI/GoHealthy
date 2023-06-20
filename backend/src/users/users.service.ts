@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma, User } from '@prisma/client';
+import { Connection, Prisma, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -25,7 +25,13 @@ export class UsersService {
     });
   }
 
-  findOne(where: Prisma.UserWhereUniqueInput): Promise<User | null> {
-    return this.prismaService.user.findUnique({ where });
+  findOne(
+    where: Prisma.UserWhereUniqueInput,
+    includes?: Prisma.UserInclude,
+  ): Promise<(User & { connections?: Array<Connection> }) | null> {
+    return this.prismaService.user.findUnique({
+      where,
+      include: includes,
+    });
   }
 }

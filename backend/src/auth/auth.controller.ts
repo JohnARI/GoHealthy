@@ -10,11 +10,12 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { JwtAuthGuard } from './jwt-auth.guard';
-import { LocalAuthGuard } from './local-auth.guard';
+import { JwtAccessGuard } from './guards/jwt-access.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthService } from './auth.service';
 import { Prisma } from '@prisma/client';
 import { UsersService } from 'src/users/users.service';
+import { RefreshAuthGuard } from './guards/jwt-refresh.guard';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludePrefixes: ['password'] })
@@ -31,13 +32,13 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessGuard)
   @Get('profile')
   getProfile(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
     return this.usersService.findOne({ id: req.user.id });
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessGuard)
   @Patch('profile')
   updateProfile(
     @Body() body: Prisma.UserUpdateInput,
@@ -47,5 +48,17 @@ export class AuthController {
       where: { id: req.user.id },
       data: body,
     });
+  }
+
+  @UseGuards(JwtAccessGuard)
+  @Get('logout')
+  logout(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
+    return this.authService.logout(req.user);
+  }
+
+  @UseGuards(RefreshAuthGuard)
+  @Get('refresh')
+  refreshToken(@Request() req: Request & { user: any }) {
+    return this.authService.refreshToken(req.user.id, req.user.refreshToken);
   }
 }
