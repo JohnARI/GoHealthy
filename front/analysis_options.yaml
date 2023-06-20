@@ -31,3 +31,4 @@ linter:
     avoid_empty_else: true
     file_names: true
     constant_identifier_names: false
+    non_constant_identifier_names: false
