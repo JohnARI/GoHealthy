@@ -4,9 +4,9 @@ import { Prisma, Products } from '@prisma/client';
 @Injectable()
 export class ProductsService {
   constructor(private prismaService: PrismaService) {}
-  async create(data: Prisma.ProductsCreateInput): Promise<void> {
+  async create(data: Prisma.ProductsCreateInput): Promise<Products | void> {
     try {
-      await this.prismaService.products.create({ data });
+      return this.prismaService.products.create({ data });
     } catch (error) {
       throw new Error('One or more fields are missing');
     }

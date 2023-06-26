@@ -13,17 +13,17 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Prisma } from '@prisma/client';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAccessGuard } from '../auth/guards/jwt-access.guard';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessGuard)
   @Post()
   async create(@Body() data: Prisma.ProductsCreateInput) {
     try {
-      await this.productsService.create(data);
+      return this.productsService.create(data);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -32,13 +32,13 @@ export class ProductsController {
   @Get(':id')
   async getProductById(@Param('id', ParseUUIDPipe) id: string) {
     try {
-      await this.productsService.findOne({ id });
+      return this.productsService.findOne({ id });
     } catch (error) {
       throw new NotFoundException(error);
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessGuard)
   @Patch(':id')
   async updateProduct(
     @Param('id', ParseUUIDPipe) id: string,
@@ -46,7 +46,7 @@ export class ProductsController {
     data: Prisma.ProductsUpdateInput,
   ) {
     try {
-      await this.productsService.update({
+      return this.productsService.update({
         where: { id },
         data,
       });
@@ -55,11 +55,11 @@ export class ProductsController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessGuard)
   @Delete(':id')
   async deleteProduct(@Param('id', ParseUUIDPipe) id: string) {
     try {
-      await this.productsService.deleteProduct({ id });
+      return this.productsService.deleteProduct({ id });
     } catch (error) {
       throw new NotFoundException(error);
     }
