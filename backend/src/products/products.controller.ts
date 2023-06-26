@@ -1,7 +1,5 @@
 import {
-  ClassSerializerInterceptor,
   Controller,
-  UseInterceptors,
   Post,
   Body,
   Get,
@@ -11,15 +9,17 @@ import {
   NotFoundException,
   BadRequestException,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Prisma } from '@prisma/client';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@UseInterceptors(ClassSerializerInterceptor)
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() data: Prisma.ProductsCreateInput) {
     try {
@@ -38,6 +38,7 @@ export class ProductsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async updateProduct(
     @Param('id', ParseUUIDPipe) id: string,
@@ -54,6 +55,7 @@ export class ProductsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteProduct(@Param('id', ParseUUIDPipe) id: string) {
     try {
