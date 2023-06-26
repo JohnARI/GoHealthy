@@ -9,6 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthController } from './auth.controller';
 import { UsersService } from 'src/users/users.service';
 import { RefreshTokenStrategy } from './strategies/jwt-refresh.stategy';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RefreshTokenStrategy } from './strategies/jwt-refresh.stategy';
     RefreshTokenStrategy,
     UsersService,
     PrismaService,
+    GoogleStrategy,
   ],
   exports: [AuthService],
 })

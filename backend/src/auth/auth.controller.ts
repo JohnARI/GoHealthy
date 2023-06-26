@@ -16,10 +16,12 @@ import { AuthService } from './auth.service';
 import { Prisma } from '@prisma/client';
 import { UsersService } from 'src/users/users.service';
 import { RefreshAuthGuard } from './guards/jwt-refresh.guard';
+import { GoogleOauthGuard } from './guards/google-auth.guard';
+import { RequestWithUserIniqueInput } from 'src/types/request.type';
 
 @UseInterceptors(ClassSerializerInterceptor)
-@SerializeOptions({ excludePrefixes: ['password'] })
-@Controller()
+@SerializeOptions({ excludePrefixes: ['password', 'accountType'] })
+@Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
@@ -28,13 +30,23 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
+  login(@Request() req: RequestWithUserIniqueInput) {
     return this.authService.login(req.user);
+  }
+
+  @Get('google')
+  @UseGuards(GoogleOauthGuard)
+  googleAuth() {} // nothing to do here, the guard does it all!
+
+  @Get('google/redirect')
+  @UseGuards(GoogleOauthGuard)
+  googleAuthRedirect(@Request() req) {
+    return this.authService.googleLogin(req.user);
   }
 
   @UseGuards(JwtAccessGuard)
   @Get('profile')
-  getProfile(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
+  getProfile(@Request() req: RequestWithUserIniqueInput) {
     return this.usersService.findOne({ id: req.user.id });
   }
 
@@ -42,7 +54,7 @@ export class AuthController {
   @Patch('profile')
   updateProfile(
     @Body() body: Prisma.UserUpdateInput,
-    @Request() req: Request & { user: Prisma.UserWhereUniqueInput },
+    @Request() req: RequestWithUserIniqueInput,
   ) {
     return this.usersService.update({
       where: { id: req.user.id },
@@ -52,7 +64,7 @@ export class AuthController {
 
   @UseGuards(JwtAccessGuard)
   @Get('logout')
-  logout(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
+  logout(@Request() req: RequestWithUserIniqueInput) {
     return this.authService.logout(req.user);
   }
 
