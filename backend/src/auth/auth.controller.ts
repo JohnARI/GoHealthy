@@ -9,6 +9,8 @@ import {
   SerializeOptions,
   UseInterceptors,
   ClassSerializerInterceptor,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { JwtAccessGuard } from './guards/jwt-access.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -30,7 +32,8 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req: RequestWithUserIniqueInput) {
+  @HttpCode(HttpStatus.OK)
+  async login(@Request() req: Request & { user: Prisma.UserWhereUniqueInput }) {
     return this.authService.login(req.user);
   }
 

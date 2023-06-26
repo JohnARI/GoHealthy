@@ -1,9 +1,4 @@
-import {
-  ForbiddenException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -22,16 +17,16 @@ export class AuthService {
     const user = await this.usersService.findOne({ email });
 
     if (!user || user.accountType !== AccountType.DEFAULT) {
-      throw new ForbiddenException('Access Denied');
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     const isPassCorrect = await bcrypt.compare(pass, user.password);
 
-    if (user && isPassCorrect) {
+    if (isPassCorrect) {
       return user;
     }
 
-    return null;
+    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
 
   async login(user: any) {
@@ -98,15 +93,18 @@ export class AuthService {
       { connections: true },
     );
 
-    if (!user || user.connections.length === 0)
-      throw new ForbiddenException('Access Denied');
+    if (!user || user.connections.length === 0) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
 
     const connection = user.connections.find(
       async (connection) =>
         await bcrypt.compare(refreshToken, connection.refreshToken),
     );
 
-    if (!connection) throw new ForbiddenException('Access Denied');
+    if (!connection) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
 
     const payload = { email: user.email, id: user.id };
 
