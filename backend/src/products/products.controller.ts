@@ -11,10 +11,12 @@ import {
   ParseUUIDPipe,
   UseGuards,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
 import { Prisma } from '@prisma/client';
+import { SkipThrottle } from '@nestjs/throttler';
+import { ProductsService } from './products.service';
 import { JwtAccessGuard } from '../auth/guards/jwt-access.guard';
 
+@SkipThrottle()
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

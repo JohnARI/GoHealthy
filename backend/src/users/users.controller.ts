@@ -6,9 +6,11 @@ import {
   UseInterceptors,
   SerializeOptions,
 } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
+@SkipThrottle()
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludePrefixes: ['password'] })
 @Controller('users')
