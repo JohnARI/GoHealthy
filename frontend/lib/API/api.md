@@ -1,0 +1,2 @@
+# API
+The "API" folder is responsible for handling API integration and communication with external services. It typically contains files related to API endpoints, client configuration, and providers. This folder is where you would find classes responsible for making API requests, defining API endpoints, and configuring the API client.

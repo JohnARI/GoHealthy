@@ -1,0 +1,51 @@
+{
+  "@@locale" : "fr",
+  "appTitle": "Go Healthy",
+  "@appTitle": {
+    "description": "Le titre de l'application"
+  },
+  "login": "Connexion",
+  "@login": {
+    "description": "Le titre de la page de connexion"
+  },
+
+  "logout": "Déconnexion",
+  "@logout": {
+    "description": "Le titre du bouton de déconnexion"
+  },
+
+  "email": "Email",
+  "@email":{
+    "description": "Le titre de l'input email"
+  },
+  "password": "Mot de passe",
+  "@password":{
+    "description": "Le titre de l'input password"
+  },
+  "loginButton": "Se connecter",
+  "@loginButton":{
+    "description": "Le titre du bouton de connexion"
+  },
+  "registerButton": "S'inscrire",
+  "@registerButton":{
+    "description": "Le titre du bouton d'inscription"
+  },
+  "register": "Inscription",
+  "@register": {
+    "description": "Le titre de la page d'inscription"
+  },
+  "forgotPassword": "Mot de passe oublié ?",
+  "@forgotPassword": {
+    "description": "Le titre du lien de mot de passe oublié"
+  },
+
+  "loginWithGoogle": "Se connecter avec Google",
+  "@loginWithGoogle": {
+    "description": "Le titre du bouton de connexion avec Google"
+  },
+
+  "unknownErrorOccured": "Une erreur inconnue s'est produite",
+  "@unknownErrorOccured": {
+    "description": "Message d'erreur"
+  }
+}

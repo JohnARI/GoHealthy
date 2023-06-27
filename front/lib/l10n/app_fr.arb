@@ -1,7 +1,0 @@
-{
-  "@@locale" : "fr",
-  "appTitle": "Go Healthy",
-  "@appTitle": {
-    "description": "Le titre de l'application"
-  }
-}
