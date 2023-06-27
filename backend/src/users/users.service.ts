@@ -11,9 +11,7 @@ export class UsersService {
     const user = { ...data, password: await bcrypt.hash(data.password, 10) };
 
     try {
-      const result = await this.prismaService.user.create({ data: user });
-
-      return result;
+      return this.prismaService.user.create({ data: user });
     } catch (error) {
       throw new HttpException(
         'Database error with field:' + error.meta.target[0],
