@@ -6,14 +6,15 @@ import {
   Patch,
   Delete,
   Param,
-  NotFoundException,
-  BadRequestException,
   ParseUUIDPipe,
   UseGuards,
+  HttpCode,
 } from '@nestjs/common';
+
 import { ProductsService } from './products.service';
-import { Prisma } from '@prisma/client';
 import { JwtAccessGuard } from '../auth/guards/jwt-access.guard';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -21,21 +22,13 @@ export class ProductsController {
 
   @UseGuards(JwtAccessGuard)
   @Post()
-  async create(@Body() data: Prisma.ProductsCreateInput) {
-    try {
-      return this.productsService.create(data);
-    } catch (error) {
-      throw new BadRequestException(error.message);
-    }
+  async create(@Body() data: CreateProductDto) {
+    return this.productsService.create(data);
   }
 
   @Get(':id')
   async getProductById(@Param('id', ParseUUIDPipe) id: string) {
-    try {
-      return this.productsService.findOne({ id });
-    } catch (error) {
-      throw new NotFoundException(error);
-    }
+    return this.productsService.findOne({ id });
   }
 
   @UseGuards(JwtAccessGuard)
@@ -43,25 +36,18 @@ export class ProductsController {
   async updateProduct(
     @Param('id', ParseUUIDPipe) id: string,
     @Body()
-    data: Prisma.ProductsUpdateInput,
+    data: UpdateProductDto,
   ) {
-    try {
-      return this.productsService.update({
-        where: { id },
-        data,
-      });
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.productsService.update({
+      where: { id },
+      data,
+    });
   }
 
   @UseGuards(JwtAccessGuard)
   @Delete(':id')
+  @HttpCode(204)
   async deleteProduct(@Param('id', ParseUUIDPipe) id: string) {
-    try {
-      return this.productsService.deleteProduct({ id });
-    } catch (error) {
-      throw new NotFoundException(error);
-    }
+    return this.productsService.deleteProduct({ id });
   }
 }
