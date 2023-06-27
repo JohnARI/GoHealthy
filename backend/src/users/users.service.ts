@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Connection, Prisma, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
@@ -10,7 +10,14 @@ export class UsersService {
   async create(data: Prisma.UserCreateInput): Promise<User> {
     const user = { ...data, password: await bcrypt.hash(data.password, 10) };
 
-    return this.prismaService.user.create({ data: user });
+    try {
+      return this.prismaService.user.create({ data: user });
+    } catch (error) {
+      throw new HttpException(
+        'Database error with field:' + error.meta.target[0],
+        HttpStatus.CONFLICT,
+      );
+    }
   }
 
   update(params: {
@@ -25,13 +32,19 @@ export class UsersService {
     });
   }
 
-  findOne(
+  async findOne(
     where: Prisma.UserWhereUniqueInput,
     includes?: Prisma.UserInclude,
-  ): Promise<(User & { connections?: Array<Connection> }) | null> {
-    return this.prismaService.user.findUnique({
+  ): Promise<User & { connections?: Array<Connection> }> {
+    const user = await this.prismaService.user.findUnique({
       where,
       include: includes,
     });
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
   }
 }
