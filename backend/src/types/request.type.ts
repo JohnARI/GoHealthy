@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
 
-export type RequestWithUserIniqueInput = Request & {
+export type RequestWithUserUniqueInput = Request & {
   user: Prisma.UserWhereUniqueInput;
 };

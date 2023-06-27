@@ -49,4 +49,14 @@ export class UsersService {
 
     return user;
   }
+
+  async delete(where: Prisma.UserWhereUniqueInput): Promise<User> {
+    const user = await this.prismaService.user.delete({ where });
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
+  }
 }
