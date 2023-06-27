@@ -1,0 +1,52 @@
+{
+  "@@locale" : "en",
+  "appTitle": "Go Healthy",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "The title of the login page"
+  },
+
+  "logout": "Logout",
+  "@logout": {
+    "description": "The title of the logout button"
+  },
+
+  "email": "Email",
+  "@email":{
+    "description": "The title of the input email"
+  },
+  "password": "Password",
+  "@password":{
+    "description": "The title of the input password"
+  },
+  "loginButton": "Login",
+  "@loginButton":{
+    "description": "The title of the login button"
+  },
+  "registerButton": "Register",
+  "@registerButton":{
+    "description": "The title of the register button"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "The title of the register page"
+  },
+  "forgotPassword": "Forgot password?",
+  "@forgotPassword": {
+    "description": "The title of the forgot password link"
+  },
+
+  "loginWithGoogle": "Login with Google",
+  "@loginWithGoogle": {
+    "description": "The title of the login with Google button"
+  },
+
+  "unknownErrorOccured": "An unknown error occurred",
+  "@unknownErrorOccured": {
+    "description": "Error message"
+  }
+}
