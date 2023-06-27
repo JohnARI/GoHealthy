@@ -11,6 +11,7 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
@@ -18,6 +19,7 @@ import { RequestWithUserUniqueInput } from 'src/types/request.type';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+@SkipThrottle()
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludePrefixes: ['password', 'accountType', 'id'] })
 @Controller('users')

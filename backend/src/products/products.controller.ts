@@ -10,12 +10,14 @@ import {
   UseGuards,
   HttpCode,
 } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 
 import { ProductsService } from './products.service';
 import { JwtAccessGuard } from '../auth/guards/jwt-access.guard';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
+@SkipThrottle()
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
