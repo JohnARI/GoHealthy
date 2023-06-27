@@ -19,7 +19,7 @@ import { Prisma } from '@prisma/client';
 import { UsersService } from 'src/users/users.service';
 import { RefreshAuthGuard } from './guards/jwt-refresh.guard';
 import { GoogleOauthGuard } from './guards/google-auth.guard';
-import { RequestWithUserIniqueInput } from 'src/types/request.type';
+import { RequestWithUserUniqueInput } from 'src/types/request.type';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludePrefixes: ['password', 'accountType'] })
@@ -48,26 +48,8 @@ export class AuthController {
   }
 
   @UseGuards(JwtAccessGuard)
-  @Get('profile')
-  getProfile(@Request() req: RequestWithUserIniqueInput) {
-    return this.usersService.findOne({ id: req.user.id });
-  }
-
-  @UseGuards(JwtAccessGuard)
-  @Patch('profile')
-  updateProfile(
-    @Body() body: Prisma.UserUpdateInput,
-    @Request() req: RequestWithUserIniqueInput,
-  ) {
-    return this.usersService.update({
-      where: { id: req.user.id },
-      data: body,
-    });
-  }
-
-  @UseGuards(JwtAccessGuard)
   @Get('logout')
-  logout(@Request() req: RequestWithUserIniqueInput) {
+  logout(@Request() req: RequestWithUserUniqueInput) {
     return this.authService.logout(req.user);
   }
 
