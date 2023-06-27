@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "9b0affd4-ddbe-4b38-b1cb-72e0b6f866fa",
+		"name": "GoHealthy Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27468524",
+		"_collection_link": "https://planetary-crater-94533.postman.co/workspace/GoHealthy~8ef3bb81-5d7b-41ed-ae00-c1e0bc2f1eec/collection/27468524-9b0affd4-ddbe-4b38-b1cb-72e0b6f866fa?action=share&creator=27468524&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "LudovicLogin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"password\": \"Ludodo32@\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JohnLogin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"password\": \"Ludodo32@\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OAuth2",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"username\": \"Ludovic233\",\n    \"password\": \"Ludodo32@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Eau de source - Cristaline - 1,5 L\",\n    \"type\": \"whole\",\n    \"description\": \"Spring water\",\n    \"energy\": 0,\n    \"fat\": 0,\n    \"saturatedFat\": 0,\n    \"carbohydrates\": 0,\n    \"sugars\": 0,\n    \"protein\": 0,\n    \"fiber\": 0,\n    \"salt\": 0.052\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d657c1da-05ca-4b8b-a7d8-ad3ea70684ae"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"French Spring Water\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d657c1da-05ca-4b8b-a7d8-ad3ea70684ae"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2b6d86b5-53b0-4aa3-b209-374249ee74ea"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OpenFoodFacts",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Refresh",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDRkYzY3MTAtZTMxMi00NTFhLWIzMWEtM2Y5Y2YwMWUyNDI0IiwiaWF0IjoxNjg3MDc2NzM2LCJleHAiOjE2ODc2ODE1MzZ9.urky4TOdj0mLXGZ6K6CNtFOs8I6VNyTHXKerSRDGScI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/refresh",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5eHBsYXlybEBnbWFpbC5jb20iLCJpZCI6IjgwNTQ4MGY5LTIxODUtNDkwMC04MDk4LWZjNTY3OTcyMDc5NiIsImlhdCI6MTY4NjkxNzY0MywiZXhwIjoxNjg2OTE3NjczfQ.dl-ZLe353AY5fOOr2mFQH9zVk1xXKCZ2enOmVcLGggU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiYzI2NjBiODEtYjYzOS00M2I5LWJjNzAtNjZmOTZiMDMwNjUxIiwiaWF0IjoxNjg3Nzg4NDI5LCJleHAiOjE2ODc3ODkzMjl9.iIJl2XiD_W0oPfwwLfKXMsGMywPEOKxkMX8K76hKkSA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Lxdovic\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiJhOWViOGI4Ni1hZWZhLTRkZGUtYmIzZi1kOWY5NjIxY2E3ZTAiLCJpYXQiOjE2ODY2NTkyNTMsImV4cCI6MTY4NjY2MDE1M30.7E7p1FbUZQmKfjh11if8MRL3UfJObG8AhNz52cz9QuI",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
