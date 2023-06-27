@@ -5,7 +5,7 @@ export class CreateProductDto {
   title: string;
 
   @IsNotEmpty()
-  type: string;
+  type: 'whole' | 'processed' | 'other';
 
   @IsOptional()
   description?: string;
