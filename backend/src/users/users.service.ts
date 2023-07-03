@@ -11,10 +11,12 @@ export class UsersService {
     const user = { ...data, password: await bcrypt.hash(data.password, 10) };
 
     try {
-      return this.prismaService.user.create({ data: user });
+      const result = await this.prismaService.user.create({ data: user });
+
+      return result;
     } catch (error) {
       throw new HttpException(
-        'Database error with field:' + error.meta.target[0],
+        `Database error with field: ${error.meta.target[0]}`,
         HttpStatus.CONFLICT,
       );
     }
