@@ -30,7 +30,7 @@ class APIClient {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
           includeHeaders ? headers ?? APIProvider.headers : null;
-      final http.Response response = await APIProvider().getClient().get(
+      final http.Response response = await APIProvider.getClient().get(
             Uri.parse(endpoint),
             headers: requestHeaders,
           );
@@ -52,16 +52,39 @@ class APIClient {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
           includeHeaders ? headers ?? APIProvider.headers : null;
-      log(body.toString());
-      final http.Response response = await APIProvider().getClient().post(
+      log(
+        name: 'APIClient',
+        'Request body: $body, Request headers: $requestHeaders, Request endpoint: $endpoint',
+      );
+      log(
+        name: 'APIClient',
+        'Sending request...',
+      );
+      final http.Response response = await APIProvider.getClient().post(
             Uri.parse(endpoint),
             headers: requestHeaders,
             body: body,
           );
-          log(response.body);
+      log(
+        name: 'APIClient',
+        'Request sent successfully with status code: ${response.statusCode} and response body: ${response.body}',
+      );
+      log(
+        name: 'APIClient',
+        'Converting response started...',
+      );
       final dynamic result = handleResponse(response);
+      log(
+        name: 'APIClient',
+        'Converting response completed...',
+      );
       return result as T;
     } catch (e) {
+      log(
+        name: 'APIClient',
+        e.toString(),
+        error: e,
+      );
       handleException(e);
       rethrow;
     }

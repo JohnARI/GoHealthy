@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import '../shared/constants.dart';
 import 'app_routes.dart';
 
 /// The Widget that configures your application.
@@ -25,12 +26,8 @@ class MainApp extends StatelessWidget {
       ],
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context)!.appTitle,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
+      theme: AppTheme.LIGHT_THEME.themeData,
+      darkTheme: AppTheme.DARK_THEME.themeData,
     );
   }
 }

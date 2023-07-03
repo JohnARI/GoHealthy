@@ -8,10 +8,9 @@ import '../blocs/register_bloc.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
 
-    final RegisterBloc _registerBloc = RegisterBloc();
+  final RegisterBloc _registerBloc = RegisterBloc();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text('Register')),
       body: BlocConsumer<RegisterBloc, RegisterState>(
@@ -26,7 +25,7 @@ class RegisterPage extends StatelessWidget {
           }
 
           if (state is RegisterNavigateLoginActionState) {
-            GoRouter.of(context).goNamed(AppRoute.LOGIN_ROUTE_NAME);
+            GoRouter.of(context).goNamed(AppRoute.LOGIN.name);
           }
         },
         builder: (BuildContext context, RegisterState state) {
@@ -43,7 +42,6 @@ class RegisterPage extends StatelessWidget {
       ),
     );
   }
-  
   Widget _buildInitialState() {
     return Scaffold(
       body: Center(
@@ -53,7 +51,8 @@ class RegisterPage extends StatelessWidget {
             const Text('Register Page'),
             ElevatedButton(
               onPressed: () {
-                _registerBloc.add(const RegisterButtonPressedEvent('email', 'name', 'password'));
+                _registerBloc.add(const RegisterButtonPressedEvent(
+                    'email', 'name', 'password'));
               },
               child: const Text('Register'),
             ),
@@ -68,11 +67,11 @@ class RegisterPage extends StatelessWidget {
       ),
     );
   }
-  
+
   Widget _buildLoadingState() {
     return Container();
   }
-  
+
   Widget _buildErrorState() {
     return Container();
   }

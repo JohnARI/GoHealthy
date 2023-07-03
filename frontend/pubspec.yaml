@@ -7,9 +7,9 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0-63.1.beta <4.0.0'
+  sdk: '>=3.1.0-246.0.dev <4.0.0'
 
-# To add dependences we run the command 'flutter pub add {dependance name}'' that we can find on pub.dev
+# To add dependences we run the command 'flutter pub add {dependance name}' that we can find on pub.dev
 
 dependencies:
   equatable: ^2.0.5
@@ -19,10 +19,10 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ^8.0.0
-  go_router: ^8.0.2
+  go_router: ^9.0.0
   http: ^1.0.0
   intl: any
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

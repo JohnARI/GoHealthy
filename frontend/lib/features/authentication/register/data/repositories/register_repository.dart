@@ -6,7 +6,7 @@ import '../../../../../helpers/api_helper.dart';
 import '../models/register.dart';
 
 class RegisterRepository {
-  final http.Client client = APIProvider().getClient();
+  final http.Client client = APIProvider.getClient();
   Future<Register> login(String email, String username, String password) async {
     try {
       final http.Response response = await client.post(

@@ -7,4 +7,11 @@ abstract class LogoutState extends Equatable {
   List<Object> get props => <Object>[];
 }
 
+
 class LogoutInitial extends LogoutState {}
+
+class LogoutLoadingState extends LogoutState {}
+
+class LogoutSuccessState extends LogoutState {}
+
+class LogoutErrorState extends LogoutState {}

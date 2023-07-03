@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_healthy/helpers/build_context_extensions.dart';
+import 'package:go_healthy/utils/build_context_extensions.dart';
 
 import '../../../../shared/constants.dart';
 import '../blocs/login_bloc.dart';
@@ -46,16 +46,11 @@ class _LoginPageState extends State<LoginPage> {
                 content: Text('Login Success'),
               ),
             );
-            Future<void>.delayed(
-              const Duration(seconds: 2),
-              () {
-                context.navigateNamedRoute(AppRoute.HOME_ROUTE_NAME);
-              },
-            );
+            context.navigateNamedRoute(AppRoute.HOME.name);
           }
 
           if (state is LoginNavigateRegisterActionState) {
-            context.navigateNamedRoute(AppRoute.REGISTER_ROUTE_NAME);
+            context.navigateNamedRoute(AppRoute.REGISTER.name);
           }
         },
         builder: (BuildContext context, LoginState state) {
@@ -112,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           ElevatedButton(
             onPressed: () {
-              _loginBloc.add(LoginNavigateGoogleEvent());
+              _loginBloc.add((LoginGoogleButtonPressedEvent()));
             },
             child: Text(context.translate!.loginWithGoogle),
           ),

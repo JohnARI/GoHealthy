@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_healthy/features/authentication/login/data/models/login.dart';
+import 'package:go_healthy/utils/shared_preference.dart';
 
-import '../../../../utils/secure_storage.dart';
-import '../data/models/login.dart';
 import '../data/repositories/login_repository.dart';
 
 part 'login_event.dart';
@@ -32,16 +33,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginButtonPressedEvent event, Emitter<LoginState> emit) async {
     try {
       emit(LoginLoadingState());
-      final Future<Login> accessToken = _loginRepository.login(
-        event.email,
-        event.password,
-      );
-      await accessToken.then((Login value) {
-        SecureStorage.setAccessToken(value.accessToken);
-        emit(LoginSuccessState());
-      }).catchError((Object error) {
-        emit(LoginErrorState());
-      });
+      final Login login =
+          await _loginRepository.login(event.email, event.password);
+      await SharedPreference.setAccessToken(login.accessToken);
+      final String? accessToken = SharedPreference.getAccessToken();
+      log(name: 'LoginBLoC', 'accessToken: $accessToken');
+      emit(LoginSuccessState());
     } catch (e) {
       emit(LoginErrorState());
     }

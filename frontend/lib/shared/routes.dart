@@ -1,5 +1,26 @@
+class Route {
+  final String name;
+  final String path;
+
+  const Route({
+    required this.name,
+    required this.path,
+  });
+}
+
 class AppRoute {
-  static const String HOME_ROUTE_NAME = 'home';
-  static const String LOGIN_ROUTE_NAME = 'login';
-  static const String REGISTER_ROUTE_NAME = 'register';
+  static const Route HOME = Route(
+    name: 'home',
+    path: '/home',
+  );
+
+  static const Route LOGIN = Route(
+    name: 'login',
+    path: '/login',
+  );
+
+  static const Route REGISTER = Route(
+    name: 'register',
+    path: '/register',
+  );
 }

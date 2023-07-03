@@ -21,7 +21,7 @@ class APIProvider {
     'Authorization': 'Bearer ', // TODO: add bearer token here
   };
 
-  http.Client getClient() {
+  static http.Client getClient() {
     final http.Client client = http.Client();
     return client;
   }
