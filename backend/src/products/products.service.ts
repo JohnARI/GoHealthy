@@ -4,11 +4,14 @@ import { Prisma, Products } from '@prisma/client';
 @Injectable()
 export class ProductsService {
   constructor(private prismaService: PrismaService) {}
+
   async create(data: Prisma.ProductsCreateInput): Promise<Products | void> {
+    console.log(data);
     try {
       const product = await this.prismaService.products.create({ data });
       return product;
     } catch (error) {
+      console.log(error);
       if (error.code === 'P2002') {
         throw new HttpException(
           `A product with this ${error.meta.target[0]} already exists`,

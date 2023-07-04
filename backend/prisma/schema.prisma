@@ -28,18 +28,35 @@ model Connection {
 }
 
 model Products {
-  id            String  @id @default(uuid())
-  title         String  @unique
+  id            String          @id @default(uuid())
+  title         String          @unique
   type          String
   description   String?
-  energy        Float   @default(0)
-  fat           Float   @default(0)
-  saturatedFat  Float   @default(0)
-  carbohydrates Float   @default(0)
-  sugars        Float   @default(0)
-  protein       Float   @default(0)
-  fiber         Float   @default(0)
-  salt          Float   @default(0)
-  averageMass   Float   @default(0)
+  energy        Float           @default(0)
+  fat           Float           @default(0)
+  saturatedFat  Float           @default(0)
+  carbohydrates Float           @default(0)
+  sugars        Float           @default(0)
+  protein       Float           @default(0)
+  fiber         Float           @default(0)
+  salt          Float           @default(0)
+  averageMass   Float           @default(0)
   imageBucketId String?
+  meals         MealOnProduct[]
+}
+
+model Meals {
+  id            String          @id @default(uuid())
+  title         String
+  products      MealOnProduct[]
+  imageBucketId String          @default("")
+}
+
+model MealOnProduct {
+  id            String   @id @default(uuid())
+  mealId        String
+  productId     String
+  meal          Meals    @relation(fields: [mealId], references: [id])
+  product       Products @relation(fields: [productId], references: [id])
+  weightInGrams Float
 }
