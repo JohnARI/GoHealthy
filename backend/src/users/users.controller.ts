@@ -14,6 +14,8 @@ import {
 import { SkipThrottle } from '@nestjs/throttler';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+import { UsersSwaggerResponses } from 'src/swagger/users.swagger';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
 import { RequestWithUserUniqueInput } from 'src/types/request.type';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -30,18 +32,28 @@ export class UsersController {
   ) {}
 
   @Post()
+  @ApiResponse(UsersSwaggerResponses.CREATE_SUCCESS)
+  @ApiResponse(UsersSwaggerResponses.CREATE_CONFLICT)
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @UseGuards(JwtAccessGuard)
   @Get('me')
+  @ApiHeader(UsersSwaggerResponses.JWT_ACCESS_HEADER)
+  @ApiResponse(UsersSwaggerResponses.PROFILE_SUCCESS)
+  @ApiResponse(UsersSwaggerResponses.JWT_UNAUTHORIZED)
+  @ApiResponse(UsersSwaggerResponses.NOT_FOUND)
   profile(@Req() req: RequestWithUserUniqueInput) {
     return this.usersService.findOne({ email: req.user.email });
   }
 
   @UseGuards(JwtAccessGuard)
   @Patch('me')
+  @ApiHeader(UsersSwaggerResponses.JWT_ACCESS_HEADER)
+  @ApiResponse(UsersSwaggerResponses.UPDATE_SUCCESS)
+  @ApiResponse(UsersSwaggerResponses.JWT_UNAUTHORIZED)
+  @ApiResponse(UsersSwaggerResponses.DATABASE_ERROR)
   update(@Req() req: RequestWithUserUniqueInput, @Body() body: UpdateUserDto) {
     return this.usersService.update({
       where: { email: req.user.email },
@@ -51,6 +63,10 @@ export class UsersController {
 
   @UseGuards(JwtAccessGuard)
   @Delete('me')
+  @ApiHeader(UsersSwaggerResponses.JWT_ACCESS_HEADER)
+  @ApiResponse(UsersSwaggerResponses.DELETE_SUCCESS)
+  @ApiResponse(UsersSwaggerResponses.JWT_UNAUTHORIZED)
+  @ApiResponse(UsersSwaggerResponses.NOT_FOUND)
   async delete(@Req() req: RequestWithUserUniqueInput) {
     await this.prismaService.connection.deleteMany({
       where: { user: { email: req.user.email } },

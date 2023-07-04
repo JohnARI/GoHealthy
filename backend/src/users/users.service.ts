@@ -22,16 +22,24 @@ export class UsersService {
     }
   }
 
-  update(params: {
+  async update(params: {
     where: Prisma.UserWhereUniqueInput;
     data: Prisma.UserUpdateInput;
   }): Promise<User> {
     const { where, data } = params;
 
-    return this.prismaService.user.update({
-      data,
-      where,
-    });
+    try {
+      const result = await this.prismaService.user.update({
+        data,
+        where,
+      });
+      return result;
+    } catch (error) {
+      throw new HttpException(
+        `Database error with field: ${error.meta.target[0]}`,
+        HttpStatus.CONFLICT,
+      );
+    }
   }
 
   async findOne(
