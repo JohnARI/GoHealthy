@@ -47,6 +47,8 @@ model Products {
   user          User            @relation("UserProducts", fields: [userId], references: [id])
   meals         MealOnProduct[]
   userId        String
+}
+
 
 model Meals {
   id            String          @id @default(uuid())

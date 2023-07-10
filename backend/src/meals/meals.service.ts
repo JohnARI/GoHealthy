@@ -40,19 +40,54 @@ export class MealsService {
     }
   }
 
-  // findAll() {
-  //   return `This action returns all meals`;
-  // }
+  async findAll() {
+    const meals = await this.prismaService.meals.findMany({
+      include: {
+        products: true,
+      },
+    });
+    return meals;
+  }
 
-  // findOne(id: string) {
-  //   return `This action returns a #${id} meal`;
-  // }
+  async findOne(id: string) {
+    try {
+      const meal = await this.prismaService.meals.findUnique({
+        where: { id },
+        include: {
+          products: true,
+        },
+      });
+      return meal;
+    } catch (error) {
+      throw new HttpException(
+        `Database error: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 
   // update(id: string, updateMealDto: UpdateMealDto) {
   //   return `This action updates a #${id} meal`;
   // }
 
-  // remove(id: string) {
-  //   return `This action removes a #${id} meal`;
-  // }
+  async remove(id: string) {
+    try {
+      await this.prismaService.meals.delete({
+        where: { id },
+      });
+      const meals = await this.prismaService.meals.findMany({
+        include: {
+          products: true,
+        },
+      });
+      return meals;
+      // return HttpStatus.OK;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        `Database error: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

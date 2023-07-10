@@ -27,16 +27,17 @@ export class MealsController {
     return this.mealsService.create(createMealDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.mealsService.findAll();
-  // }
+  @UseGuards(JwtAccessGuard)
+  @Get()
+  findAll() {
+    return this.mealsService.findAll();
+  }
 
-  // @UseGuards(JwtAccessGuard)
-  // @Get(':id')
-  // findOne(@Param('id', ParseUUIDPipe) id: string) {
-  //   return this.mealsService.findOne(id);
-  // }
+  @UseGuards(JwtAccessGuard)
+  @Get(':id')
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.mealsService.findOne(id);
+  }
 
   // @UseGuards(JwtAccessGuard)
   // @Patch(':id')
@@ -47,10 +48,10 @@ export class MealsController {
   //   return this.mealsService.update(id, updateMealDto);
   // }
 
-  // @UseGuards(JwtAccessGuard)
-  // @Delete(':id')
-  // @HttpCode(204)
-  // remove(@Param('id') id: string) {
-  //   return this.mealsService.remove(id);
-  // }
+  @UseGuards(JwtAccessGuard)
+  @Delete(':id')
+  @HttpCode(204)
+  remove(@Param('id') id: string) {
+    return this.mealsService.remove(id);
+  }
 }
