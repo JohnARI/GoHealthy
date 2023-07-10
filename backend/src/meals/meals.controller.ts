@@ -32,25 +32,25 @@ export class MealsController {
   //   return this.mealsService.findAll();
   // }
 
-  @UseGuards(JwtAccessGuard)
-  @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.mealsService.findOne(id);
-  }
+  // @UseGuards(JwtAccessGuard)
+  // @Get(':id')
+  // findOne(@Param('id', ParseUUIDPipe) id: string) {
+  //   return this.mealsService.findOne(id);
+  // }
 
-  @UseGuards(JwtAccessGuard)
-  @Patch(':id')
-  update(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateMealDto: UpdateMealDto,
-  ) {
-    return this.mealsService.update(id, updateMealDto);
-  }
+  // @UseGuards(JwtAccessGuard)
+  // @Patch(':id')
+  // update(
+  //   @Param('id', ParseUUIDPipe) id: string,
+  //   @Body() updateMealDto: UpdateMealDto,
+  // ) {
+  //   return this.mealsService.update(id, updateMealDto);
+  // }
 
-  @UseGuards(JwtAccessGuard)
-  @Delete(':id')
-  @HttpCode(204)
-  remove(@Param('id') id: string) {
-    return this.mealsService.remove(id);
-  }
+  // @UseGuards(JwtAccessGuard)
+  // @Delete(':id')
+  // @HttpCode(204)
+  // remove(@Param('id') id: string) {
+  //   return this.mealsService.remove(id);
+  // }
 }
