@@ -48,4 +48,7 @@ export class CreateProductDto {
 
   @IsOptional()
   imageBucketId?: string;
+
+  @IsNotEmpty()
+  userId: string;
 }

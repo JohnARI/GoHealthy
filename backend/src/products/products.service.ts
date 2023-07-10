@@ -1,26 +1,33 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, Products } from '@prisma/client';
+import { CreateProductDto } from './dto/create-product.dto';
 @Injectable()
 export class ProductsService {
   constructor(private prismaService: PrismaService) {}
 
-  async create(data: Prisma.ProductsCreateInput): Promise<Products | void> {
-    console.log(data);
+  async create(data: CreateProductDto): Promise<Products> {
     try {
-      const product = await this.prismaService.products.create({ data });
+      const { userId, ...productData } = data;
+
+      const product = await this.prismaService.products.create({
+        data: {
+          ...productData,
+          user: { connect: { id: userId } },
+        },
+      });
+
       return product;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       if (error.code === 'P2002') {
         throw new HttpException(
           `A product with this ${error.meta.target[0]} already exists`,
           HttpStatus.CONFLICT,
         );
       }
-
       throw new HttpException(
-        'Database error',
+        `Database error: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

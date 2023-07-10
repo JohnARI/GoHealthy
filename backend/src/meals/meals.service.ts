@@ -11,7 +11,7 @@ export class MealsService {
 
   async create(data: CreateMealDto): Promise<Meals> {
     try {
-      const { title, products } = data;
+      const { title, products, userId } = data;
 
       const meal = await this.prismaService.meals.create({
         data: {
@@ -19,6 +19,8 @@ export class MealsService {
           products: {
             create: products.map((product) => ({
               weightInGrams: product.weightInGrams,
+              productId: product.id,
+              userId,
               product: { connect: { id: product.id } },
             })),
           },

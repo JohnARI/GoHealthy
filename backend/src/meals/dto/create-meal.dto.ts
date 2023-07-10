@@ -9,4 +9,8 @@ export class CreateMealDto {
   @IsArray()
   @ValidateNested({ each: true }) // Valide chaque élément de la liste
   products: Prisma.MealOnProductCreateInput[];
+
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
 }

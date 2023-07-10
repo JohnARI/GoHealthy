@@ -13,12 +13,14 @@ enum AccountType {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  accountType AccountType  @default(DEFAULT)
-  email       String       @unique
-  username    String
-  password    String
-  connections Connection[]
+  id            String          @id @default(uuid())
+  accountType   AccountType     @default(DEFAULT)
+  email         String          @unique
+  username      String
+  password      String
+  connections   Connection[]
+  product       Products[]      @relation("UserProducts")
+  MealOnProduct MealOnProduct[]
 }
 
 model Connection {
@@ -42,8 +44,9 @@ model Products {
   salt          Float           @default(0)
   averageMass   Float           @default(0)
   imageBucketId String?
+  user          User            @relation("UserProducts", fields: [userId], references: [id])
   meals         MealOnProduct[]
-}
+  userId        String
 
 model Meals {
   id            String          @id @default(uuid())
@@ -59,4 +62,6 @@ model MealOnProduct {
   meal          Meals    @relation(fields: [mealId], references: [id])
   product       Products @relation(fields: [productId], references: [id])
   weightInGrams Float
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
 }
