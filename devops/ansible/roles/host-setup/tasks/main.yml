@@ -1,0 +1,25 @@
+---
+- name: Change host name 
+  hostname:
+    name: GetHealthy-{{ ansible_hostname }}
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install pre-requisites
+  apt:
+    pkg:
+    - sudo
+    - curl
+
+- name: Creating SysAdmin user
+  user:
+    name: sysadmin
+    shell: /bin/bash
+    password: "{{ 'sysadmin' | password_hash('sha512') }}"
+    groups: sudo
+    append: yes
+
+- name: 
+    
