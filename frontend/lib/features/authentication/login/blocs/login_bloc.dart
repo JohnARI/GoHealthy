@@ -36,10 +36,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final Login login =
           await _loginRepository.login(event.email, event.password);
       await SharedPreference.setAccessToken(login.accessToken);
-      final String? accessToken = SharedPreference.getAccessToken();
-      log(name: 'LoginBLoC', 'accessToken: $accessToken');
       emit(LoginSuccessState());
     } catch (e) {
+      log(name: 'LoginBLoC', 'error: $e');
       emit(LoginErrorState());
     }
   }
@@ -51,8 +50,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   // Handles the google login button event.
-  FutureOr<void> _handleLoginGoogleButtonPressedEvent(
-      LoginGoogleButtonPressedEvent event, Emitter<LoginState> emit) {}
+  Future<void> _handleLoginGoogleButtonPressedEvent(
+      LoginGoogleButtonPressedEvent event, Emitter<LoginState> emit) async {
+    try {
+      emit(LoginLoadingState());
+
+      final Login googleUser = await _loginRepository.loginGoogle();
+      SharedPreference.setAccessToken(googleUser.accessToken);
+      emit(LoginSuccessState());
+    } catch (e) {
+      log(name: 'LoginBLoC', 'error: $e');
+      emit(LoginErrorState());
+    }
+  }
 
   // Handles the forgot password event.
   FutureOr<void> _handleLoginForgotPasswordButtonPressedEvent(

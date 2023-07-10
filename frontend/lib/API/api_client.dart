@@ -18,9 +18,15 @@ class APIClient {
   ///
   /// This constructor initializes the [http.Client] used for making API requests.
   APIClient() {
-    _client = http.Client();
+    _client = APIProvider.getClient();
   }
 
+  /// Sends a GET request to the specified [endpoint].
+  ///
+  /// This method sends a GET request to the provided [endpoint] and returns the
+  /// response body of type [T]. The [headers] and [includeHeaders] parameters
+  /// can be used to specify additional headers for the request and control whether
+  /// the default headers should be included.
   static Future<T> getHttpRequest<T>(
     String endpoint, {
     Map<String, String>? headers,
@@ -30,18 +36,25 @@ class APIClient {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
           includeHeaders ? headers ?? APIProvider.headers : null;
-      final http.Response response = await APIProvider.getClient().get(
-            Uri.parse(endpoint),
-            headers: requestHeaders,
-          );
+      final http.Response response = await _client.get(
+        Uri.parse(endpoint),
+        headers: requestHeaders,
+      );
       final dynamic result = handleResponse(response);
       return result as T;
     } catch (e) {
+      // TODO : Handle exception with API response
       handleException(e);
       rethrow;
     }
   }
 
+  /// Sends a POST request to the specified [endpoint] with the given [body].
+  ///
+  /// This method sends a POST request to the provided [endpoint] with the [body]
+  /// and returns the response body of type [T]. The [headers] and [includeHeaders]
+  /// parameters can be used to specify additional headers for the request and control
+  /// whether the default headers should be included.
   static Future<T> postHttpRequest<T>(
     String endpoint,
     Map<String, dynamic> body, {
@@ -56,22 +69,10 @@ class APIClient {
         name: 'APIClient',
         'Request body: $body, Request headers: $requestHeaders, Request endpoint: $endpoint',
       );
-      log(
-        name: 'APIClient',
-        'Sending request...',
-      );
-      final http.Response response = await APIProvider.getClient().post(
-            Uri.parse(endpoint),
-            headers: requestHeaders,
-            body: body,
-          );
-      log(
-        name: 'APIClient',
-        'Request sent successfully with status code: ${response.statusCode} and response body: ${response.body}',
-      );
-      log(
-        name: 'APIClient',
-        'Converting response started...',
+      final http.Response response = await _client.post(
+        Uri.parse(endpoint),
+        headers: requestHeaders,
+        body: body,
       );
       final dynamic result = handleResponse(response);
       log(
@@ -85,6 +86,7 @@ class APIClient {
         e.toString(),
         error: e,
       );
+      // TODO : Handle exception with API response
       handleException(e);
       rethrow;
     }

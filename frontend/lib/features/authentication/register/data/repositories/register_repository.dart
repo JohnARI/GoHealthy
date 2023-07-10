@@ -10,7 +10,7 @@ class RegisterRepository {
   Future<Register> login(String email, String username, String password) async {
     try {
       final http.Response response = await client.post(
-        Uri.parse('${APIProvider.baseUrl}${APIEndpoint.users()}'),
+        Uri.parse('${APIProvider.baseUrl}${APIEndpoint.register()}'),
         body: <String, String>{
           'email': email,
           'username': username,
@@ -21,7 +21,6 @@ class RegisterRepository {
       final dynamic result = handleResponse(response);
       return Register.fromMap(result);
     } catch (e) {
-      handleException(e);
       rethrow;
     }
   }

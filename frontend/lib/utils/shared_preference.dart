@@ -12,34 +12,65 @@ class SharedPreference {
   }
 
   static String? getAccessToken() {
-    final String? accessToken = _preferences.getString(_keyAccessToken);
-    log(name: 'SharedPreference', 'AccessToken retrieved successfully');
-    return accessToken;
+    try {
+      final String? accessToken = _preferences.getString(_keyAccessToken);
+      log(name: 'SharedPreference', 'AccessToken : $accessToken');
+      return accessToken;
+    } catch (error) {
+      log(name: 'SharedPreference', 'AccessToken failed to load : $error');
+      rethrow;
+    }
   }
 
   static Future<void> setAccessToken(String accessToken) async {
-    await _preferences.setString(_keyAccessToken, accessToken);
-    log(name: 'SharedPreference', 'AccessToken saved successfully');
+    try {
+      await _preferences.setString(_keyAccessToken, accessToken);
+      log(name: 'SharedPreference', 'set AccessToken : $accessToken');
+    } catch (error) {
+      log(name: 'SharedPreference', 'AccessToken failed to save : $error');
+      rethrow;
+    }
   }
 
+
   static Future<void> deleteAccessToken() async {
-    await _preferences.remove(_keyAccessToken);
-    log(name: 'SharedPreference', 'AccessToken deleted successfully');
+    try {
+      final Future<bool> accessToken = _preferences.remove(_keyAccessToken);
+      log(name: 'SharedPreference', 'deleted AccessToken : $accessToken');
+    } catch (error) {
+      log(name: 'SharedPreference', 'AccessToken failed to delete : $error');
+      rethrow;
+    }
   }
 
   static String? getRefreshToken() {
-    final String? refreshToken = _preferences.getString(_keyRefreshToken);
-    log(name: 'SharedPreference', 'RefreshToken retrieved successfully');
-    return refreshToken;
+    try {
+      final String? refreshToken = _preferences.getString(_keyRefreshToken);
+      log(name: 'SharedPreference', 'RefreshToken : $refreshToken');
+      return refreshToken;
+    } catch (error) {
+      log(name: 'SharedPreference', 'RefreshToken failed to load : $error');
+      rethrow;
+    }
   }
 
   static Future<void> setRefreshToken(String refreshToken) async {
-    await _preferences.setString(_keyRefreshToken, refreshToken);
-    log(name: 'SharedPreference', 'RefreshToken saved successfully');
+    try {
+      await _preferences.setString(_keyRefreshToken, refreshToken);
+      log(name: 'SharedPreference', 'set RefreshToken : $refreshToken');
+    } catch (error) {
+      log(name: 'SharedPreference', 'RefreshToken failed to save : $error');
+      rethrow;
+    }
   }
 
   static Future<void> deleteRefreshToken() async {
-    await _preferences.remove(_keyRefreshToken);
-    log(name: 'SharedPreference', 'RefreshToken deleted successfully');
+    try {
+      final Future<bool> refreshToken = _preferences.remove(_keyRefreshToken);
+      log(name: 'SharedPreference', 'deleted RefreshToken : $refreshToken');
+    } catch (error) {
+      log(name: 'SharedPreference', 'RefreshToken failed to delete : $error');
+      rethrow;
+    }
   }
 }

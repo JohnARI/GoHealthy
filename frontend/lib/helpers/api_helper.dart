@@ -1,9 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:http/http.dart' as http;
+
 import '../utils/api_exceptions.dart';
 
 dynamic handleResponse(http.Response response) {
+  log(
+    name: 'APIHelper',
+    'Converting response...',
+  );
   if (response.statusCode >= 200 && response.statusCode < 300) {
     return jsonDecode(response.body);
   } else if (response.statusCode == 401) {
@@ -19,6 +26,7 @@ dynamic handleResponse(http.Response response) {
   }
 }
 
+// TODO: Update this method to handle API exceptions
 void handleException(dynamic e) {
   if (e is http.ClientException) {
     throw NoInternetException('No internet connection');
