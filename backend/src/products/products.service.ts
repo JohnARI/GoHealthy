@@ -26,10 +26,6 @@ export class ProductsService {
           HttpStatus.CONFLICT,
         );
       }
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
     }
   }
 

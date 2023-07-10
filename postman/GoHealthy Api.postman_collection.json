@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9b0affd4-ddbe-4b38-b1cb-72e0b6f866fa",
+		"_postman_id": "961205fd-0d57-4a23-9d09-5dc67c822aee",
 		"name": "GoHealthy Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27468524",
-		"_collection_link": "https://planetary-crater-94533.postman.co/workspace/GoHealthy~8ef3bb81-5d7b-41ed-ae00-c1e0bc2f1eec/collection/27468524-9b0affd4-ddbe-4b38-b1cb-72e0b6f866fa?action=share&creator=27468524&source=collection_link"
+		"_exporter_id": "21993036"
 	},
 	"item": [
 		{
@@ -71,7 +70,10 @@
 							"name": "OAuth2",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -111,6 +113,16 @@
 				{
 					"name": "Create Product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMmY5NjU3N2QtNGJlOC00YjI1LWE1YTktMWUyZmZkYzZiMjI3IiwiaWF0IjoxNjg4Mzk2MTcyLCJleHAiOjE2ODgzOTcwNzJ9.SPFFfWiwt5WYHWhCX8RCmcAiy_w1Em6vF5P-2wQ7dRc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -224,7 +236,207 @@
 					"name": "New Request",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meals",
+			"item": [
+				{
+					"name": "Create Meal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMzZkMDgzMjQtYTc2Ny00Zjg2LWEzZjQtMzZiMmNkMGFiMDcxIiwiaWF0IjoxNjg4NDgxNzA2LCJleHAiOjE2ODk3Nzc3MDZ9.oBOJ0UGuYmzFDDNO5kbNf0y_Lhdc5Yswvs44XUde7C8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all meals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg4OTgwMjQzLCJleHAiOjE2OTAyNzYyNDN9.tvGUEFr01Hk0ZApS1nfeqzNrbYtc4EobHIkatXpOHzE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one meal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMzZkMDgzMjQtYTc2Ny00Zjg2LWEzZjQtMzZiMmNkMGFiMDcxIiwiaWF0IjoxNjg4NDgxNzA2LCJleHAiOjE2ODk3Nzc3MDZ9.oBOJ0UGuYmzFDDNO5kbNf0y_Lhdc5Yswvs44XUde7C8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Meal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMzZkMDgzMjQtYTc2Ny00Zjg2LWEzZjQtMzZiMmNkMGFiMDcxIiwiaWF0IjoxNjg4NDgxNzA2LCJleHAiOjE2ODk3Nzc3MDZ9.oBOJ0UGuYmzFDDNO5kbNf0y_Lhdc5Yswvs44XUde7C8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete on meal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMzZkMDgzMjQtYTc2Ny00Zjg2LWEzZjQtMzZiMmNkMGFiMDcxIiwiaWF0IjoxNjg4NDgxNzA2LCJleHAiOjE2ODk3Nzc3MDZ9.oBOJ0UGuYmzFDDNO5kbNf0y_Lhdc5Yswvs44XUde7C8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
+							]
+						}
 					},
 					"response": []
 				}
@@ -459,6 +671,15 @@
 			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWQiOiJhOWViOGI4Ni1hZWZhLTRkZGUtYmIzZi1kOWY5NjIxY2E3ZTAiLCJpYXQiOjE2ODY2NTkyNTMsImV4cCI6MTY4NjY2MDE1M30.7E7p1FbUZQmKfjh11if8MRL3UfJObG8AhNz52cz9QuI",
 			"type": "string",
 			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMmY5NjU3N2QtNGJlOC00YjI1LWE1YTktMWUyZmZkYzZiMjI3IiwiaWF0IjoxNjg4MzkyMTU1LCJleHAiOjE2ODgzOTMwNTV9.n3RwOFbtTjveYo3mJtxt9W8Kzv7Bsiu898PXs_2imgQ",
+			"type": "string"
 		}
 	]
 }

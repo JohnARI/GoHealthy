@@ -49,7 +49,6 @@ model Products {
   userId        String
 }
 
-
 model Meals {
   id            String          @id @default(uuid())
   title         String
