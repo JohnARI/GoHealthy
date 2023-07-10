@@ -14,4 +14,6 @@ class APIEndpoint {
   static String login() => '$_baseUrl/auth/login';
   static String register() => '$_baseUrl/auth/users';
   static String logout() => '$_baseUrl/auth/logout';
+
+  static String getMe() => '$_baseUrl/users/me';
 }

@@ -9,9 +9,9 @@ class Route {
 }
 
 class AppRoute {
-  static const Route HOME = Route(
-    name: 'home',
-    path: '/home',
+  static const Route REGISTER = Route(
+    name: 'register',
+    path: '/register',
   );
 
   static const Route LOGIN = Route(
@@ -19,8 +19,18 @@ class AppRoute {
     path: '/login',
   );
 
-  static const Route REGISTER = Route(
-    name: 'register',
-    path: '/register',
+  static const Route HOME = Route(
+    name: 'home',
+    path: '/home',
+  );
+
+  static const Route STATS = Route(
+    name: 'settings',
+    path: '/settings',
+  );
+
+  static const Route PROFILE = Route(
+    name: 'settings',
+    path: '/settings',
   );
 }

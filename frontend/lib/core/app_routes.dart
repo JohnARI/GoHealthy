@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_healthy/widgets/general/appbar.dart';
+import 'package:go_healthy/widgets/general/bottom_navbar.dart';
 import 'package:go_router/go_router.dart';
 
 import '/shared/routes.dart';
@@ -24,12 +26,7 @@ class RouteInitializer {
 /// The routes are defined using [GoRoute], which specifies the route name, path, and builder function.
 final GoRouter router = GoRouter(
   initialLocation: RouteInitializer.determineInitialRoute(),
-  routes: <GoRoute>[
-    GoRoute(
-        name: AppRoute.HOME.name,
-        path: AppRoute.HOME.path,
-        builder: (BuildContext context, GoRouterState state) =>
-            const HomePage()),
+  routes: <RouteBase>[
     GoRoute(
       name: AppRoute.LOGIN.name,
       path: AppRoute.LOGIN.path,
@@ -39,6 +36,26 @@ final GoRouter router = GoRouter(
       name: AppRoute.REGISTER.name,
       path: AppRoute.REGISTER.path,
       builder: (BuildContext context, GoRouterState state) => RegisterPage(),
+    ),
+    ShellRoute(
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return Scaffold(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(75.0),
+            child: AppBarGeneral(name: "Test"),
+          ),
+          body: child,
+          bottomNavigationBar: const BottomNavBar(),
+        );
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          name: AppRoute.HOME.name,
+          path: AppRoute.HOME.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              const HomePage(),
+        ),
+      ],
     ),
   ],
 );

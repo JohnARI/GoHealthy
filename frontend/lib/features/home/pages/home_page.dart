@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_healthy/features/authentication/logout/blocs/logout_bloc.dart';
 import 'package:go_healthy/shared/constants.dart';
+import 'package:go_healthy/widgets/general/appbar.dart';
 
 import '../../../utils/build_context_extensions.dart';
 
@@ -10,9 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.translate!.appTitle),
-      ),
+      appBar: const AppBarGeneral(name: "Test"),
       body: ElevatedButton(
         onPressed: () {
           LogoutBloc().add(LogoutRequestEvent());
