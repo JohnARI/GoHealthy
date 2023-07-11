@@ -11,8 +11,9 @@ class AppBarGeneral extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(name)),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Text(name, style: Theme.of(context).textTheme.titleLarge),
+      ),
       centerTitle: false,
     );
   }

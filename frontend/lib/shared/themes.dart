@@ -11,10 +11,36 @@ extension AppThemeExtension on AppTheme {
   // If you want to add more properties to your theme, you can add them here.
   static ThemeData _createThemeData(Brightness brightness, Color primaryColor) {
     return ThemeData(
-      fontFamily: 'NunitoSans',
       brightness: brightness,
       primaryColor: primaryColor,
       useMaterial3: true,
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(
+          fontFamily: 'fontRegular',
+          fontSize: 12.0,
+          color: AppColor.BLACK1,
+        ),
+        bodyLarge: TextStyle(
+          fontFamily: 'fontMedium',
+          fontSize: 16.0,
+          color: AppColor.BLACK1,
+        ),
+        titleSmall: TextStyle(
+          fontFamily: 'fontMedium',
+          fontSize: 20.0,
+          color: AppColor.BLACK1,
+        ),
+        titleMedium: TextStyle(
+          fontFamily: 'fontSemiBold',
+          fontSize: 24.0,
+          color: AppColor.BLACK1,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: 'fontBold',
+          fontSize: 28.0,
+          color: AppColor.BLACK1,
+        ),
+      ),
     );
   }
 
