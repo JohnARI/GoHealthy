@@ -41,8 +41,8 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return Scaffold(
           appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(75.0),
-            child: AppBarGeneral(name: "Test"),
+            preferredSize: Size.fromHeight(60.0),
+            child: AppBarGeneral(name: "Follow-up"),
           ),
           body: child,
           bottomNavigationBar: const BottomNavBar(),

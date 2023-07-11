@@ -2,153 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SvgAssets {
-  static SvgPicture angrySmiley = SvgPicture.asset(
-    'assets/images/AngrySmiley.svg',
-    fit: BoxFit.cover,
-  );
+  static SvgPicture buildSvg(String path, Color color) {
+    return SvgPicture.asset(path,
+        fit: BoxFit.cover,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn));
+  }
 
-  static SvgPicture breakfast = SvgPicture.asset(
-    'assets/images/Breakfast.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture breakfast2 = SvgPicture.asset(
-    'assets/images/Breakfast2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture calories = SvgPicture.asset(
-    'assets/images/Cal.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture carbs = SvgPicture.asset(
-    'assets/images/Carbs.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture dinner = SvgPicture.asset(
-    'assets/images/dinner.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture dinner2 = SvgPicture.asset(
-    'assets/images/dinner2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture email = SvgPicture.asset(
-    'assets/images/Email.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture email2 = SvgPicture.asset(
-    'assets/images/Email.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture fat = SvgPicture.asset(
-    'assets/images/Fat.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture filter = SvgPicture.asset(
-    'assets/images/Filter.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture foodList = SvgPicture.asset(
-    'assets/images/FoodList.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture foodpic = SvgPicture.asset(
-    'assets/images/FoodPic.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture googleLogo = SvgPicture.asset(
-    'assets/images/GoogleLogo.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture happySmiley = SvgPicture.asset(
-    'assets/images/HappySmiley.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture info = SvgPicture.asset(
-    'assets/images/Info.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture lunch = SvgPicture.asset(
-    'assets/images/Lunch.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture lunch2 = SvgPicture.asset(
-    'assets/images/Lunch2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture normalSmiley = SvgPicture.asset(
-    'assets/images/NormalSmiley.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture password = SvgPicture.asset(
-    'assets/images/Password.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture password2 = SvgPicture.asset(
-    'assets/images/Password2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture passwordNotVisible = SvgPicture.asset(
-    'assets/images/PasswordNotVisible.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture passwordVisible = SvgPicture.asset(
-    'assets/images/PasswordVisible.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture photo2 = SvgPicture.asset(
-    'assets/images/Photo2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture protein = SvgPicture.asset(
-    'assets/images/Prot.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture scan = SvgPicture.asset(
-    'assets/images/Scan.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture scan2 = SvgPicture.asset(
-    'assets/images/Scan2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture snack = SvgPicture.asset(
-    'assets/images/Snack2.svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture waterDropFilled = SvgPicture.asset(
-    'assets/images/WaterDropFilled .svg',
-    fit: BoxFit.cover,
-  );
-
-  static SvgPicture waterGlass = SvgPicture.asset(
-    'assets/images/WaterGlass.svg',
-    fit: BoxFit.cover,
-  );
+  static String angrySmiley = 'assets/images/AngrySmiley.svg';
+  static String breakfast = 'assets/images/Breakfast.svg';
+  static String breakfast2 = 'assets/images/Breakfast2.svg';
+  static String calories = 'assets/images/Cal.svg';
+  static String carbs = 'assets/images/Carbs.svg';
+  static String dinner = 'assets/images/dinner.svg';
+  static String dinner2 = 'assets/images/dinner2.svg';
+  static String email = 'assets/images/Email.svg';
+  static String email2 = 'assets/images/Email.svg';
+  static String fat = 'assets/images/Fat.svg';
+  static String filter = 'assets/images/Filter.svg';
+  static String foodList = 'assets/images/FoodList.svg';
+  static String foodpic = 'assets/images/FoodPic.svg';
+  static String googleLogo = 'assets/images/GoogleLogo.svg';
+  static String happySmiley = 'assets/images/HappySmiley.svg';
+  static String home = 'assets/images/Home.svg';
+  static String info = 'assets/images/Info.svg';
+  static String lunch = 'assets/images/Lunch.svg';
+  static String lunch2 = 'assets/images/Lunch2.svg';
+  static String normalSmiley = 'assets/images/NormalSmiley.svg';
+  static String password = 'assets/images/Password.svg';
+  static String password2 = 'assets/images/Password2.svg';
+  static String passwordNotVisible = 'assets/images/PasswordNotVisible.svg';
+  static String passwordVisible = 'assets/images/PasswordVisible.svg';
+  static String photo2 = 'assets/images/Photo2.svg';
+  static String profile = 'assets/images/Profile.svg';
+  static String protein = 'assets/images/Prot.svg';
+  static String scan = 'assets/images/Scan.svg';
+  static String scan2 = 'assets/images/Scan2.svg';
+  static String snack = 'assets/images/Snack2.svg';
+  static String stats = 'assets/images/Stats.svg';
+  static String waterDropFilled = 'assets/images/WaterDropFilled .svg';
+  static String waterGlass = 'assets/images/WaterGlass.svg';
 }

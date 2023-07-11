@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_healthy/shared/routes.dart';
+import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../shared/colors.dart';
@@ -23,16 +24,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: BottomNavigationBar(
           currentIndex: pageIndex,
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: buildIcon(Icons.home, 0), label: ''),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list,
-                  color: pageIndex == 1 ? AppColor.GREEN4 : AppColor.BLACK5),
+              icon: buildIcon(SvgAssets.home, 0),
               label: '',
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings,
-                    color: pageIndex == 2 ? AppColor.GREEN4 : AppColor.BLACK5),
-                label: ''),
+              icon: buildIcon(SvgAssets.stats, 1),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+                icon: buildIcon(SvgAssets.profile, 2), label: ''),
           ],
           unselectedItemColor: AppColor.BLACK5,
           selectedItemColor: AppColor.GREEN4,
@@ -45,17 +46,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-  Widget buildIcon(IconData icon, int index) {
+  Widget buildIcon(String iconPath, int index) {
     bool isSelected = pageIndex == index;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Icon(Icons.home, color: isSelected ? AppColor.GREEN4 : AppColor.BLACK5),
+        SvgAssets.buildSvg(
+            iconPath, isSelected ? AppColor.GREEN4 : AppColor.BLACK5),
         if (isSelected)
           Container(
-            margin: const EdgeInsets.only(top: 3.0),
+            margin: const EdgeInsets.only(top: 5.0),
             width: 15,
-            height: 4,
+            height: 3,
             decoration: BoxDecoration(
               color: AppColor.GREEN4,
               shape: BoxShape.rectangle,

@@ -71,14 +71,27 @@ flutter:
         - asset: assets/fonts/NunitoSans_10pt-BoldItalic.ttf
           weight: 700
           style: italic
-  #   - family: fontNameRegular
-  #     fonts:
-  #       - asset: fonts/fontNameRegular.ttf
-  #       - asset: fonts/fontNameRegularItalic.ttf
-  #         style: italic
-  #   - family: fontNameBold
-  #     fonts:
-  #       - asset: fonts/fontNameBold.ttf
-  #       - asset: fonts/fontWeightBoldItalic.ttf
-  #         weight: 700
-  #         style: italic
+
+    - family: fontRegular
+      fonts:
+        - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
+        - asset: assets/fonts/NunitoSans_10pt-Italic.ttf
+          style: italic
+    - family: fontMedium
+      fonts:
+        - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
+        - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
+          style: italic
+          weight: 500
+    - family: fontSemiBold
+      fonts:
+        - asset: assets/fonts/NunitoSans_10pt-SemiBold.ttf
+        - asset: assets/fonts/NunitoSans_10pt-SemiBoldItalic.ttf
+          style: italic
+          weight: 600
+    - family: fontBold
+      fonts:
+        - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
+        - asset: assets/fonts/NunitoSans_10pt-BoldItalic.ttf
+          style: italic
+          weight: 700
