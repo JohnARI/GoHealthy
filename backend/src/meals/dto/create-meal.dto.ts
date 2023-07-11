@@ -1,4 +1,10 @@
-import { IsString, IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
+import {
+  IsString,
+  IsArray,
+  IsNotEmpty,
+  ValidateNested,
+  IsOptional,
+} from 'class-validator';
 import { Prisma } from '@prisma/client';
 export class CreateMealDto {
   @IsNotEmpty()
@@ -13,4 +19,7 @@ export class CreateMealDto {
   @IsNotEmpty()
   @IsString()
   userId: string;
+
+  @IsOptional()
+  imagebucketId?: string;
 }

@@ -12,6 +12,21 @@ enum AccountType {
   GOOGLE
 }
 
+enum ActivityLevel {
+  SEDENTARY
+  LIGHTLY_ACTIVE
+  MODERATELY_ACTIVE
+  VERY_ACTIVE
+  EXTREMELY_ACTIVE
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+  NOT_SPECIFIED
+}
+
 model User {
   id            String          @id @default(uuid())
   accountType   AccountType     @default(DEFAULT)
@@ -21,6 +36,7 @@ model User {
   connections   Connection[]
   product       Products[]      @relation("UserProducts")
   MealOnProduct MealOnProduct[]
+  bodyBuild     BodyBuild[]
 }
 
 model Connection {
@@ -65,4 +81,16 @@ model MealOnProduct {
   weightInGrams Float
   user          User     @relation(fields: [userId], references: [id])
   userId        String
+}
+
+model BodyBuild {
+  id            String        @id @default(uuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  weightGoal    Float
+  currentWeight Float
+  sexe          Sex
+  activityLevel ActivityLevel
+  height        Float
+  age           Int
 }

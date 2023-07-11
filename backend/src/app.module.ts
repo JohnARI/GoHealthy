@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { MealsModule } from './meals/meals.module';
+import { BodyBuildModule } from './body-build/body-build.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MealsModule } from './meals/meals.module';
     AuthModule,
     ProductsModule,
     MealsModule,
+    BodyBuildModule,
   ],
   controllers: [],
   providers: [
