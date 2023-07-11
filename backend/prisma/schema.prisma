@@ -27,6 +27,13 @@ enum Sex {
   NOT_SPECIFIED
 }
 
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
 model User {
   id            String          @id @default(uuid())
   accountType   AccountType     @default(DEFAULT)
@@ -37,6 +44,7 @@ model User {
   product       Products[]      @relation("UserProducts")
   MealOnProduct MealOnProduct[]
   bodyBuild     BodyBuild[]
+  MealHistory     MealHistory[]
 }
 
 model Connection {
@@ -70,15 +78,17 @@ model Meals {
   title         String
   products      MealOnProduct[]
   imageBucketId String          @default("")
+  mealType      MealType
+  MealHistory     MealHistory[]
 }
 
 model MealOnProduct {
   id            String   @id @default(uuid())
   mealId        String
   productId     String
+  weightInGrams Float
   meal          Meals    @relation(fields: [mealId], references: [id])
   product       Products @relation(fields: [productId], references: [id])
-  weightInGrams Float
   user          User     @relation(fields: [userId], references: [id])
   userId        String
 }
@@ -94,3 +104,14 @@ model BodyBuild {
   height        Float
   age           Int
 }
+
+
+model MealHistory {
+  id            String        @id @default(uuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  meal          Meals         @relation(fields: [mealId], references: [id])
+  mealId        String
+  date          DateTime
+}
+
