@@ -11,6 +11,7 @@ extension AppThemeExtension on AppTheme {
   // If you want to add more properties to your theme, you can add them here.
   static ThemeData _createThemeData(Brightness brightness, Color primaryColor) {
     return ThemeData(
+      fontFamily: 'NunitoSans',
       brightness: brightness,
       primaryColor: primaryColor,
       useMaterial3: true,
