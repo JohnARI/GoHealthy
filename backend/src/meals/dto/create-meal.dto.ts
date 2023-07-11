@@ -29,7 +29,4 @@ export class CreateMealDto {
 
   @IsNotEmpty()
   mealType: MealType;
-
-  @IsNotEmpty()
-  eatenAt: Date;
 }
