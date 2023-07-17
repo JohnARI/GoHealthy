@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { AccountType, Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma, AccountType } from '@prisma/client';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
@@ -29,36 +29,11 @@ export class AuthService {
     throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
 
-  async login(user: any) {
+  async login(user: Prisma.UserWhereUniqueInput) {
     const payload = { email: user.email, id: user.id };
     const tokens = await this.generateTokens(payload);
 
     await this.createConnection(user.id, tokens.refresh_token);
-
-    return tokens;
-  }
-
-  async googleLogin(user: any) {
-    const dbUser = await this.usersService.findOne({ email: user.email });
-
-    if (dbUser && dbUser.accountType !== AccountType.GOOGLE)
-      return new HttpException(
-        'This email is already registered with another account',
-        HttpStatus.CONFLICT,
-      );
-
-    const finalUser =
-      dbUser ||
-      (await this.usersService.create({
-        ...user,
-        accountType: AccountType.GOOGLE,
-        password: '',
-      }));
-
-    const payload = { email: finalUser.email, id: finalUser.id };
-    const tokens = await this.generateTokens(payload);
-
-    await this.createConnection(finalUser.id, tokens.refresh_token);
 
     return tokens;
   }

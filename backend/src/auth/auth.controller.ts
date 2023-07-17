@@ -1,27 +1,32 @@
 import {
+  Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
-  Request,
-  Post,
-  UseGuards,
-  Patch,
-  Body,
-  SerializeOptions,
-  UseInterceptors,
-  ClassSerializerInterceptor,
   HttpCode,
+  HttpException,
   HttpStatus,
+  Post,
+  Request,
+  SerializeOptions,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
-import { JwtAccessGuard } from './guards/jwt-access.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { AuthService } from './auth.service';
-import { Prisma } from '@prisma/client';
-import { UsersService } from 'src/users/users.service';
-import { RefreshAuthGuard } from './guards/jwt-refresh.guard';
-import { GoogleOauthGuard } from './guards/google-auth.guard';
-import { RequestWithUserUniqueInput } from 'src/types/request.type';
 import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+import { AccountType, Prisma } from '@prisma/client';
+import { OAuth2Client } from 'google-auth-library';
 import { AuthSwaggerResponses } from 'src/swagger/auth.swagger';
+import { RequestWithUserUniqueInput } from 'src/types/request.type';
+import { UsersService } from 'src/users/users.service';
+import { AuthService } from './auth.service';
+import { JwtAccessGuard } from './guards/jwt-access.guard';
+import { RefreshAuthGuard } from './guards/jwt-refresh.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+
+const client = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+);
 
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludePrefixes: ['password', 'accountType'] })
@@ -41,17 +46,36 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Get('google')
+  @Post('google')
   @ApiResponse(AuthSwaggerResponses.TO_BE_DONE)
-  @UseGuards(GoogleOauthGuard)
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  googleAuth() {} // nothing to do here, the guard does it all!
+  async googleAuth(@Body('id_token') idToken: string) {
+    const ticket = await client.verifyIdToken({
+      idToken: idToken,
+      audience: process.env.OAUTH_GOOGLE_CLIENT_ID,
+    });
 
-  @Get('google/redirect')
-  @UseGuards(GoogleOauthGuard)
-  @ApiResponse(AuthSwaggerResponses.TO_BE_DONE)
-  googleAuthRedirect(@Request() req) {
-    return this.authService.googleLogin(req.user);
+    const payload = ticket.getPayload();
+    const dbUser = await this.usersService.findOne({ email: payload.email });
+
+    if (dbUser && dbUser.accountType !== AccountType.GOOGLE)
+      return new HttpException(
+        'This email is already registered with another account',
+        HttpStatus.CONFLICT,
+      );
+
+    const finalUser =
+      dbUser ||
+      (await this.usersService.create({
+        email: payload.email,
+        username: payload.name,
+        accountType: AccountType.GOOGLE,
+        password: '',
+      }));
+
+    return this.authService.login({
+      email: finalUser.email,
+      id: finalUser.id,
+    });
   }
 
   @UseGuards(JwtAccessGuard)
