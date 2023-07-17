@@ -1,88 +1,90 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../shared/constants.dart';
+import '../../../../shared/constants.dart';
 
-class Input {
-  static InputDecoration _buildInputDecoration({
-    required Widget? icon,
-    required String hintText,
-    required Widget? suffixIcon,
-    TextStyle? hintStyle,
-  }) {
-    return InputDecoration(
-      suffixIcon: suffixIcon,
-      icon: icon,
-      hintText: hintText,
-      suffixIconColor: AppColor.BLACK1,
-      iconColor: AppColor.BLACK6,
-      hintStyle: hintStyle ?? const TextStyle(color: AppColor.BLACK6),
-      enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColor.BLACK5),
-      ),
-      focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: AppColor.BLACK4,
-          width: 2.0,
+class InputWithLeadingIcon extends StatelessWidget {
+  final TextEditingController controller;
+  final Widget icon;
+  final String hintText;
+  final TextStyle hintStyle;
+
+  const InputWithLeadingIcon({
+    super.key,
+    required this.controller,
+    required this.icon,
+    required this.hintText,
+    this.hintStyle = const TextStyle(color: AppColor.BLACK6),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        icon: icon,
+        hintText: hintText,
+        suffixIconColor: AppColor.BLACK1,
+        iconColor: AppColor.BLACK6,
+        hintStyle: hintStyle,
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK4),
+        ),
+        border: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
         ),
       ),
-      border: const UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColor.BLACK5),
-      ),
     );
   }
+}
 
-  static TextField inputWithLeadingIcon({
-    required String hintText,
-    required Widget icon,
-    required TextEditingController controller,
-    TextStyle? style = const TextStyle(color: AppColor.BLACK1),
-    bool obscureText = false,
-    TextStyle? hintStyle,
-    TextInputType? keyboardType,
-    List<TextInputFormatter>? inputFormatters,
-  }) {
-    
-    return TextField(
-      obscureText: obscureText,
+class InputWithLeadingAndTrailingIcon extends StatelessWidget {
+  final TextEditingController controller;
+  final Widget icon;
+  final Widget suffixIcon;
+  final String hintText;
+  final Function() onPressedTrailingIcon;
+  final bool obscureText;
+  final TextStyle hintStyle;
+
+  const InputWithLeadingAndTrailingIcon({
+    super.key,
+    required this.controller,
+    required this.icon,
+    required this.suffixIcon,
+    required this.hintText,
+    required this.onPressedTrailingIcon,
+    this.obscureText = false,
+    this.hintStyle = const TextStyle(color: AppColor.BLACK6),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
       controller: controller,
-      style: style,
-      decoration: _buildInputDecoration(
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          icon: suffixIcon,
+          onPressed: onPressedTrailingIcon,
+        ),
         icon: icon,
         hintText: hintText,
-        suffixIcon: null,
+        suffixIconColor: AppColor.BLACK1,
+        iconColor: AppColor.BLACK6,
         hintStyle: hintStyle,
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK4),
+        ),
+        border: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
+        ),
       ),
-      keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
-    );
-  }
-
-  static TextField inputWithLeadingAndTrailingIcon({
-    required String hintText,
-    required Widget icon,
-    required Widget suffixIcon,
-    required TextEditingController controller,
-    TextStyle? style = const TextStyle(color: AppColor.BLACK1),
-    bool obscureText = false,
-    TextStyle? hintStyle,
-    TextInputType? keyboardType,
-    List<TextInputFormatter>? inputFormatters,
-  }) {
-
-    return TextField(
-      obscureText: obscureText,
-      controller: controller,
-      style: style,
-      decoration: _buildInputDecoration(
-        icon: icon,
-        hintText: hintText,
-        suffixIcon: suffixIcon,
-        hintStyle: hintStyle,
-      ),
-      keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
     );
   }
 }

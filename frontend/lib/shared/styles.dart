@@ -5,9 +5,10 @@ class AppStyle {
   static const double VERTICAL_PADDING = 20.0;
   static const double BUTTON_HORIZONTAL_PADDING = 25.0;
   static const double BUTTON_VERTICAL_PADDING = 15.0;
+  static const double BUTTON_RADIUS = 6.0;
+
   static const double TAG_HORIZONTAL_PADDING = BUTTON_HORIZONTAL_PADDING;
   static const double TAG_VERTICAL_PADDING = BUTTON_VERTICAL_PADDING;
-  static const double BUTTON_RADIUS = 6.0;
   static const double TAG_RADIUS = 10.0;
 
   // Shadows
@@ -16,4 +17,6 @@ class AppStyle {
     blurRadius: 15,
     offset: const Offset(0, 0),
   );
+  static const double CARD_RADIUS = 15.0;
+  static const double CARD_PADDING = 20.0;
 }

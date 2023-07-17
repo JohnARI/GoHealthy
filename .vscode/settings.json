@@ -1,0 +1,7 @@
+{
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "pubspec.yaml": ".packages, .metadata, pubspec.lock, analysis_options.yaml, .flutter-plugins, .flutter-plugins-dependencies",
+  }
+}

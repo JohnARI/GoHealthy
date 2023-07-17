@@ -45,6 +45,16 @@
     "description": "The title of the login with Google button"
   },
 
+  "loginDontHaveAnAccount": "No account yet?",
+  "@dontHaveAnAccount": {
+    "description": "The title of the register link"
+  },
+
+  "loginForgotPassword": "Forgot password?",
+  "@loginForgotPassword": {
+    "description": "The title of the forgot password link"
+  },
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

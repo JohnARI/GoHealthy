@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:go_healthy/utils/build_context_extensions.dart';
 
 import '../shared/constants.dart';
 
-class Button {
-  final double horizontalButtonPadding = AppStyle.HORIZONTAL_PADDING;
-  final double verticalButtonPadding = AppStyle.BUTTON_VERTICAL_PADDING;
-  static ElevatedButton filledButton(
-      {required String text,
-      required Function onPressed,
-      EdgeInsetsGeometry padding =
-          const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0)}) {
+class AppFilledButton extends StatelessWidget {
+  const AppFilledButton({
+    super.key,
+    required this.context,
+    required this.text,
+    required this.onPressed,
+    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+  });
+
+  final BuildContext context;
+  final String text;
+  final Function onPressed;
+  final EdgeInsetsGeometry padding;
+
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () => onPressed(),
       style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all<Size>(
+          Size(double.infinity, context.screenHeight * 0.06),
+        ),
         textStyle: MaterialStateProperty.all<TextStyle>(
           const TextStyle(
             color: Colors.white,
@@ -28,15 +40,33 @@ class Button {
       child: Text(text),
     );
   }
+}
 
-  static ElevatedButton outlinedButton(
-      {required String text,
-      required Function onPressed,
-      EdgeInsetsGeometry padding =
-          const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0)}) {
-    return ElevatedButton(
+class AppOutlinedButton extends StatelessWidget {
+  const AppOutlinedButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.context,
+    required this.icon,
+    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+  });
+
+  final String text;
+  final Function onPressed;
+  final BuildContext context;
+  final Widget? icon;
+  final EdgeInsetsGeometry padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      icon: icon ?? const SizedBox(),
       onPressed: () => onPressed(),
       style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all<Size>(
+          Size(double.infinity, context.screenHeight * 0.06),
+        ),
         textStyle: MaterialStateProperty.all<TextStyle>(
           const TextStyle(
             color: Colors.green,
@@ -52,17 +82,27 @@ class Button {
           ),
         ),
       ),
-      child: Text(text),
+      label: Text(text),
     );
   }
+}
 
-  static TextButton textButton({
-    required String text,
-    required Function onPressed,
-    EdgeInsetsGeometry padding =
-        const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-    TextStyle textStyle = const TextStyle(color: Colors.green),
-  }) {
+class AppTextButton extends StatelessWidget {
+  const AppTextButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+    required this.textStyle,
+  });
+
+  final String text;
+  final Function onPressed;
+  final EdgeInsetsGeometry padding;
+  final TextStyle textStyle;
+
+  @override
+  Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => onPressed(),
       style: ButtonStyle(

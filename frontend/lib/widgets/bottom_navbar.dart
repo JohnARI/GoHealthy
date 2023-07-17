@@ -52,7 +52,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SvgAssets.buildSvg(
-            iconPath, isSelected ? AppColor.GREEN4 : AppColor.BLACK5),
+            path: iconPath,
+            colorFilter: isSelected
+                ? const ColorFilter.mode(AppColor.GREEN4, BlendMode.srcIn)
+                : const ColorFilter.mode(AppColor.BLACK5, BlendMode.srcIn)),
         if (isSelected)
           Container(
             margin: const EdgeInsets.only(top: 5.0),

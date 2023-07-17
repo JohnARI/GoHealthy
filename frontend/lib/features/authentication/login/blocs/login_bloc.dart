@@ -70,5 +70,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   // Handles the show password event.
   FutureOr<void> _handleLoginShowPasswordButtonPressedEvent(
-      LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {}
+      LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {
+    emit(LoginShowPasswordActionState());
+  }
 }
