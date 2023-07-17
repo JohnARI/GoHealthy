@@ -56,7 +56,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
 
       final Login googleUser = await _loginRepository.loginGoogle();
+
       SharedPreference.setAccessToken(googleUser.accessToken);
+      SharedPreference.setRefreshToken(googleUser.refreshToken);
+
       emit(LoginSuccessState());
     } catch (e) {
       log(name: 'LoginBLoC', 'error: $e');

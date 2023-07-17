@@ -60,23 +60,20 @@ class LoginRepository {
         name: 'Login repository',
         'Google login request started...',
       );
-      // await APIClient.postHttpRequest<Map<String, dynamic>>(
-      //   APIEndpoint.loginGoogle(),
-      //   <String, dynamic>{
-      //     'access_token': accessToken,
-      //     'id_token': idToken,
-      //   },
-      //   includeHeaders: false,
-      // );
+      final Map<String, dynamic> googleSigninRequest = await APIClient.postHttpRequest<Map<String, dynamic>>(
+        APIEndpoint.loginGoogle(),
+        <String, dynamic>{
+          'access_token': accessToken,
+          'id_token': idToken,
+        },
+        includeHeaders: false,
+      );
 
+      final Login result = Login.fromMap(googleSigninRequest);
       // translate to login model
       log(
         name: 'Login repository',
         'Google login request sent successfully',
-      );
-      final Login result = Login(
-        accessToken: accessToken!,
-        refreshToken: idToken!,
       );
 
       return result;
