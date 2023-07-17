@@ -51,4 +51,7 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   userId: string;
+
+  @IsOptional()
+  EAN?: number;
 }

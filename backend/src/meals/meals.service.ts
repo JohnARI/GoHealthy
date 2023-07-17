@@ -96,19 +96,6 @@ export class MealsService {
         include: { products: true },
       });
 
-      // Vérifier si les produits existent
-      for (const product of products) {
-        const existingProduct = await this.prismaService.products.findUnique({
-          where: { id: product.id },
-        });
-
-        if (!existingProduct) {
-          throw new NotFoundException(
-            `Product with ID ${product.id} not found`,
-          );
-        }
-      }
-
       // Créer les nouveaux produits pour le repas
       const createdProducts = await Promise.all(
         products.map((product) =>

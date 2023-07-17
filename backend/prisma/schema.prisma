@@ -44,7 +44,7 @@ model User {
   product       Products[]      @relation("UserProducts")
   MealOnProduct MealOnProduct[]
   bodyBuild     BodyBuild[]
-  MealHistory     MealHistory[]
+  MealHistory   MealHistory[]
 }
 
 model Connection {
@@ -70,6 +70,7 @@ model Products {
   imageBucketId String?
   user          User            @relation("UserProducts", fields: [userId], references: [id])
   meals         MealOnProduct[]
+  EAN           Float?          @unique
   userId        String
 }
 
@@ -79,7 +80,7 @@ model Meals {
   products      MealOnProduct[]
   imageBucketId String          @default("")
   mealType      MealType
-  MealHistory     MealHistory[]
+  MealHistory   MealHistory[]
 }
 
 model MealOnProduct {
@@ -105,13 +106,10 @@ model BodyBuild {
   age           Int
 }
 
-
 model MealHistory {
-  id            String        @id @default(uuid())
-  user          User          @relation(fields: [userId], references: [id])
-  userId        String
-  meal          Meals         @relation(fields: [mealId], references: [id])
-  mealId        String
-  date          DateTime
+  id     String   @id @default(uuid())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  meal   Meals[]
+  date   DateTime
 }
-
