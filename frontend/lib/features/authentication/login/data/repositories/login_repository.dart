@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:go_healthy/API/api_client.dart';
-import 'package:go_healthy/API/api_endpoints.dart';
+import 'package:go_healthy/api/api_client.dart';
+import 'package:go_healthy/api/api_endpoints.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../../API/api_google.dart';
+import '../../../../../api/api_google.dart';
 import '../models/login.dart';
 
 class LoginRepository {

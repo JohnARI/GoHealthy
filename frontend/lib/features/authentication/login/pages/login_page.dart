@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_healthy/shared/constants.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
-import 'package:go_healthy/widgets/button.dart';
+import 'package:go_healthy/widgets/buttons.dart';
 
 import '../../../../utils/lottie/lottie.dart';
 import '../blocs/login_bloc.dart';
@@ -119,11 +119,11 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(context.translate!.loginDontHaveAnAccount),
-              TextButton(
+              AppTextButton(
                 onPressed: () {
                   _loginBloc.add(LoginNavigateRegisterEvent());
                 },
-                child: Text(context.translate!.register),
+                text: context.translate!.register,
               ),
             ],
           ),

@@ -8,7 +8,9 @@ class AppFilledButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+    this.padding = const EdgeInsets.symmetric(
+        horizontal: AppStyle.BUTTON_HORIZONTAL_PADDING,
+        vertical: AppStyle.BUTTON_VERTICAL_PADDING),
   });
 
   final String text;
@@ -18,24 +20,18 @@ class AppFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onPressed(),
+      onPressed: () => onPressed,
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
           Size(double.infinity, context.screenHeight * 0.06),
         ),
-        textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppStyle.BUTTON_RADIUS),
-          ),
-        ),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: AppColor.BLACK8,
+            ),
+      ),
     );
   }
 }
@@ -58,27 +54,23 @@ class AppOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: icon ?? const SizedBox(),
-      onPressed: () => onPressed(),
+      onPressed: () => onPressed,
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
           Size(double.infinity, context.screenHeight * 0.06),
         ),
-        textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(
-            color: Colors.green,
-          ),
-        ),
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppStyle.BUTTON_RADIUS),
-            side: const BorderSide(
-              color: Colors.green,
-            ),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            color: Theme.of(context).primaryColor,
+            width: 1.0,
           ),
         ),
       ),
-      label: Text(text),
+      label: Text(text,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: AppColor.BLACK2,
+              )),
     );
   }
 }
@@ -88,24 +80,21 @@ class AppTextButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-    required this.textStyle,
   });
 
   final String text;
   final Function onPressed;
-  final EdgeInsetsGeometry padding;
-  final TextStyle textStyle;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => onPressed(),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
-        textStyle: MaterialStateProperty.all<TextStyle>(textStyle),
+      onPressed: () => onPressed,
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: Theme.of(context).primaryColor,
+        ),
       ),
-      child: Text(text),
     );
   }
 }

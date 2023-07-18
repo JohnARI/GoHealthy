@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_healthy/shared/constants.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
-import 'package:go_healthy/widgets/input.dart';
+import 'package:go_healthy/widgets/inputs.dart';
 
 class LoginForm extends StatelessWidget {
   final TextEditingController emailController;
@@ -64,7 +64,7 @@ class LoginForm extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               Text(context.translate!.loginForgotPassword),
             ],
           ),

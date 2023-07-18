@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../shared/constants.dart';
 import '../../../../utils/lottie/lottie.dart';
-import '../../../../widgets/button.dart';
+import '../../../../widgets/buttons.dart';
 import '../blocs/register_bloc.dart';
 import '../widgets/register_widgets.dart';
 
@@ -81,13 +81,11 @@ class RegisterPage extends StatelessWidget {
               Text(
                 context.translate!.registerAlreadyHaveAnAccount,
               ),
-              TextButton(
+              AppTextButton(
                 onPressed: () {
                   _registerBloc.add(RegisterNavigateLoginEvent());
                 },
-                child: Text(
-                  context.translate!.login,
-                ),
+                text: context.translate!.login,
               ),
             ],
           ),
