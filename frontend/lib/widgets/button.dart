@@ -6,13 +6,11 @@ import '../shared/constants.dart';
 class AppFilledButton extends StatelessWidget {
   const AppFilledButton({
     super.key,
-    required this.context,
     required this.text,
     required this.onPressed,
     this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
   });
 
-  final BuildContext context;
   final String text;
   final Function onPressed;
   final EdgeInsetsGeometry padding;
@@ -47,14 +45,12 @@ class AppOutlinedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    required this.context,
     required this.icon,
     this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
   });
 
   final String text;
   final Function onPressed;
-  final BuildContext context;
   final Widget? icon;
   final EdgeInsetsGeometry padding;
 

@@ -54,6 +54,11 @@
     "description": "Le titre du lien de mot de passe oublié"
   },
 
+  "registerAlreadyHaveAnAccount": "Vous avez déjà un compte ?",
+  "@alreadyHaveAnAccount": {
+    "description": "Le titre du lien de connexion"
+  },
+
   "unknownErrorOccured": "Une erreur inconnue s'est produite",
   "@unknownErrorOccured": {
     "description": "Message d'erreur"

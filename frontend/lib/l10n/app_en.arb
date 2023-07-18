@@ -55,6 +55,11 @@
     "description": "The title of the forgot password link"
   },
 
+  "registerAlreadyHaveAnAccount": "Already have an account?",
+  "@alreadyHaveAnAccount": {
+    "description": "The title of the login link"
+  },
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

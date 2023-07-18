@@ -91,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
           AppFilledButton(
             text: context.translate!.loginButton,
-            context: context,
             onPressed: () {
               _loginBloc.add(
                 LoginButtonPressedEvent(
@@ -112,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
               height: context.screenHeight * 0.03,
             ),
             text: context.translate!.loginWithGoogle,
-            context: context,
             onPressed: () {
               _loginBloc.add(LoginGoogleButtonPressedEvent());
             },
