@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               );
               context.navigateNamedRoute(AppRoute.HOME.name);
             }
-
+    
             if (state is LoginNavigateRegisterActionState) {
               context.navigateNamedRoute(AppRoute.REGISTER.name);
             }
@@ -76,59 +76,66 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildInitialState() {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          LottieAnim.LoginOrRegister(context.screenHeight, context.screenWidth),
-          Text(context.translate!.login),
-          LoginForm(
-            emailController: _emailController,
-            passwordController: _passwordController,
-            onPressedTrailingIcon: () {
-              _loginBloc.add(LoginShowPasswordButtonPressedEvent());
-            },
-          ),
-          AppFilledButton(
-            text: context.translate!.loginButton,
-            onPressed: () {
-              _loginBloc.add(
-                LoginButtonPressedEvent(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                ),
-              );
-            },
-          ),
-          const Row(children: <Widget>[
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        LottieAnim.LoginOrRegister(context.screenHeight * 0.8, context.screenWidth * 0.8),
+        Text(context.translate!.login,
+            style: Theme.of(context).textTheme.titleLarge),
+        LoginForm(
+          emailController: _emailController,
+          passwordController: _passwordController,
+          onPressedTrailingIcon: () {
+            _loginBloc.add(LoginShowPasswordButtonPressedEvent());
+          },
+        ),
+        AppFilledButton(
+          text: context.translate!.loginButton,
+          onPressed: () {
+            _loginBloc.add(
+              LoginButtonPressedEvent(
+                email: _emailController.text,
+                password: _passwordController.text,
+              ),
+            );
+          },
+        ),
+
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: AppStyle.VERTICAL_PADDING),
+          child: Row(children: <Widget>[
             Expanded(child: Divider()),
-            Text("OR"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.0),
+              child: Text("OR", style: TextStyle(color: AppColor.BLACK5, fontSize: 16.0,)),
+            ),
             Expanded(child: Divider()),
           ]),
-          AppOutlinedButton(
-            icon: SvgAssets.buildSvg(
-              path: SvgAssets.googleLogo,
-              height: context.screenHeight * 0.03,
+        ),
+        
+        AppOutlinedButton(
+          icon: SvgAssets.buildSvg(
+            path: SvgAssets.googleLogo,
+            height: context.screenHeight * 0.03,
+          ),
+          text: context.translate!.loginWithGoogle,
+          onPressed: () {
+            _loginBloc.add(LoginGoogleButtonPressedEvent());
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(context.translate!.loginDontHaveAnAccount, style: Theme.of(context).textTheme.bodySmall),
+            AppTextButton(
+              onPressed: () {
+                _loginBloc.add(LoginNavigateRegisterEvent());
+              },
+              text: context.translate!.register,
             ),
-            text: context.translate!.loginWithGoogle,
-            onPressed: () {
-              _loginBloc.add(LoginGoogleButtonPressedEvent());
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(context.translate!.loginDontHaveAnAccount),
-              AppTextButton(
-                onPressed: () {
-                  _loginBloc.add(LoginNavigateRegisterEvent());
-                },
-                text: context.translate!.register,
-              ),
-            ],
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
   }
 

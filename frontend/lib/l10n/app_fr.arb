@@ -59,6 +59,11 @@
     "description": "Le titre du lien de connexion"
   },
 
+  "or": "ou",
+  "@or": {
+    "description": "Le titre du ou"
+  },
+
   "unknownErrorOccured": "Une erreur inconnue s'est produite",
   "@unknownErrorOccured": {
     "description": "Message d'erreur"

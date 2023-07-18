@@ -49,49 +49,54 @@ flutter:
 
   # Pour ajouter des polices de caractères à l'application il faut ajouter le chemin relatif et le nom de la police:
   fonts:
-    - family: NunitoSans
-      fonts:
-        - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/NunitoSans_10pt-Italic.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/NunitoSans_10pt-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/NunitoSans_10pt-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/NunitoSans_10pt-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
-        - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/NunitoSans_10pt-BoldItalic.ttf
-          weight: 700
-          style: italic
+    # - family: NunitoSans
+    #   fonts:
+    #     - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/NunitoSans_10pt-Italic.ttf
+    #       weight: 400
+    #       style: italic
+    #     - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/NunitoSans_10pt-MediumItalic.ttf
+    #       weight: 500
+    #       style: italic
+    #     - asset: assets/fonts/NunitoSans_10pt-SemiBold.ttf
+    #       weight: 600
+    #     - asset: assets/fonts/NunitoSans_10pt-SemiBoldItalic.ttf
+    #       weight: 600
+    #       style: italic
+    #     - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/NunitoSans_10pt-BoldItalic.ttf
+    #       weight: 700
+    #       style: italic
 
     - family: fontRegular
       fonts:
         - asset: assets/fonts/NunitoSans_10pt-Regular.ttf
+          weight: 400
         - asset: assets/fonts/NunitoSans_10pt-Italic.ttf
+          weight: 400
           style: italic
     - family: fontMedium
       fonts:
         - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
-        - asset: assets/fonts/NunitoSans_10pt-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NunitoSans_10pt-MediumItalic.ttf
           style: italic
           weight: 500
     - family: fontSemiBold
       fonts:
         - asset: assets/fonts/NunitoSans_10pt-SemiBold.ttf
+          weight: 600
         - asset: assets/fonts/NunitoSans_10pt-SemiBoldItalic.ttf
           style: italic
           weight: 600
     - family: fontBold
       fonts:
         - asset: assets/fonts/NunitoSans_10pt-Bold.ttf
+          weight: 700
         - asset: assets/fonts/NunitoSans_10pt-BoldItalic.ttf
           style: italic
           weight: 700

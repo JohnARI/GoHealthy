@@ -60,6 +60,11 @@
     "description": "The title of the login link"
   },
 
+  "or": "or",
+  "@or": {
+    "description": "The title of the or text"
+  },
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

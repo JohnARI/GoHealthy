@@ -20,7 +20,7 @@ class AppFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onPressed,
+      onPressed: () => onPressed(),
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
           Size(double.infinity, context.screenHeight * 0.06),
@@ -54,7 +54,7 @@ class AppOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: icon ?? const SizedBox(),
-      onPressed: () => onPressed,
+      onPressed: () => onPressed(),
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
           Size(double.infinity, context.screenHeight * 0.06),
@@ -88,7 +88,7 @@ class AppTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => onPressed,
+      onPressed: () => onPressed(),
       child: Text(
         text,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(

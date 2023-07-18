@@ -11,6 +11,8 @@ class AppStyle {
   static const double TAG_VERTICAL_PADDING = BUTTON_VERTICAL_PADDING;
   static const double TAG_RADIUS = 10.0;
 
+  static const double ICON_SIZE = 20.0;
+
   // Shadows
   final BoxShadow shadow0 = BoxShadow(
     color: Colors.black.withOpacity(0.05),

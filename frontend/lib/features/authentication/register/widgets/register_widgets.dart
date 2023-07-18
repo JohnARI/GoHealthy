@@ -38,7 +38,6 @@ class RegisterForm extends StatelessWidget {
               ),
               height: context.screenHeight * 0.03,
             ),
-            hintStyle: const TextStyle(color: AppColor.BLACK6),
             hintText: context.translate!.email,
           ),
           InputWithLeadingAndTrailingIcon(
@@ -51,7 +50,6 @@ class RegisterForm extends StatelessWidget {
               ),
               height: context.screenHeight * 0.03,
             ),
-            hintStyle: const TextStyle(color: AppColor.BLACK6),
             suffixIcon: SvgAssets.buildSvg(
               path: SvgAssets.passwordVisible,
               colorFilter: const ColorFilter.mode(
@@ -74,7 +72,6 @@ class RegisterForm extends StatelessWidget {
               ),
               height: context.screenHeight * 0.03,
             ),
-            hintStyle: const TextStyle(color: AppColor.BLACK6),
             suffixIcon: SvgAssets.buildSvg(
               path: SvgAssets.passwordVisible,
               colorFilter: const ColorFilter.mode(

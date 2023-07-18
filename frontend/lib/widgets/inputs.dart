@@ -6,14 +6,12 @@ class InputWithLeadingIcon extends StatelessWidget {
   final TextEditingController controller;
   final Widget icon;
   final String hintText;
-  final TextStyle hintStyle;
 
   const InputWithLeadingIcon({
     super.key,
     required this.controller,
     required this.icon,
     required this.hintText,
-    this.hintStyle = const TextStyle(color: AppColor.BLACK6),
   });
 
   @override
@@ -25,16 +23,6 @@ class InputWithLeadingIcon extends StatelessWidget {
         hintText: hintText,
         suffixIconColor: AppColor.BLACK1,
         iconColor: AppColor.BLACK6,
-        hintStyle: hintStyle,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK5),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK4),
-        ),
-        border: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK5),
-        ),
       ),
     );
   }
@@ -47,7 +35,6 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
   final String hintText;
   final Function() onPressedTrailingIcon;
   final bool obscureText;
-  final TextStyle hintStyle;
 
   const InputWithLeadingAndTrailingIcon({
     super.key,
@@ -57,7 +44,6 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
     required this.hintText,
     required this.onPressedTrailingIcon,
     this.obscureText = false,
-    this.hintStyle = const TextStyle(color: AppColor.BLACK6),
   });
 
   @override
@@ -74,16 +60,6 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
         hintText: hintText,
         suffixIconColor: AppColor.BLACK1,
         iconColor: AppColor.BLACK6,
-        hintStyle: hintStyle,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK5),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK4),
-        ),
-        border: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.BLACK5),
-        ),
       ),
     );
   }

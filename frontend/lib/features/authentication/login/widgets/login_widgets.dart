@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_healthy/shared/constants.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
+import 'package:go_healthy/widgets/buttons.dart';
 import 'package:go_healthy/widgets/inputs.dart';
 
 class LoginForm extends StatelessWidget {
@@ -18,57 +19,61 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS),
-        color: Colors.white,
-      ),
-      padding: const EdgeInsets.all(AppStyle.CARD_PADDING),
-      child: Column(
-        children: <Widget>[
-          InputWithLeadingIcon(
-            controller: emailController,
-            icon: SvgAssets.buildSvg(
-              path: SvgAssets.email,
-              colorFilter: const ColorFilter.mode(
-                AppColor.BLACK6,
-                BlendMode.srcIn,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppStyle.VERTICAL_PADDING),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS),
+          color: Colors.white,
+        ),
+        padding: const EdgeInsets.all(AppStyle.CARD_PADDING),
+        child: Column(
+          children: <Widget>[
+            InputWithLeadingIcon(
+              controller: emailController,
+              icon: SvgAssets.buildSvg(
+                path: SvgAssets.email,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.BLACK6,
+                  BlendMode.srcIn,
+                ),
+                height: context.screenHeight * 0.03,
               ),
-              height: context.screenHeight * 0.03,
+              hintText: context.translate!.email,
             ),
-            hintStyle: const TextStyle(color: AppColor.BLACK6),
-            hintText: context.translate!.email,
-          ),
-          InputWithLeadingAndTrailingIcon(
-            controller: passwordController,
-            icon: SvgAssets.buildSvg(
-              path: SvgAssets.password,
-              colorFilter: const ColorFilter.mode(
-                AppColor.BLACK6,
-                BlendMode.srcIn,
+            const SizedBox(height: 10.0),
+            InputWithLeadingAndTrailingIcon(
+              controller: passwordController,
+              icon: SvgAssets.buildSvg(
+                path: SvgAssets.password,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.BLACK6,
+                  BlendMode.srcIn,
+                ),
+                height: context.screenHeight * 0.03,
               ),
-              height: context.screenHeight * 0.03,
-            ),
-            hintStyle: const TextStyle(color: AppColor.BLACK6),
-            suffixIcon: SvgAssets.buildSvg(
-              path: SvgAssets.passwordVisible,
-              colorFilter: const ColorFilter.mode(
-                AppColor.BLACK1,
-                BlendMode.srcIn,
+              suffixIcon: SvgAssets.buildSvg(
+                path: SvgAssets.passwordVisible,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.BLACK1,
+                  BlendMode.srcIn,
+                ),
               ),
-              height: context.screenHeight * 0.03,
+              onPressedTrailingIcon: onPressedTrailingIcon,
+              obscureText: true,
+              hintText: context.translate!.password,
             ),
-            onPressedTrailingIcon: onPressedTrailingIcon,
-            obscureText: true,
-            hintText: context.translate!.password,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(context.translate!.loginForgotPassword),
-            ],
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                AppTextButton(
+                  onPressed: () {},
+                  text: context.translate!.loginForgotPassword,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

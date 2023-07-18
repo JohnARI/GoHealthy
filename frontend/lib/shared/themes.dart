@@ -14,6 +14,22 @@ extension AppThemeExtension on AppTheme {
     return ThemeData(
       colorScheme: colorScheme,
       useMaterial3: true,
+      inputDecorationTheme: const InputDecorationTheme(
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK5),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColor.BLACK4),
+        ),
+        hintStyle: TextStyle(
+          color: AppColor.BLACK6,
+          fontFamily: 'fontRegular',
+          fontSize: 20.0,
+        ),
+      ),
       bottomAppBarTheme: BottomAppBarTheme(
         color: colorScheme.background,
       ),
