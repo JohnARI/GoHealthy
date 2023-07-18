@@ -66,11 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               return _buildLoadingState();
             }
             if (state is LoginErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.toString()),
-                ),
-              );
+              return _buildErrorState();
             }
             return _buildInitialState();
           },
@@ -141,6 +137,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoadingState() {
     return const Center(
       child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildErrorState() {
+    return const Center(
+      child: Text('Error'),
     );
   }
 }
