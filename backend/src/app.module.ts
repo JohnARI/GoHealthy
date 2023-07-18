@@ -7,7 +7,6 @@ import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { MealsModule } from './meals/meals.module';
 import { BodyBuildModule } from './body-build/body-build.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot({

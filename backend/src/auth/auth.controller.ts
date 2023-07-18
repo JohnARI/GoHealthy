@@ -95,4 +95,27 @@ export class AuthController {
   refreshToken(@Request() req: Request & { user: any }) {
     return this.authService.refreshToken(req.user.id, req.user.refreshToken);
   }
+
+  @Post('sendResetPassword')
+  async sendResetPassword(@Body() body: { email: string }) {
+    return this.authService.sendPasswordResetEmail(body.email);
+  }
+
+  @Post('checkCodeValidity')
+  @HttpCode(HttpStatus.OK)
+  async checkCodeValidity(@Body() body: { code: number; email: string }) {
+    return this.authService.checkIfTokenIsValid(Number(body.code), body.email);
+  }
+
+  @Post('resetPassword')
+  @HttpCode(HttpStatus.OK)
+  async resetPassword(
+    @Body() body: { code: number; password: string; email: string },
+  ) {
+    return this.authService.resetPassword(
+      Number(body.code),
+      body.password,
+      body.email,
+    );
+  }
 }

@@ -17,7 +17,7 @@ export class UsersService {
     where: Prisma.UserWhereUniqueInput;
     data: Prisma.UserUpdateInput;
   }): Promise<User> {
-    return await this.prismaService.user.update({...params});
+    return await this.prismaService.user.update({ ...params });
   }
 
   async findOne(

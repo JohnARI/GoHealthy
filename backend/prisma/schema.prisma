@@ -35,22 +35,31 @@ enum MealType {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  accountType   AccountType     @default(DEFAULT)
-  email         String          @unique
-  username      String
-  password      String
-  connections   Connection[]
-  product       Products[]      @relation("UserProducts")
-  MealOnProduct MealOnProduct[]
-  bodyBuild     BodyBuild[]
-  MealHistory     MealHistory[]
+  id                String             @id @default(uuid())
+  accountType       AccountType        @default(DEFAULT)
+  email             String             @unique
+  username          String
+  password          String
+  connections       Connection[]
+  product           Products[]         @relation("UserProducts")
+  MealOnProduct     MealOnProduct[]
+  bodyBuild         BodyBuild[]
+  MealHistory       MealHistory[]
+  codeResetPassword CodeResetPassword?
 }
 
 model Connection {
   refreshToken String @unique
   user         User   @relation(fields: [userId], references: [id])
   userId       String
+}
+
+model CodeResetPassword {
+  id             String   @id @default(uuid())
+  code           Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String   @unique
+  expirationDate DateTime
 }
 
 model Products {
@@ -79,7 +88,7 @@ model Meals {
   products      MealOnProduct[]
   imageBucketId String          @default("")
   mealType      MealType
-  MealHistory     MealHistory[]
+  MealHistory   MealHistory[]
 }
 
 model MealOnProduct {
@@ -105,13 +114,11 @@ model BodyBuild {
   age           Int
 }
 
-
 model MealHistory {
-  id            String        @id @default(uuid())
-  user          User          @relation(fields: [userId], references: [id])
-  userId        String
-  meal          Meals         @relation(fields: [mealId], references: [id])
-  mealId        String
-  date          DateTime
+  id     String   @id @default(uuid())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  meal   Meals    @relation(fields: [mealId], references: [id])
+  mealId String
+  date   DateTime
 }
-

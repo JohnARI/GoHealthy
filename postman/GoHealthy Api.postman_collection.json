@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"password\": \"Ludodo32@\"\n}",
+									"raw": "{\n    \"email\": \"gohealthy@yopmail.com\",\n    \"password\": \"Ludodo32@\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -40,13 +40,13 @@
 							"response": []
 						},
 						{
-							"name": "JohnLogin",
+							"name": "userMailLogin",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"password\": \"Ludodo32@\"\n}",
+									"raw": "{\n    \"email\": \"gohealthy@yopmail.com\",\n    \"password\": \"TEEEEEST222@bruh\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -76,37 +76,233 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Logout",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5eHBsYXlybEBnbWFpbC5jb20iLCJpZCI6IjgwNTQ4MGY5LTIxODUtNDkwMC04MDk4LWZjNTY3OTcyMDc5NiIsImlhdCI6MTY4NjkxNzY0MywiZXhwIjoxNjg2OTE3NjczfQ.dl-ZLe353AY5fOOr2mFQH9zVk1xXKCZ2enOmVcLGggU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDRkYzY3MTAtZTMxMi00NTFhLWIzMWEtM2Y5Y2YwMWUyNDI0IiwiaWF0IjoxNjg3MDc2NzM2LCJleHAiOjE2ODc2ODE1MzZ9.urky4TOdj0mLXGZ6K6CNtFOs8I6VNyTHXKerSRDGScI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/refresh",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"refresh"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
-					"name": "Create User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"username\": \"Ludovic233\",\n    \"password\": \"Ludodo32@\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Mail",
+					"item": [
+						{
+							"name": "sendResetCode",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdvaGVhbHRoeUB5b3BtYWlsLmNvbSIsImlkIjoiZTRhYzg3MzYtNTg1OC00ZjdkLWEzODktNWM4MzFlOGY1NTZiIiwiaWF0IjoxNjg5NjgyOTI3LCJleHAiOjE2OTA5Nzg5Mjd9.eLI2FfzgY8FHDhk_UtiohG49K5wTPJTbe5rvx4l9mgw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"gohealthy@yopmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/sendResetPassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"sendResetPassword"
+									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "checkCodeValidity",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdvaGVhbHRoeUB5b3BtYWlsLmNvbSIsImlkIjoiZTRhYzg3MzYtNTg1OC00ZjdkLWEzODktNWM4MzFlOGY1NTZiIiwiaWF0IjoxNjg5NjgyOTI3LCJleHAiOjE2OTA5Nzg5Mjd9.eLI2FfzgY8FHDhk_UtiohG49K5wTPJTbe5rvx4l9mgw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"632389\",\n    \"email\": \"gohealthy@yopmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/checkCodeValidity",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"checkCodeValidity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resetPassword",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdvaGVhbHRoeUB5b3BtYWlsLmNvbSIsImlkIjoiZTRhYzg3MzYtNTg1OC00ZjdkLWEzODktNWM4MzFlOGY1NTZiIiwiaWF0IjoxNjg5NjgyOTI3LCJleHAiOjE2OTA5Nzg5Mjd9.eLI2FfzgY8FHDhk_UtiohG49K5wTPJTbe5rvx4l9mgw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n    \"code\": \"632389\",\n    \"password\": \"TEEEEEST222@bruh\",\n    \"email\": \"gohealthy@yopmail.com\" \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/resetpassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"resetpassword"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
 							}
 						},
-						"url": {
-							"raw": "{{url}}/users",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users"
-							]
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
-					},
-					"response": []
-				},
+					]
+				}
+			]
+		},
+		{
+			"name": "User CRUD",
+			"item": [
 				{
-					"name": "Refresh",
+					"name": "Get Profile",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -116,7 +312,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDRkYzY3MTAtZTMxMi00NTFhLWIzMWEtM2Y5Y2YwMWUyNDI0IiwiaWF0IjoxNjg3MDc2NzM2LCJleHAiOjE2ODc2ODE1MzZ9.urky4TOdj0mLXGZ6K6CNtFOs8I6VNyTHXKerSRDGScI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
 									"type": "string"
 								}
 							]
@@ -133,12 +329,76 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/refresh",
+							"raw": "{{url}}/users/me",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"refresh"
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gohealthy@yopmail.com\",\n    \"username\": \"Ludovic233\",\n    \"password\": \"Ludodo32@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
 							]
 						}
 					},
@@ -180,45 +440,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Logout",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5eHBsYXlybEBnbWFpbC5jb20iLCJpZCI6IjgwNTQ4MGY5LTIxODUtNDkwMC04MDk4LWZjNTY3OTcyMDc5NiIsImlhdCI6MTY4NjkxNzY0MywiZXhwIjoxNjg2OTE3NjczfQ.dl-ZLe353AY5fOOr2mFQH9zVk1xXKCZ2enOmVcLGggU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/logout",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"logout"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -233,7 +454,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMmY5NjU3N2QtNGJlOC00YjI1LWE1YTktMWUyZmZkYzZiMjI3IiwiaWF0IjoxNjg4Mzk2MTcyLCJleHAiOjE2ODgzOTcwNzJ9.SPFFfWiwt5WYHWhCX8RCmcAiy_w1Em6vF5P-2wQ7dRc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg4OTgwMjQzLCJleHAiOjE2OTAyNzYyNDN9.tvGUEFr01Hk0ZApS1nfeqzNrbYtc4EobHIkatXpOHzE",
 									"type": "string"
 								}
 							]
@@ -242,7 +463,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Eau de source - Cristaline - 1,5 L\",\n    \"type\": \"whole\",\n    \"description\": \"Spring water\",\n    \"energy\": 0,\n    \"fat\": 0,\n    \"saturatedFat\": 0,\n    \"carbohydrates\": 0,\n    \"sugars\": 0,\n    \"protein\": 0,\n    \"fiber\": 0,\n    \"salt\": 0.052\n}",
+							"raw": "{\n    \"title\": \"Eau de source - Cristaline - 2 L\",\n    \"type\": \"whole\",\n    \"description\": \"Spring water\",\n    \"energy\": 0,\n    \"fat\": 0,\n    \"saturatedFat\": 0,\n    \"carbohydrates\": 0,\n    \"sugars\": 0,\n    \"protein\": 0,\n    \"fiber\": 0,\n    \"salt\": 0.052,\n    \"userId\":\"cf7b89ab-1bb7-47b2-b2e4-280f87bc517e\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -288,11 +509,21 @@
 				{
 					"name": "Edit Product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg4OTgwMjQzLCJleHAiOjE2OTAyNzYyNDN9.tvGUEFr01Hk0ZApS1nfeqzNrbYtc4EobHIkatXpOHzE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"French Spring Water\"\n}",
+							"raw": "{\n    \"description\": \"French Spring Water 5L\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,7 +542,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "d657c1da-05ca-4b8b-a7d8-ad3ea70684ae"
+									"value": "06bbbd44-0e6e-4a94-a105-f904e5862721"
 								}
 							]
 						}
@@ -380,7 +611,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"06bbbd44-0e6e-4a94-a105-f904e5862721\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"06bbbd44-0e6e-4a94-a105-f904e5862721\",\n        \"weightInGrams\": 200\n    }\n  ],\n  \"userId\": \"cf7b89ab-1bb7-47b2-b2e4-280f87bc517e\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -466,13 +697,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"raw": "{{url}}/meals/233d8266-14af-4e1f-9399-f72f54cb68d4",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"meals",
-								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
+								"233d8266-14af-4e1f-9399-f72f54cb68d4"
 							]
 						}
 					},
@@ -480,9 +711,6 @@
 				},
 				{
 					"name": "update Meal",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -494,11 +722,11 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 3 L\",\n  \"products\": [\n    {\n      \"id\": \"06bbbd44-0e6e-4a94-a105-f904e5862721\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"06bbbd44-0e6e-4a94-a105-f904e5862721\",\n      \"weightInGrams\": 200\n    }\n  ],\n  \"userId\": \"cf7b89ab-1bb7-47b2-b2e4-280f87bc517e\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -506,13 +734,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"raw": "{{url}}/meals/233d8266-14af-4e1f-9399-f72f54cb68d4",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"meals",
-								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
+								"233d8266-14af-4e1f-9399-f72f54cb68d4"
 							]
 						}
 					},
@@ -543,95 +771,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/meals/65f6eb68-e8dc-4dcc-a242-9d9f5cdad200",
+							"raw": "{{url}}/meals/445cbe8a-d5b6-4564-82dd-d67ca9858819",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"meals",
-								"65f6eb68-e8dc-4dcc-a242-9d9f5cdad200"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User CRUD",
-			"item": [
-				{
-					"name": "Get Profile",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/me",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Account",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDA1MWU3YjctODBjNC00NTI0LWFhOTItM2JiYjA1MGU1ZThjIiwiaWF0IjoxNjg3Nzg4NzE2LCJleHAiOjE2ODc3ODk2MTZ9.vOjYtSbXNWH6V1Lr3mC72n2uiSj4tSta7S3h1zza3I4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/me",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"me"
+								"445cbe8a-d5b6-4564-82dd-d67ca9858819"
 							]
 						}
 					},
@@ -645,6 +791,16 @@
 				{
 					"name": "Get all Body-Build",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg5MDY4MDYyLCJleHAiOjE2OTAzNjQwNjJ9.dilMsWucE17IW2yRtzPML_YW7A6_6Ii29sFElTPsig8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -662,14 +818,44 @@
 				{
 					"name": "Get One Body-Build",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg5MDY4MzE2LCJleHAiOjE2OTAzNjQzMTZ9.7df7sSTommsLpvsCi6qkaqEflI07kLswE2W7x6mnYoM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{url}}/body-build/444ab979-f2b1-4c9a-92fd-739684141747",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"body-build",
+								"444ab979-f2b1-4c9a-92fd-739684141747"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Create Body-Build",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiY2Y3Yjg5YWItMWJiNy00N2IyLWIyZTQtMjgwZjg3YmM1MTdlIiwiaWF0IjoxNjg5MDY4MzE2LCJleHAiOjE2OTAzNjQzMTZ9.7df7sSTommsLpvsCi6qkaqEflI07kLswE2W7x6mnYoM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -746,12 +932,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/body-build",
+							"raw": "{{url}}/body-build/444ab979-f2b1-4c9a-92fd-739684141747",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"body-build"
+								"body-build",
+								"444ab979-f2b1-4c9a-92fd-739684141747"
 							]
 						}
 					},
