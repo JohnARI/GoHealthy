@@ -11,8 +11,8 @@ class AppStyle {
   static const double TAG_RADIUS = 10.0;
 
   // Shadows
-  final BoxShadow shadow0 = BoxShadow(
-    color: Colors.black.withOpacity(0.05),
+  static BoxShadow shadow0 = BoxShadow(
+    color: Colors.black.withOpacity(0.03),
     blurRadius: 15,
     offset: const Offset(0, 0),
   );

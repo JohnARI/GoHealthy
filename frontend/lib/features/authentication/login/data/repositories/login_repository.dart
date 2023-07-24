@@ -23,6 +23,8 @@ class LoginRepository {
         },
         includeHeaders: false,
       );
+      print('=====================');
+      print(login);
       log(
         name: 'Login repository',
         'login request sent successfully',

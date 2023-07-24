@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SvgAssets {
-  static SvgPicture buildSvg(String path, Color color) {
+  static SvgPicture buildSvg(
+      {required String path, ColorFilter? colorFilter, double? height}) {
     return SvgPicture.asset(path,
-        fit: BoxFit.cover,
-        colorFilter: ColorFilter.mode(color, BlendMode.srcIn));
+        fit: BoxFit.cover, height: height, colorFilter: colorFilter);
   }
 
   static String angrySmiley = 'assets/images/AngrySmiley.svg';
