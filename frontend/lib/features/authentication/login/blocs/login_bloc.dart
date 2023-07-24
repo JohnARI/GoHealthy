@@ -33,14 +33,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginButtonPressedEvent event, Emitter<LoginState> emit) async {
     try {
       emit(LoginLoadingState());
-      print("Bonjour");
       final Login login =
           await _loginRepository.login(event.email, event.password);
-      print(login);
-      print(login.accessToken);
       await SharedPreference.setAccessToken(login.accessToken);
       emit(LoginSuccessState());
     } catch (e) {
+      print(e);
       log(name: 'LoginBLoC', 'error: $e');
       emit(LoginErrorState());
     }

@@ -12,13 +12,35 @@ abstract class PieChartActionState extends PieChartState {}
 class PieChartInitialState extends PieChartState {}
 
 class PieChartInitialStateSuccess extends PieChartState {
-  const PieChartInitialStateSuccess(
-      {required this.percentValueFilled, required this.percentValueUnfilled});
+  const PieChartInitialStateSuccess({
+    required this.percentValueFilled,
+    required this.percentValueUnfilled,
+  });
+
   final double percentValueFilled;
   final double percentValueUnfilled;
 
   @override
-  List<Object> get props => <Object>[percentValueFilled, percentValueUnfilled];
+  List<Object> get props => <Object>[
+        percentValueFilled,
+        percentValueUnfilled,
+      ];
+}
+
+class PieChartContainerInitialStateSuccess extends PieChartState {
+  const PieChartContainerInitialStateSuccess(
+      {required this.title,
+      required this.piePrimaryColor,
+      required this.pieSecondaryColor,
+      required this.svgAssets});
+  final String title;
+  final Color piePrimaryColor;
+  final Color pieSecondaryColor;
+  final String svgAssets;
+
+  @override
+  List<Object> get props =>
+      <Object>[title, piePrimaryColor, pieSecondaryColor, svgAssets];
 }
 
 class PieChartLoadingState extends PieChartState {}

@@ -8,13 +8,24 @@ abstract class PieChartEvent extends Equatable {
 }
 
 class PieChartInitialEvent extends PieChartEvent {
-  const PieChartInitialEvent({required this.minValue, required this.maxValue});
+  const PieChartInitialEvent(
+      {required this.minValue, required this.maxValue, required this.type});
 
   final double minValue;
   final double maxValue;
+  final PieChartType type;
 
   @override
-  List<Object> get props => <Object>[minValue, maxValue];
+  List<Object> get props => <Object>[minValue, maxValue, type];
+}
+
+class PieChartContainerInitialEvent extends PieChartEvent {
+  const PieChartContainerInitialEvent({required this.type});
+
+  final PieChartType type;
+
+  @override
+  List<Object> get props => <Object>[type];
 }
 
 class PieChartButtonPressedEvent extends PieChartEvent {
