@@ -7,7 +7,7 @@ import 'utils/shared_preference.dart';
 Future<void> main() async {
   // Initialize the dotenv library
   await dotenv.load();
-  // Initialize the shared preference
+  // Initialize the shared preference`
   await SharedPreference.initialize();
   runApp(const MainApp());
 }

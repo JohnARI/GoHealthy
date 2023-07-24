@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:go_healthy/API/api_client.dart';
-import 'package:go_healthy/API/api_endpoints.dart';
+import 'package:go_healthy/api/api_client.dart';
+import 'package:go_healthy/api/api_endpoints.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../../API/api_google.dart';
+import '../../../../../api/api_google.dart';
 import '../models/login.dart';
 
 class LoginRepository {
@@ -62,23 +62,20 @@ class LoginRepository {
         name: 'Login repository',
         'Google login request started...',
       );
-      // await APIClient.postHttpRequest<Map<String, dynamic>>(
-      //   APIEndpoint.loginGoogle(),
-      //   <String, dynamic>{
-      //     'access_token': accessToken,
-      //     'id_token': idToken,
-      //   },
-      //   includeHeaders: false,
-      // );
+      final Map<String, dynamic> googleSigninRequest = await APIClient.postHttpRequest<Map<String, dynamic>>(
+        APIEndpoint.loginGoogle(),
+        <String, dynamic>{
+          'access_token': accessToken,
+          'id_token': idToken,
+        },
+        includeHeaders: false,
+      );
 
+      final Login result = Login.fromMap(googleSigninRequest);
       // translate to login model
       log(
         name: 'Login repository',
         'Google login request sent successfully',
-      );
-      final Login result = Login(
-        accessToken: accessToken!,
-        refreshToken: idToken!,
       );
 
       return result;

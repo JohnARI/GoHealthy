@@ -59,7 +59,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
 
       final Login googleUser = await _loginRepository.loginGoogle();
+
       SharedPreference.setAccessToken(googleUser.accessToken);
+      SharedPreference.setRefreshToken(googleUser.refreshToken);
+
       emit(LoginSuccessState());
     } catch (e) {
       log(name: 'LoginBLoC', 'error: $e');
@@ -73,5 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   // Handles the show password event.
   FutureOr<void> _handleLoginShowPasswordButtonPressedEvent(
-      LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {}
+      LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {
+    emit(LoginShowPasswordActionState());
+  }
 }

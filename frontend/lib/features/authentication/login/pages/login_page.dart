@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_healthy/shared/constants.dart';
+import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
+import 'package:go_healthy/widgets/buttons.dart';
 
-import '../../../../shared/constants.dart';
+import '../../../../utils/lottie/lottie.dart';
 import '../blocs/login_bloc.dart';
+import '../widgets/login_widgets.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   late LoginBloc _loginBloc;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+
   @override
   void initState() {
     super.initState();
@@ -34,85 +39,103 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.translate!.login),
-      ),
-      body: BlocConsumer<LoginBloc, LoginState>(
-        bloc: _loginBloc,
-        listener: (BuildContext context, LoginState state) {
-          if (state is LoginSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Login Success'),
-              ),
-            );
-            context.navigateNamedRoute(AppRoute.HOME.name);
-          }
-
-          if (state is LoginNavigateRegisterActionState) {
-            context.navigateNamedRoute(AppRoute.REGISTER.name);
-          }
-        },
-        builder: (BuildContext context, LoginState state) {
-          if (state is LoginInitialState) {
+      body: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppStyle.HORIZONTAL_PADDING),
+        child: BlocConsumer<LoginBloc, LoginState>(
+          bloc: _loginBloc,
+          listener: (BuildContext context, LoginState state) {
+            if (state is LoginSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Login Success'),
+                ),
+              );
+              context.navigateNamedRoute(AppRoute.HOME.name);
+            }
+    
+            if (state is LoginNavigateRegisterActionState) {
+              context.navigateNamedRoute(AppRoute.REGISTER.name);
+            }
+          },
+          builder: (BuildContext context, LoginState state) {
+            if (state is LoginInitialState) {
+              return _buildInitialState();
+            }
+            if (state is LoginLoadingState) {
+              return _buildLoadingState();
+            }
+            if (state is LoginErrorState) {
+              return _buildErrorState();
+            }
             return _buildInitialState();
-          } else if (state is LoginLoadingState) {
-            return _buildLoadingState();
-          } else if (state is LoginErrorState) {
-            return _buildErrorState();
-          } else {
-            return _buildInitialState();
-          }
-        },
+          },
+        ),
       ),
     );
   }
 
   Widget _buildInitialState() {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          TextField(
-            controller: _emailController,
-            decoration: InputDecoration(
-              labelText: context.translate!.email,
-            ),
-          ),
-          TextField(
-            controller: _passwordController,
-            decoration: InputDecoration(
-              labelText: context.translate!.password,
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _loginBloc.add(LoginButtonPressedEvent(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        LottieAnim.LoginOrRegister(context.screenHeight * 0.8, context.screenWidth * 0.8),
+        Text(context.translate!.login,
+            style: Theme.of(context).textTheme.titleLarge),
+        LoginForm(
+          emailController: _emailController,
+          passwordController: _passwordController,
+          onPressedTrailingIcon: () {
+            _loginBloc.add(LoginShowPasswordButtonPressedEvent());
+          },
+        ),
+        AppFilledButton(
+          text: context.translate!.loginButton,
+          onPressed: () {
+            _loginBloc.add(
+              LoginButtonPressedEvent(
                 email: _emailController.text,
                 password: _passwordController.text,
-              ));
-            },
-            child: Text(context.translate!.loginButton),
+              ),
+            );
+          },
+        ),
+
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: AppStyle.VERTICAL_PADDING),
+          child: Row(children: <Widget>[
+            Expanded(child: Divider()),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.0),
+              child: Text("OR", style: TextStyle(color: AppColor.BLACK5, fontSize: 16.0,)),
+            ),
+            Expanded(child: Divider()),
+          ]),
+        ),
+        
+        AppOutlinedButton(
+          icon: SvgAssets.buildSvg(
+            path: SvgAssets.googleLogo,
+            height: context.screenHeight * 0.03,
           ),
-          ElevatedButton(
-            onPressed: () {
-              _loginBloc.add(LoginNavigateRegisterEvent());
-            },
-            child: Text(context.translate!.register),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _loginBloc.add(LoginNavigateForgotPasswordEvent());
-            },
-            child: Text(context.translate!.forgotPassword),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _loginBloc.add((LoginGoogleButtonPressedEvent()));
-            },
-            child: Text(context.translate!.loginWithGoogle),
-          ),
-        ],
-      ),
+          text: context.translate!.loginWithGoogle,
+          onPressed: () {
+            _loginBloc.add(LoginGoogleButtonPressedEvent());
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(context.translate!.loginDontHaveAnAccount, style: Theme.of(context).textTheme.bodySmall),
+            AppTextButton(
+              onPressed: () {
+                _loginBloc.add(LoginNavigateRegisterEvent());
+              },
+              text: context.translate!.register,
+            ),
+          ],
+        ),
+      ],
     );
   }
 

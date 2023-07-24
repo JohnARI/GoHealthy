@@ -1,5 +1,5 @@
-import '../../../../../API/api_client.dart';
-import '../../../../../API/api_endpoints.dart';
+import '../../../../../api/api_client.dart';
+import '../../../../../api/api_endpoints.dart';
 
 class LogoutRepository {
   Future<void> logout() async =>

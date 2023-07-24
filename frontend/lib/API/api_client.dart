@@ -12,14 +12,14 @@ import 'api_providers.dart';
 /// such as GET, POST, PUT, DELETE, and PATCH. It handles sending the requests,
 /// handling the responses, and parsing the data.
 class APIClient {
-  static late final http.Client _client;
+  static final http.Client _client = APIProvider.getClient();
 
   /// Creates a new instance of [APIClient].
   ///
   /// This constructor initializes the [http.Client] used for making API requests.
-  APIClient() {
-    _client = APIProvider.getClient();
-  }
+  // APIClient() {
+  //   _client = APIProvider.getClient();
+  // }
 
   /// Sends a GET request to the specified [endpoint].
   ///

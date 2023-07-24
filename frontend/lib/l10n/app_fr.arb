@@ -44,6 +44,26 @@
     "description": "Le titre du bouton de connexion avec Google"
   },
 
+  "loginDontHaveAnAccount": "Vous n'avez pas de compte encore de compte ?",
+  "@dontHaveAnAccount": {
+    "description": "The title of the register link"
+  },
+
+  "loginForgotPassword": "Mot de passe oublié ?",
+  "@loginForgotPassword": {
+    "description": "Le titre du lien de mot de passe oublié"
+  },
+
+  "registerAlreadyHaveAnAccount": "Vous avez déjà un compte ?",
+  "@alreadyHaveAnAccount": {
+    "description": "Le titre du lien de connexion"
+  },
+
+  "or": "ou",
+  "@or": {
+    "description": "Le titre du ou"
+  },
+
   "unknownErrorOccured": "Une erreur inconnue s'est produite",
   "@unknownErrorOccured": {
     "description": "Message d'erreur"
