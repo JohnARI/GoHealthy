@@ -69,14 +69,12 @@ class APIClient {
         name: 'APIClient',
         'Request body: $body, Request headers: $requestHeaders, Request endpoint: $endpoint',
       );
-      print('========');
       final http.Response response = await _client.post(
         Uri.parse(endpoint),
         headers: requestHeaders,
         body: body,
       );
       final dynamic result = handleResponse(response);
-      print('========');
       log(
         name: 'APIClient',
         'Converting response completed...',
