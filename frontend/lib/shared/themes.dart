@@ -12,11 +12,6 @@ extension AppThemeExtension on AppTheme {
   // If you want to add more properties to your theme, you can add them here.
   static ThemeData _createThemeData({required ColorScheme colorScheme}) {
     return ThemeData(
-<<<<<<< HEAD
-      brightness: brightness,
-      primaryColor: primaryColor,
-      useMaterial3: true,
-=======
       colorScheme: colorScheme,
       useMaterial3: true,
       inputDecorationTheme: const InputDecorationTheme(
@@ -56,7 +51,6 @@ extension AppThemeExtension on AppTheme {
         color: AppColor.BLACK6,
         thickness: 1.0,
       ),
->>>>>>> frontend/staging
       textTheme: const TextTheme(
         bodyMedium: TextStyle(
           fontFamily: 'fontRegular',
