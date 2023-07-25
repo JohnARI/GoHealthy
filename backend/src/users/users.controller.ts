@@ -33,6 +33,7 @@ export class UsersController {
 
   @Post()
   @ApiResponse(UsersSwaggerResponses.CREATE_SUCCESS)
+  @ApiResponse(UsersSwaggerResponses.BAD_REQUEST)
   @ApiResponse(UsersSwaggerResponses.CREATE_CONFLICT)
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);

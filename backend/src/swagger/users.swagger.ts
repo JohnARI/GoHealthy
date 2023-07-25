@@ -11,6 +11,11 @@ export class UsersSwaggerResponses {
     description: 'The JWT access token is invalid',
   };
 
+  static readonly BAD_REQUEST = {
+    status: 400,
+    description: 'The request body is malformed, see error message for details',
+  };
+
   static readonly NOT_FOUND = {
     status: 404,
     description:

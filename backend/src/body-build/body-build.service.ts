@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBodyBuildDto } from './dto/create-body-build.dto';
 import { UpdateBodyBuildDto } from './dto/update-body-build.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { calculateNeeds } from 'src/utils/calculators/calculators.needs';
 
 @Injectable()
 export class BodyBuildService {
@@ -29,6 +30,8 @@ export class BodyBuildService {
               id: createBodyBuildDto.userId,
             },
           },
+          diet: createBodyBuildDto.diet,
+          dietIntensity: createBodyBuildDto.dietIntensity,
         },
       });
       return bodyBuild;
@@ -41,11 +44,37 @@ export class BodyBuildService {
     }
   }
 
+  async createNeeds(createBodyBuildDto: CreateBodyBuildDto, bodyId: string) {
+    var needs = calculateNeeds(createBodyBuildDto);
+    try {
+      await this.prismaService.dailyNeeds.create({
+        data: {
+          body: {
+            connect: {
+              id: bodyId,
+            },
+          },
+          calories: needs.calories,
+          proteins: needs.proteins,
+          carbohydrates: needs.carbohydrates,
+          lipids: needs.lipids,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      return new HttpException(
+        `Database error: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   async findAll() {
     try {
       const bodyBuilds = await this.prismaService.bodyBuild.findMany({
         include: {
           user: true,
+          dailyNeeds: true,
         },
       });
       return bodyBuilds;
@@ -94,6 +123,32 @@ export class BodyBuildService {
       console.error(error);
       throw new HttpException(
         `Database error: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async updateNeeds(bodyId: string) {
+    try {
+      const bodyBuild = await this.findOne(bodyId);
+      if (!bodyBuild) {
+        throw new Error('BodyBuild not found');
+      }
+      const needs = calculateNeeds(bodyBuild);
+      const bodyNeeds = await this.prismaService.dailyNeeds.update({
+        where: { bodyId: bodyBuild.id },
+        data: {
+          calories: needs.calories,
+          proteins: needs.proteins,
+          carbohydrates: needs.carbohydrates,
+          lipids: needs.lipids,
+        },
+      });
+      return bodyNeeds;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        `Database error: ${error.message} `,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

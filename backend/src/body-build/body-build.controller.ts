@@ -22,7 +22,9 @@ export class BodyBuildController {
   @UseGuards(JwtAccessGuard)
   @Post()
   async create(@Body() createBodyBuildDto: CreateBodyBuildDto) {
-    return this.bodyBuildService.create(createBodyBuildDto);
+    const bodyBuild = await this.bodyBuildService.create(createBodyBuildDto);
+    await this.bodyBuildService.createNeeds(createBodyBuildDto, bodyBuild.id);
+    return bodyBuild;
   }
 
   @UseGuards(JwtAccessGuard)
@@ -43,7 +45,11 @@ export class BodyBuildController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateBodyBuildDto: UpdateBodyBuildDto,
   ) {
-    return this.bodyBuildService.update(id, updateBodyBuildDto);
+    var updatedBodyBuild = await this.bodyBuildService.update(
+      id,
+      updateBodyBuildDto,
+    );
+    return updatedBodyBuild;
   }
 
   @UseGuards(JwtAccessGuard)

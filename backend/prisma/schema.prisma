@@ -34,6 +34,19 @@ enum MealType {
   SNACK
 }
 
+enum Diet {
+  LOWCARB
+  LOWFAT
+  HIGHPROTEIN
+  STANDARD
+}
+
+enum DietIntensity {
+  SLOW
+  MEDIUM
+  FAST
+}
+
 model User {
   id                String             @id @default(uuid())
   accountType       AccountType        @default(DEFAULT)
@@ -43,7 +56,7 @@ model User {
   connections       Connection[]
   product           Products[]         @relation("UserProducts")
   MealOnProduct     MealOnProduct[]
-  bodyBuild         BodyBuild[]
+  bodyBuild         BodyBuild?
   MealHistory       MealHistory[]
   codeResetPassword CodeResetPassword?
 }
@@ -102,17 +115,23 @@ model MealOnProduct {
   userId        String
 }
 
+
 model BodyBuild {
   id            String        @id @default(uuid())
   user          User          @relation(fields: [userId], references: [id])
-  userId        String
+  userId        String @unique
   weightGoal    Float
   currentWeight Float
   sexe          Sex
   activityLevel ActivityLevel
   height        Float
   age           Int
+  diet          Diet
+  dietIntensity DietIntensity
+  dailyNeeds         DailyNeeds?
 }
+
+
 
 model MealHistory {
   id     String   @id @default(uuid())
@@ -121,4 +140,14 @@ model MealHistory {
   meal   Meals    @relation(fields: [mealId], references: [id])
   mealId String
   date   DateTime
+}
+
+model DailyNeeds {
+  id String @id @default(uuid())
+  body BodyBuild @relation(fields: [bodyId], references: [id], onDelete: Cascade)
+  bodyId String @unique
+  calories Int
+  proteins Int
+  carbohydrates Int
+  lipids Int
 }

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { ActivityLevel, Sex } from '@prisma/client';
+import { ActivityLevel, Diet, DietIntensity, Sex } from '@prisma/client';
 
 export class CreateBodyBuildDto {
   @IsNotEmpty()
@@ -24,4 +24,12 @@ export class CreateBodyBuildDto {
   @IsNotEmpty()
   @IsString()
   sexe: Sex;
+
+  @IsNotEmpty()
+  @IsString()
+  diet: Diet;
+
+  @IsNotEmpty()
+  @IsString()
+  dietIntensity: DietIntensity;
 }
