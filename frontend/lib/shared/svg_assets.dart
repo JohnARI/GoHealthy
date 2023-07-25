@@ -30,7 +30,8 @@ class SvgAssets {
   static const String normalSmiley = 'assets/images/NormalSmiley.svg';
   static const String roundedPassword = 'assets/images/Password.svg';
   static const String password = 'assets/images/Password2.svg';
-  static const String passwordNotVisible = 'assets/images/PasswordNotVisible.svg';
+  static const String passwordNotVisible =
+      'assets/images/PasswordNotVisible.svg';
   static const String passwordVisible = 'assets/images/PasswordVisible.svg';
   static const String photo2 = 'assets/images/Photo2.svg';
   static const String profile = 'assets/images/Profile.svg';

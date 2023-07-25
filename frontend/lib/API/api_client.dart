@@ -81,6 +81,7 @@ class APIClient {
       );
       return result as T;
     } catch (e) {
+      print(e);
       log(
         name: 'APIClient',
         e.toString(),

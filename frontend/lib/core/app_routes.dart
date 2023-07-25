@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../widgets/appbar.dart';
-import '../widgets/bottom_navbar.dart';
 import '/shared/routes.dart';
 import '../features/authentication/login/pages/login_page.dart';
 import '../features/authentication/register/pages/register_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../utils/shared_preference.dart';
+import '../widgets/appbar.dart';
+import '../widgets/bottom_navbar.dart';
 
 class RouteInitializer {
   static String determineInitialRoute() {

@@ -14,7 +14,7 @@ class AppStyle {
   static const double ICON_SIZE = 20.0;
 
   // Shadows
-  final BoxShadow shadow0 = BoxShadow(
+  static final BoxShadow shadow0 = BoxShadow(
     color: Colors.black.withOpacity(0.05),
     blurRadius: 15,
     offset: const Offset(0, 0),
