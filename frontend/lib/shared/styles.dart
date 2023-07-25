@@ -19,6 +19,8 @@ class AppStyle {
     blurRadius: 15,
     offset: const Offset(0, 0),
   );
-  static const double CARD_RADIUS = 15.0;
+  static const double CARD_RADIUS_LARGE = 15.0;
+  static const double CARD_RADIUS_MEDIUM = 12.5;
+  static const double CARD_RADIUS_SMALL = 10.0;
   static const double CARD_PADDING = 20.0;
 }

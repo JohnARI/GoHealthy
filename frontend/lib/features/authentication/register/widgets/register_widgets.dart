@@ -22,7 +22,7 @@ class RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS),
+        borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS_LARGE),
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(AppStyle.CARD_PADDING),
