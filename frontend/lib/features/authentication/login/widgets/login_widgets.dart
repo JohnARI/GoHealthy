@@ -8,12 +8,14 @@ import 'package:go_healthy/widgets/inputs.dart';
 class LoginForm extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final bool obscureText;
   final Function() onPressedTrailingIcon;
 
   const LoginForm({
     super.key,
     required this.emailController,
     required this.passwordController,
+    required this.obscureText,
     required this.onPressedTrailingIcon,
   });
 
@@ -52,15 +54,23 @@ class LoginForm extends StatelessWidget {
                 ),
                 height: context.screenHeight * 0.03,
               ),
-              suffixIcon: SvgAssets.buildSvg(
-                path: SvgAssets.passwordVisible,
-                colorFilter: const ColorFilter.mode(
-                  AppColor.BLACK1,
-                  BlendMode.srcIn,
-                ),
-              ),
+              suffixIcon: obscureText
+                  ? SvgAssets.buildSvg(
+                      path: SvgAssets.passwordVisible,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.BLACK1,
+                        BlendMode.srcIn,
+                      ),
+                    )
+                  : SvgAssets.buildSvg(
+                      path: SvgAssets.passwordNotVisible,
+                      colorFilter: const ColorFilter.mode(
+                        AppColor.BLACK1,
+                        BlendMode.srcIn,
+                      ),
+                    ),
               onPressedTrailingIcon: onPressedTrailingIcon,
-              obscureText: true,
+              obscureText: obscureText,
               hintText: context.translate!.password,
             ),
             Row(
