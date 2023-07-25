@@ -38,7 +38,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await SharedPreference.setAccessToken(login.accessToken);
       emit(LoginSuccessState());
     } catch (e) {
-      print(e);
       log(name: 'LoginBLoC', 'error: $e');
       emit(LoginErrorState());
     }

@@ -23,6 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         border: Border(top: BorderSide(color: AppColor.BLACK7, width: 1.5)),
       ),
       child: BottomNavigationBar(
+          backgroundColor: AppColor.WHITE,
           currentIndex: pageIndex,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_healthy/features/authentication/logout/blocs/logout_bloc.dart';
+import 'package:go_healthy/features/followup/followup_meals/widgets/followup_meals_container.dart';
 import 'package:go_healthy/features/graphs/pie_chart/widgets/pie_chart_container.dart';
 import 'package:go_healthy/shared/constants.dart';
 import 'package:go_healthy/shared/enums/pie_charts_enums.dart';
@@ -15,10 +16,6 @@ class HomePage extends StatelessWidget {
     return Container(
       width: context.screenWidth,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
         color: AppColor.BLACK8,
       ),
       child: SingleChildScrollView(
@@ -31,6 +28,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 2,
                 childAspectRatio: (context.screenWidth / 2 - 30) / 107,
@@ -63,6 +61,10 @@ class HomePage extends StatelessWidget {
                       svgAssets: SvgAssets.calories),
                 ],
               ),
+              const SizedBox(height: 20),
+              const FollowupMealContainer(),
+              const SizedBox(height: 10),
+              // water intakes
               ElevatedButton(
                 onPressed: () {
                   LogoutBloc().add(LogoutRequestEvent());
