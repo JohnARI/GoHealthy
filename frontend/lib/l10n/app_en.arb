@@ -86,6 +86,32 @@
     "description" : "Calories"
   },
 
+  "followupAddMeal": "Add",
+  "@followupAddMeal" : {
+    "description" : "Add"
+  },
+  
+  "followupBreakfast": "Breakfast",
+  "@followupBreakfast" : {
+    "description" : "Breakfast"
+  },
+  
+  "followupLunch": "Lunch",
+  "@followupLunch" : {
+    "description" : "Lunch"
+  },
+
+  "followupSnack": "Snack",
+  "@followupSnack" : {
+    "description" : "Snack"
+  },
+
+  "followupDinner": "Dinner",
+  "@followupDinner" : {
+    "description" : "Dinner"
+  },
+
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

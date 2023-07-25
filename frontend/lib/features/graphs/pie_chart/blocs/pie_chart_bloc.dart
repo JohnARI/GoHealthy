@@ -16,8 +16,8 @@ class PieChartBloc extends Bloc<PieChartEvent, PieChartState> {
   // Loads the initial state of the bloc.
   FutureOr<void> _handlePieChartInitialEvent(
       PieChartInitialEvent event, Emitter<PieChartState> emit) {
-    double minValue = event.minValue;
-    double restValue = event.maxValue - event.minValue;
+    double minValue = event.minValue % event.maxValue;
+    double restValue = event.maxValue - (event.minValue % event.maxValue);
 
     emit(PieChartInitialStateSuccess(
       percentValueFilled: minValue,

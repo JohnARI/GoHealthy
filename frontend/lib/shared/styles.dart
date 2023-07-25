@@ -19,6 +19,12 @@ class AppStyle {
     blurRadius: 15,
     offset: const Offset(0, 0),
   );
+  static final BoxShadow shadow1 = BoxShadow(
+    color: Colors.black.withOpacity(0.5),
+    blurRadius: 15,
+    spreadRadius: 1,
+    offset: const Offset(0, 0),
+  );
   static const double CARD_RADIUS = 15.0;
   static const double CARD_PADDING = 20.0;
 }

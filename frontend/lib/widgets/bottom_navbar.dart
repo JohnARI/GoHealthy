@@ -19,10 +19,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: AppColor.WHITE,
         border: Border(top: BorderSide(color: AppColor.BLACK7, width: 1.5)),
       ),
       child: BottomNavigationBar(
+          backgroundColor: AppColor.WHITE,
           currentIndex: pageIndex,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

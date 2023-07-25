@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_healthy/shared/colors.dart';
 import 'package:go_router/go_router.dart';
 
-import '/shared/routes.dart';
 import '../features/authentication/login/pages/login_page.dart';
 import '../features/authentication/register/pages/register_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../utils/shared_preference.dart';
 import '../widgets/appbar.dart';
 import '../widgets/bottom_navbar.dart';
+import '/shared/routes.dart';
 
 class RouteInitializer {
   static String determineInitialRoute() {
@@ -44,7 +45,9 @@ final GoRouter router = GoRouter(
             preferredSize: Size.fromHeight(60.0),
             child: AppBarGeneral(name: "Follow-up"),
           ),
-          body: child,
+          body: Container(
+              decoration: const BoxDecoration(color: AppColor.WHITE),
+              child: child),
           bottomNavigationBar: const BottomNavBar(),
         );
       },

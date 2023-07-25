@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_healthy/shared/styles.dart';
 
 class AppBarGeneral extends StatelessWidget implements PreferredSizeWidget {
   const AppBarGeneral({Key? key, required this.name}) : super(key: key);
@@ -9,13 +10,20 @@ class AppBarGeneral extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      scrolledUnderElevation: 0,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Text(name, style: Theme.of(context).textTheme.titleLarge),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: <BoxShadow>[AppStyle.shadow0],
       ),
-      centerTitle: false,
+      child: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(name, style: Theme.of(context).textTheme.titleLarge),
+        ),
+        centerTitle: false,
+      ),
     );
   }
 }

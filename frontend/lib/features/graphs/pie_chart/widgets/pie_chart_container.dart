@@ -23,6 +23,9 @@ class PieChartContainer extends StatelessWidget {
   final Color secondaryColor;
   final String svgAssets;
 
+  final double minValue = 3000;
+  final double maxValue = 2500;
+
   @override
   Widget build(BuildContext context) {
     final PieChartBloc pieChartBloc = PieChartBloc();
@@ -54,6 +57,8 @@ class PieChartContainer extends StatelessWidget {
 
   Widget _buildInitialState(BuildContext context, Color primaryColor,
       Color secondaryColor, String svgAssets) {
+    final String unit = type == PieChartType.Calories ? 'kcal' : 'g';
+
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -74,8 +79,8 @@ class PieChartContainer extends StatelessWidget {
                       colorFilter:
                           ColorFilter.mode(primaryColor, BlendMode.srcIn)),
                   PieChartWidget(
-                      minValue: 540,
-                      maxValue: 2450,
+                      minValue: minValue,
+                      maxValue: maxValue,
                       type: type,
                       primaryColor: primaryColor,
                       secondaryColor: secondaryColor,
@@ -92,7 +97,7 @@ class PieChartContainer extends StatelessWidget {
               Baseline(
                 baselineType: TextBaseline.alphabetic,
                 baseline: 28.0,
-                child: Text("540",
+                child: Text(minValue.round().toString(),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: primaryColor,
                         )),
@@ -101,8 +106,8 @@ class PieChartContainer extends StatelessWidget {
                 baselineType: TextBaseline.alphabetic,
                 baseline: 20.0,
                 child: Text(
-                  " / 2540cal",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  ' / ${maxValue.round()} $unit',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColor.BLACK5,
                       ),
                 ),
