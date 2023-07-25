@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_healthy/features/authentication/widgets/auth_widgets.dart';
 import 'package:go_healthy/shared/constants.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
@@ -20,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   late LoginBloc _loginBloc;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  bool obscureText = true;
 
   @override
   void initState() {
@@ -33,6 +35,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     _loginBloc.close();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -42,77 +46,88 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppStyle.HORIZONTAL_PADDING),
-        child: BlocConsumer<LoginBloc, LoginState>(
-          bloc: _loginBloc,
-          listener: (BuildContext context, LoginState state) {
-            if (state is LoginSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Login Success'),
-                ),
-              );
-              context.navigateNamedRoute(AppRoute.HOME.name);
-            }
-    
-            if (state is LoginNavigateRegisterActionState) {
-              context.navigateNamedRoute(AppRoute.REGISTER.name);
-            }
-          },
-          builder: (BuildContext context, LoginState state) {
-            if (state is LoginInitialState) {
+        child: SingleChildScrollView(
+          child: BlocConsumer<LoginBloc, LoginState>(
+            bloc: _loginBloc,
+            listener: (BuildContext context, LoginState state) {
+              if (state is LoginSuccessState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Login Success'),
+                  ),
+                );
+                context.navigateNamedRoute(AppRoute.HOME.name);
+              }
+
+              if (state is LoginNavigateRegisterActionState) {
+                context.navigateNamedRoute(AppRoute.REGISTER.name);
+              }
+
+              if (state is LoginShowPasswordActionState) {
+                _loginBloc.add(LoginShowPasswordButtonPressedEvent(
+                    obscureText: !state.obscureText));
+              }
+            },
+            builder: (BuildContext context, LoginState state) {
+              if (state is LoginInitialState) {
+                return _buildInitialState();
+              }
+              if (state is LoginLoadingState) {
+                return _buildLoadingState();
+              }
+              if (state is LoginErrorState) {
+                return _buildErrorState();
+              }
               return _buildInitialState();
-            }
-            if (state is LoginLoadingState) {
-              return _buildLoadingState();
-            }
-            if (state is LoginErrorState) {
-              return _buildErrorState();
-            }
-            return _buildInitialState();
-          },
+            },
+          ),
         ),
       ),
     );
   }
 
   Widget _buildInitialState() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        LottieAnim.LoginOrRegister(context.screenHeight * 0.8, context.screenWidth * 0.8),
-        Text(context.translate!.login,
-            style: Theme.of(context).textTheme.titleLarge),
-        LoginForm(
-          emailController: _emailController,
-          passwordController: _passwordController,
-          onPressedTrailingIcon: () {
-            _loginBloc.add(LoginShowPasswordButtonPressedEvent());
-          },
-        ),
-        AppFilledButton(
-          text: context.translate!.loginButton,
-          onPressed: () {
-            _loginBloc.add(
-              LoginButtonPressedEvent(
-                email: _emailController.text,
-                password: _passwordController.text,
-              ),
-            );
-          },
-        ),
-
+    return AuthWidget(
+      imageWidget: LottieAnim.LoginOrRegister(
+          context.screenHeight * 0.8, context.screenWidth * 0.8),
+      titleWidget: context.translate!.login,
+      formWidget: LoginForm(
+        emailController: _emailController,
+        passwordController: _passwordController,
+        obscureText: obscureText,
+        onPressedTrailingIcon: () {
+          setState(() {
+            obscureText = !obscureText;
+          });
+        },
+      ),
+      buttonWidget: AppFilledButton(
+        text: context.translate!.loginButton,
+        onPressed: () {
+          _loginBloc.add(
+            LoginButtonPressedEvent(
+              email: _emailController.text,
+              password: _passwordController.text,
+            ),
+          );
+        },
+      ),
+      contentWidgets: <Widget>[
         const Padding(
           padding: EdgeInsets.symmetric(vertical: AppStyle.VERTICAL_PADDING),
           child: Row(children: <Widget>[
             Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.0),
-              child: Text("OR", style: TextStyle(color: AppColor.BLACK5, fontSize: 16.0,)),
+              child: Text("OR",
+                  style: TextStyle(
+                    color: AppColor.BLACK5,
+                    fontSize: 16.0,
+                  )),
             ),
             Expanded(child: Divider()),
           ]),
         ),
-        
         AppOutlinedButton(
           icon: SvgAssets.buildSvg(
             path: SvgAssets.googleLogo,
@@ -126,7 +141,8 @@ class _LoginPageState extends State<LoginPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(context.translate!.loginDontHaveAnAccount, style: Theme.of(context).textTheme.bodySmall),
+            Text(context.translate!.loginDontHaveAnAccount,
+                style: Theme.of(context).textTheme.bodySmall),
             AppTextButton(
               onPressed: () {
                 _loginBloc.add(LoginNavigateRegisterEvent());

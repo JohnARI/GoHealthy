@@ -38,7 +38,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await SharedPreference.setAccessToken(login.accessToken);
       emit(LoginSuccessState());
     } catch (e) {
-      print(e);
       log(name: 'LoginBLoC', 'error: $e');
       emit(LoginErrorState());
     }
@@ -75,6 +74,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   // Handles the show password event.
   FutureOr<void> _handleLoginShowPasswordButtonPressedEvent(
       LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {
-    emit(LoginShowPasswordActionState());
+    emit(LoginShowPasswordActionState(obscureText: !event.obscureText));
   }
 }
