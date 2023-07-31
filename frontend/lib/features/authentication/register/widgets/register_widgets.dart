@@ -31,7 +31,7 @@ class RegisterForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppStyle.VERTICAL_PADDING),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS),
+          borderRadius: BorderRadius.circular(AppStyle.CARD_RADIUS_LARGE),
           color: Colors.white,
         ),
         padding: const EdgeInsets.all(AppStyle.CARD_PADDING),
