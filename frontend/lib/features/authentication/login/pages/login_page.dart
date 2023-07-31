@@ -63,6 +63,10 @@ class _LoginPageState extends State<LoginPage> {
                 context.navigateNamedRoute(AppRoute.REGISTER.name);
               }
 
+              if (state is LoginErrorState) {
+                context.showSnackBar(state.message!);
+              }
+
               if (state is LoginShowPasswordActionState) {
                 _loginBloc.add(LoginShowPasswordButtonPressedEvent(
                     obscureText: !state.obscureText));
@@ -74,9 +78,6 @@ class _LoginPageState extends State<LoginPage> {
               }
               if (state is LoginLoadingState) {
                 return _buildLoadingState();
-              }
-              if (state is LoginErrorState) {
-                return _buildErrorState();
               }
               return _buildInitialState();
             },
@@ -108,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
             LoginButtonPressedEvent(
               email: _emailController.text,
               password: _passwordController.text,
+              context: context,
             ),
           );
         },
@@ -161,9 +163,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildErrorState() {
-    return const Center(
-      child: Text('Error'),
-    );
-  }
 }

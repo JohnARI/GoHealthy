@@ -13,7 +13,14 @@ class LoginLoadingState extends LoginState {}
 
 class LoginSuccessState extends LoginActionState {}
 
-class LoginErrorState extends LoginActionState {}
+class LoginErrorState extends LoginActionState {
+  final String? message;
+
+  LoginErrorState({this.message});
+
+  @override
+  List<Object> get props => <Object>[message!];
+}
 
 class LoginShowPasswordActionState extends LoginActionState {
   final bool obscureText;
