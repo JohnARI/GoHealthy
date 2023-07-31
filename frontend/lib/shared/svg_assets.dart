@@ -32,6 +32,7 @@ class SvgAssets {
   static const String password = 'assets/images/Password2.svg';
   static const String passwordNotVisible = 'assets/images/PasswordNotVisible.svg';
   static const String passwordVisible = 'assets/images/PasswordVisible.svg';
+  static const String pencil = 'assets/images/Pencil.svg';
   static const String photo2 = 'assets/images/Photo2.svg';
   static const String profile = 'assets/images/Profile.svg';
   static const String protein = 'assets/images/Prot.svg';

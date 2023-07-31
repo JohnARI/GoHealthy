@@ -7,6 +7,7 @@ import '/shared/routes.dart';
 import '../features/authentication/login/pages/login_page.dart';
 import '../features/authentication/register/pages/register_page.dart';
 import '../features/home/pages/home_page.dart';
+import '../features/profile/pages/profile_page.dart';
 import '../utils/shared_preference.dart';
 
 class RouteInitializer {
@@ -54,6 +55,12 @@ final GoRouter router = GoRouter(
           path: AppRoute.HOME.path,
           builder: (BuildContext context, GoRouterState state) =>
               const HomePage(),
+        ),
+        GoRoute(
+          name: AppRoute.PROFILE.name,
+          path: AppRoute.PROFILE.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              const ProfilePage(),
         ),
       ],
     ),

@@ -30,7 +30,7 @@ class AppRoute {
   );
 
   static const Route PROFILE = Route(
-    name: 'settings',
-    path: '/settings',
+    name: 'profile',
+    path: '/profile',
   );
 }
