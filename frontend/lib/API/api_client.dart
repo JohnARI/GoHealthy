@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 
 import '../helpers/api_helper.dart';
 import 'api_providers.dart';
-// TODO: UPDATE THIS FILE WHEN THE API IS READY
 
 /// A client that is used to make API requests.
 ///
@@ -13,13 +12,6 @@ import 'api_providers.dart';
 /// handling the responses, and parsing the data.
 class APIClient {
   static final http.Client _client = APIProvider.getClient();
-
-  /// Creates a new instance of [APIClient].
-  ///
-  /// This constructor initializes the [http.Client] used for making API requests.
-  // APIClient() {
-  //   _client = APIProvider.getClient();
-  // }
 
   /// Sends a GET request to the specified [endpoint].
   ///
@@ -41,10 +33,9 @@ class APIClient {
         headers: requestHeaders,
       );
       final dynamic result = handleResponse(response);
+
       return result as T;
     } catch (e) {
-      // TODO : Handle exception with API response
-      handleException(e);
       rethrow;
     }
   }
@@ -74,11 +65,13 @@ class APIClient {
         headers: requestHeaders,
         body: body,
       );
+
       final dynamic result = handleResponse(response);
       log(
         name: 'APIClient',
         'Converting response completed...',
       );
+
       return result as T;
     } catch (e) {
       log(
@@ -86,8 +79,6 @@ class APIClient {
         e.toString(),
         error: e,
       );
-      // TODO : Handle exception with API response
-      handleException(e);
       rethrow;
     }
   }

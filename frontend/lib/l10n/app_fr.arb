@@ -64,6 +64,54 @@
     "description": "Le titre du ou"
   },
 
+
+
+  "followupPieChartTitleCarbs": "Glucides",
+  "@followupPieChartTitleCarbs" : {
+    "description" : "Sucre"
+  },
+
+  "followupPieChartTitleProteins": "Protéines",
+  "@followupPieChartTitleProteins" : {
+    "description" : "Protéines"
+  },
+
+  "followupPieChartTitleLipids": "Lipides",
+  "@followupPieChartTitleLipids" : {
+    "description" : "Gras"
+  },
+  
+  "followupPieChartTitleCalories": "Calories",
+  "@followupPieChartTitleCalories" : {
+    "description" : "Calories"
+  },
+  
+  "followupAddMeal": "Ajouter un",
+  "@followupAddMeal" : {
+    "description" : "Ajouter"
+  },
+  
+  "followupBreakfast": "Déjeuner",
+  "@followupBreakfast" : {
+    "description" : "Déjeuner"
+  },
+  
+  "followupLunch": "Repas",
+  "@followupLunch" : {
+    "description" : "Repas"
+  },
+
+  "followupSnack": "Goûter",
+  "@followupSnack" : {
+    "description" : "Goûter"
+  },
+
+  "followupDinner": "Dinner",
+  "@followupDinner" : {
+    "description" : "Dinner"
+  },
+
+
   "unknownErrorOccured": "Une erreur inconnue s'est produite",
   "@unknownErrorOccured": {
     "description": "Message d'erreur"

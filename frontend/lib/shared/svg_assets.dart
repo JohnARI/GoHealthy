@@ -3,9 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class SvgAssets {
   static SvgPicture buildSvg(
-      {required String path, ColorFilter? colorFilter, double? height}) {
+      {required String path,
+      ColorFilter? colorFilter,
+      double? height,
+      double? width}) {
     return SvgPicture.asset(path,
-        fit: BoxFit.cover, height: height, colorFilter: colorFilter);
+        fit: BoxFit.cover,
+        height: height,
+        colorFilter: colorFilter,
+        width: width);
   }
 
   static const String angrySmiley = 'assets/images/AngrySmiley.svg';
@@ -13,8 +19,8 @@ class SvgAssets {
   static const String breakfast2 = 'assets/images/Breakfast2.svg';
   static const String calories = 'assets/images/Cal.svg';
   static const String carbs = 'assets/images/Carbs.svg';
-  static const String dinner = 'assets/images/dinner.svg';
-  static const String dinner2 = 'assets/images/dinner2.svg';
+  static const String dinner = 'assets/images/Dinner.svg';
+  static const String dinner2 = 'assets/images/Dinner2.svg';
   static const String roundedEmail = 'assets/images/Email.svg';
   static const String email = 'assets/images/Email2.svg';
   static const String fat = 'assets/images/Fat.svg';
@@ -30,7 +36,8 @@ class SvgAssets {
   static const String normalSmiley = 'assets/images/NormalSmiley.svg';
   static const String roundedPassword = 'assets/images/Password.svg';
   static const String password = 'assets/images/Password2.svg';
-  static const String passwordNotVisible = 'assets/images/PasswordNotVisible.svg';
+  static const String passwordNotVisible =
+      'assets/images/PasswordNotVisible.svg';
   static const String passwordVisible = 'assets/images/PasswordVisible.svg';
   static const String pencil = 'assets/images/Pencil.svg';
   static const String photo2 = 'assets/images/Photo2.svg';
@@ -38,7 +45,7 @@ class SvgAssets {
   static const String protein = 'assets/images/Prot.svg';
   static const String scan = 'assets/images/Scan.svg';
   static const String scan2 = 'assets/images/Scan2.svg';
-  static const String snack = 'assets/images/Snack2.svg';
+  static const String snack = 'assets/images/Snack.svg';
   static const String stats = 'assets/images/Stats.svg';
   static const String waterDropFilled = 'assets/images/WaterDropFilled.svg';
   static const String waterGlass = 'assets/images/WaterGlass.svg';

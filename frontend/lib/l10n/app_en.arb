@@ -65,6 +65,53 @@
     "description": "The title of the or text"
   },
 
+
+  "followupPieChartTitleCarbs": "Carbs",
+  "@followupPieChartTitleCarbs" : {
+    "description" : "Sugar"
+  },
+
+  "followupPieChartTitleProteins": "Proteins",
+  "@followupPieChartTitleProteins" : {
+    "description" : "Proteins"
+  },
+
+  "followupPieChartTitleLipids": "Lipids",
+  "@followupPieChartTitleLipids" : {
+    "description" : "Fat"
+  },
+  
+  "followupPieChartTitleCalories": "Calories",
+  "@followupPieChartTitleCalories" : {
+    "description" : "Calories"
+  },
+
+  "followupAddMeal": "Add",
+  "@followupAddMeal" : {
+    "description" : "Add"
+  },
+  
+  "followupBreakfast": "Breakfast",
+  "@followupBreakfast" : {
+    "description" : "Breakfast"
+  },
+  
+  "followupLunch": "Lunch",
+  "@followupLunch" : {
+    "description" : "Lunch"
+  },
+
+  "followupSnack": "Snack",
+  "@followupSnack" : {
+    "description" : "Snack"
+  },
+
+  "followupDinner": "Dinner",
+  "@followupDinner" : {
+    "description" : "Dinner"
+  },
+
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

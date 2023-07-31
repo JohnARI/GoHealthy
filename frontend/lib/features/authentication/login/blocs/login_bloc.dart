@@ -2,10 +2,14 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_healthy/features/authentication/login/data/models/login.dart';
 import 'package:go_healthy/utils/shared_preference.dart';
 
+
+
+import '../../../../utils/api_exceptions.dart';
 import '../data/repositories/login_repository.dart';
 
 part 'login_event.dart';
@@ -35,10 +39,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
       final Login login =
           await _loginRepository.login(event.email, event.password);
+      if (login.statusCode != 200) {
+        // TODO: Handle API exceptions
+        return;
+      }
       await SharedPreference.setAccessToken(login.accessToken);
       emit(LoginSuccessState());
-    } catch (e) {
-      log(name: 'LoginBLoC', 'error: $e');
+    } catch (error) {
+      if (error is APIException) {
+        emit(LoginErrorState(message: error.message));
+        return;
+      }
+      log(name: 'LoginBLoC', 'error: $error');
       emit(LoginErrorState());
     }
   }
@@ -74,6 +86,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   // Handles the show password event.
   FutureOr<void> _handleLoginShowPasswordButtonPressedEvent(
       LoginShowPasswordButtonPressedEvent event, Emitter<LoginState> emit) {
-    emit(LoginShowPasswordActionState());
+    emit(LoginShowPasswordActionState(obscureText: !event.obscureText));
   }
 }
