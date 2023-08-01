@@ -45,7 +45,7 @@ export class BodyBuildController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateBodyBuildDto: UpdateBodyBuildDto,
   ) {
-    var updatedBodyBuild = await this.bodyBuildService.update(
+    const updatedBodyBuild = await this.bodyBuildService.update(
       id,
       updateBodyBuildDto,
     );

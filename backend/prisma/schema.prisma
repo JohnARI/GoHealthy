@@ -115,11 +115,10 @@ model MealOnProduct {
   userId        String
 }
 
-
 model BodyBuild {
   id            String        @id @default(uuid())
   user          User          @relation(fields: [userId], references: [id])
-  userId        String @unique
+  userId        String        @unique
   weightGoal    Float
   currentWeight Float
   sexe          Sex
@@ -128,10 +127,8 @@ model BodyBuild {
   age           Int
   diet          Diet
   dietIntensity DietIntensity
-  dailyNeeds         DailyNeeds?
+  dailyNeeds    DailyNeeds?
 }
-
-
 
 model MealHistory {
   id     String   @id @default(uuid())
@@ -143,11 +140,11 @@ model MealHistory {
 }
 
 model DailyNeeds {
-  id String @id @default(uuid())
-  body BodyBuild @relation(fields: [bodyId], references: [id], onDelete: Cascade)
-  bodyId String @unique
-  calories Int
-  proteins Int
+  id            String    @id @default(uuid())
+  body          BodyBuild @relation(fields: [bodyId], references: [id], onDelete: Cascade)
+  bodyId        String    @unique
+  calories      Int
+  proteins      Int
   carbohydrates Int
-  lipids Int
+  lipids        Int
 }
