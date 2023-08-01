@@ -36,7 +36,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: AppRoute.REGISTER.name,
       path: AppRoute.REGISTER.path,
-      builder: (BuildContext context, GoRouterState state) => RegisterPage(),
+      builder: (BuildContext context, GoRouterState state) =>
+          const RegisterPage(),
     ),
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {

@@ -21,16 +21,19 @@ class AppFilledButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () => onPressed(),
-      style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, context.screenHeight * 0.06),
-        ),
+      style: ElevatedButton.styleFrom(
+        padding: padding,
+        elevation: 0,
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: AppColor.BLACK8,
-            ),
+      child: Baseline(
+        baselineType: TextBaseline.alphabetic,
+        baseline: 20.0,
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: AppColor.BLACK8,
+              ),
+        ),
       ),
     );
   }
@@ -41,8 +44,10 @@ class AppOutlinedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    required this.icon,
-    this.padding = const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+    this.icon,
+    this.padding = const EdgeInsets.symmetric(
+        horizontal: AppStyle.BUTTON_HORIZONTAL_PADDING,
+        vertical: AppStyle.BUTTON_VERTICAL_PADDING),
   });
 
   final String text;
@@ -52,25 +57,50 @@ class AppOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: icon ?? const SizedBox(),
-      onPressed: () => onPressed(),
-      style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, context.screenHeight * 0.06),
-        ),
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        side: MaterialStateProperty.all<BorderSide>(
-          BorderSide(
-            color: Theme.of(context).primaryColor,
-            width: 1.0,
+    if (icon != null) {
+      return ElevatedButton.icon(
+        icon: icon!,
+        onPressed: () => onPressed(),
+        style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all<Size>(
+            Size(double.infinity, context.screenHeight * 0.06),
+          ),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          side: MaterialStateProperty.all<BorderSide>(
+            BorderSide(
+              color: Theme.of(context).primaryColor,
+              width: 1.0,
+            ),
           ),
         ),
+        label: Text(text,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColor.BLACK2,
+                )),
+      );
+    }
+
+    return ElevatedButton(
+      onPressed: () => onPressed(),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColor.WHITE,
+        side: const BorderSide(
+          color: AppColor.GREEN4,
+          width: 1.0,
+        ),
+        elevation: 0,
+        padding: padding,
       ),
-      label: Text(text,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: AppColor.BLACK2,
-              )),
+      child: Baseline(
+        baselineType: TextBaseline.alphabetic,
+        baseline: 20.0,
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: AppColor.GREEN4,
+              ),
+        ),
+      ),
     );
   }
 }
@@ -92,8 +122,8 @@ class AppTextButton extends StatelessWidget {
       child: Text(
         text,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: Theme.of(context).primaryColor,
-        ),
+              color: Theme.of(context).primaryColor,
+            ),
       ),
     );
   }

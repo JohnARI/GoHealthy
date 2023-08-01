@@ -23,8 +23,6 @@ class LoginRepository {
         },
         includeHeaders: false,
       );
-      print('=====================');
-      print(login);
       log(
         name: 'Login repository',
         'login request sent successfully',
@@ -62,7 +60,8 @@ class LoginRepository {
         name: 'Login repository',
         'Google login request started...',
       );
-      final Map<String, dynamic> googleSigninRequest = await APIClient.postHttpRequest<Map<String, dynamic>>(
+      final Map<String, dynamic> googleSigninRequest =
+          await APIClient.postHttpRequest<Map<String, dynamic>>(
         APIEndpoint.loginGoogle(),
         <String, dynamic>{
           'access_token': accessToken,

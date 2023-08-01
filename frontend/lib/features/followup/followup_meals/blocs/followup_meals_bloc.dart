@@ -32,7 +32,7 @@ class FollowupMealBloc extends Bloc<FollowupMealEvent, FollowupMealState> {
         emit(FollowupMealNavigateSelectMeal(redirectPage: "lunch"));
         break;
       case FollowupMealType.Snack:
-        emit(FollowupMealNavigateSelectMeal(redirectPage: "snack"));
+        emit(FollowupMealNavigateSelectMeal(redirectPage: "snac"));
         break;
       default:
         emit(FollowupMealNavigateSelectMeal(redirectPage: "dinner"));

@@ -7,9 +7,8 @@ import 'package:go_healthy/utils/build_context_extensions.dart';
 
 import '../blocs/followup_meals_bloc.dart';
 
-// ignore: must_be_immutable
-class FollouwpMealWidget extends StatelessWidget {
-  FollouwpMealWidget(
+class FollowupMealWidget extends StatelessWidget {
+  FollowupMealWidget(
       {super.key,
       required this.mealType,
       required this.meal,
