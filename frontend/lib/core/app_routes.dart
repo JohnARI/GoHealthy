@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_healthy/features/profile/pages/profile_page.dart';
+import 'package:go_healthy/features/statistics/pages/statistics_page.dart';
 import 'package:go_healthy/shared/colors.dart';
 import 'package:go_router/go_router.dart';
 
+import '/shared/routes.dart';
 import '../features/authentication/login/pages/login_page.dart';
 import '../features/authentication/register/pages/register_page.dart';
+import '../features/followup/followup_add_meals/pages/followup_add_meal_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../utils/shared_preference.dart';
 import '../widgets/appbar.dart';
 import '../widgets/bottom_navbar.dart';
-import '/shared/routes.dart';
 
 class RouteInitializer {
   static String determineInitialRoute() {
@@ -36,7 +39,19 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: AppRoute.REGISTER.name,
       path: AppRoute.REGISTER.path,
-      builder: (BuildContext context, GoRouterState state) => RegisterPage(),
+      builder: (BuildContext context, GoRouterState state) =>
+          const RegisterPage(),
+    ),
+    GoRoute(
+      name: AppRoute.ADD_MEAL.name,
+      path: AppRoute.ADD_MEAL.path,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return MaterialPage<dynamic>(
+          child: FollowupAddMealPage(
+            mealType: state.pathParameters['mealType']!,
+          ),
+        );
+      },
     ),
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
@@ -57,6 +72,18 @@ final GoRouter router = GoRouter(
           path: AppRoute.HOME.path,
           builder: (BuildContext context, GoRouterState state) =>
               const HomePage(),
+        ),
+        GoRoute(
+          name: AppRoute.STATS.name,
+          path: AppRoute.STATS.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              const StatisticsPage(),
+        ),
+        GoRoute(
+          name: AppRoute.PROFILE.name,
+          path: AppRoute.PROFILE.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              const ProfilePage(),
         ),
       ],
     ),

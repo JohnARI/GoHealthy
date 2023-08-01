@@ -32,6 +32,7 @@ class LoginForm extends StatelessWidget {
         child: Column(
           children: <Widget>[
             InputWithLeadingIcon(
+              keyboardType: TextInputType.emailAddress,
               controller: emailController,
               icon: SvgAssets.buildSvg(
                 path: SvgAssets.email,
@@ -45,6 +46,7 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             InputWithLeadingAndTrailingIcon(
+              keyboardType: TextInputType.visiblePassword,
               controller: passwordController,
               icon: SvgAssets.buildSvg(
                 path: SvgAssets.password,

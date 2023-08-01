@@ -58,6 +58,10 @@
   "@alreadyHaveAnAccount": {
     "description": "Le titre du lien de connexion"
   },
+  "registerConfirmPassword": "Confirmer le mot de passe",
+  "@registerConfirmPassword": {
+    "description": "Le titre de l'input de confirmation du mot de passe"
+  },
 
   "or": "ou",
   "@or": {

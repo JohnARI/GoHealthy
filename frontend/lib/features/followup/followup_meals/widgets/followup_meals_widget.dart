@@ -5,6 +5,7 @@ import 'package:go_healthy/shared/enums/followup_meal_enums.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
 
+import '../../../../shared/routes.dart';
 import '../blocs/followup_meals_bloc.dart';
 
 // ignore: must_be_immutable
@@ -31,8 +32,11 @@ class FollouwpMealWidget extends StatelessWidget {
     return BlocConsumer<FollowupMealBloc, FollowupMealState>(
       bloc: followupMealBloc,
       listener: (BuildContext context, FollowupMealState state) {
-        if (state is FollowupMealNavigateSelectMeal) {
-          context.navigateNamedRoute('/followup/${state.redirectPage}');
+        if (state is FollowupMealNavigateSelectMealState) {
+          context.pushNamedRouteWithParameter(
+              AppRoute.ADD_MEAL.name, <String, String>{
+            'mealType': state.mealType,
+          });
         }
         if (state is FollowupMealContainerInitialStateSuccess) {
           // TODO: Fetch from the back the values for the max and min values.

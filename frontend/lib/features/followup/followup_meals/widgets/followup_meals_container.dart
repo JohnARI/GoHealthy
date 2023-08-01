@@ -21,7 +21,7 @@ class FollowupMealContainer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           FollouwpMealWidget(
-            mealType: FollowupMealType.Breakfast,
+            mealType: FollowupMealType.breakfast,
             meal: context.translate!.followupBreakfast,
             svgAssets: SvgAssets.breakfast2,
           ),
@@ -29,7 +29,7 @@ class FollowupMealContainer extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 5),
           FollouwpMealWidget(
-            mealType: FollowupMealType.Lunch,
+            mealType: FollowupMealType.lunch,
             meal: context.translate!.followupLunch,
             svgAssets: SvgAssets.lunch2,
           ),
@@ -37,7 +37,7 @@ class FollowupMealContainer extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 5),
           FollouwpMealWidget(
-            mealType: FollowupMealType.Snack,
+            mealType: FollowupMealType.snack,
             meal: context.translate!.followupSnack,
             svgAssets: SvgAssets.snack,
           ),
@@ -45,7 +45,7 @@ class FollowupMealContainer extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 5),
           FollouwpMealWidget(
-            mealType: FollowupMealType.Dinner,
+            mealType: FollowupMealType.dinner,
             meal: context.translate!.followupDinner,
             svgAssets: SvgAssets.dinner2,
           ),

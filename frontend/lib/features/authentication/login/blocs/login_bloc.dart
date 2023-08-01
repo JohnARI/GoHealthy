@@ -39,10 +39,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
       final Login login =
           await _loginRepository.login(event.email, event.password);
-      if (login.statusCode != 200) {
-        // TODO: Handle API exceptions
-        return;
-      }
       await SharedPreference.setAccessToken(login.accessToken);
       emit(LoginSuccessState());
     } catch (error) {

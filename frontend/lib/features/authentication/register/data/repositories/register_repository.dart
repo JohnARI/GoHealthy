@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
-import '../../../../../api/api_endpoints.dart';
-import '../../../../../api/api_providers.dart';
+import '../../../../../apI/api_endpoints.dart';
+import '../../../../../apI/api_providers.dart';
 import '../../../../../helpers/api_helper.dart';
 import '../models/register.dart';
 

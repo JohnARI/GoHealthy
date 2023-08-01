@@ -60,6 +60,11 @@
     "description": "The title of the login link"
   },
 
+  "registerConfirmPassword": "Confirm password",
+  "@registerConfirmPassword": {
+    "description": "The title of the input confirm password"
+  },
+
   "or": "or",
   "@or": {
     "description": "The title of the or text"

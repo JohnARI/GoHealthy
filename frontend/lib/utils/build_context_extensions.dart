@@ -14,8 +14,8 @@ extension BuildContextExtension on BuildContext {
   void navigateNamedRouteWithParameter(
           String routeName, Map<String, String> pathParameters) =>
       GoRouter.of(this).goNamed(routeName, pathParameters: pathParameters);
-  void pushNamedRoute(String routeName) => GoRouter.of(this).goNamed(routeName);
+  void pushNamedRoute(String routeName) => GoRouter.of(this).pushNamed(routeName);
   void pushNamedRouteWithParameter(
           String routeName, Map<String, String> pathParameters) =>
-      GoRouter.of(this).goNamed(routeName, pathParameters: pathParameters);
+      GoRouter.of(this).pushNamed(routeName, pathParameters: pathParameters);
 }
