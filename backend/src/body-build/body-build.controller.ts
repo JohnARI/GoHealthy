@@ -9,11 +9,13 @@ import {
   UseGuards,
   HttpCode,
   ParseUUIDPipe,
+  Req,
 } from '@nestjs/common';
 import { BodyBuildService } from './body-build.service';
 import { CreateBodyBuildDto } from './dto/create-body-build.dto';
 import { UpdateBodyBuildDto } from './dto/update-body-build.dto';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
+import { RequestWithUserUniqueInput } from 'src/types/request.type';
 
 @Controller('body-build')
 export class BodyBuildController {
@@ -57,5 +59,11 @@ export class BodyBuildController {
   @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.bodyBuildService.remove(id);
+  }
+
+  @UseGuards(JwtAccessGuard)
+  @Get('wheightevolution')
+  async getWheightEvolution(@Req() req: RequestWithUserUniqueInput) {
+    return this.bodyBuildService.getWheightEvolution(req.user.id);
   }
 }

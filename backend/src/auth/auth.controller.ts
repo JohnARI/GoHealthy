@@ -96,18 +96,18 @@ export class AuthController {
     return this.authService.refreshToken(req.user.id, req.user.refreshToken);
   }
 
-  @Post('sendResetPassword')
+  @Post('sendresetpassword')
   async sendResetPassword(@Body() body: { email: string }) {
     return this.authService.sendPasswordResetEmail(body.email);
   }
 
-  @Post('checkCodeValidity')
+  @Post('checkcodevalidity')
   @HttpCode(HttpStatus.OK)
   async checkCodeValidity(@Body() body: { code: number; email: string }) {
     return this.authService.checkIfTokenIsValid(Number(body.code), body.email);
   }
 
-  @Post('resetPassword')
+  @Post('resetpassword')
   @HttpCode(HttpStatus.OK)
   async resetPassword(
     @Body() body: { code: number; password: string; email: string },

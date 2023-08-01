@@ -168,4 +168,7 @@ export class BodyBuildService {
       );
     }
   }
+  async getWheightEvolution(userId: string) {
+    return await this.findOne(userId) /*.wheightHistory*/;
+  }
 }
