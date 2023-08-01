@@ -117,6 +117,7 @@ class FollowupWaterIntakeContainer extends StatelessWidget {
                         ? waterIntake.waterIntake
                             .reduce((double value, double element) =>
                                 value + element)
+                            .round()
                             .toString()
                         : '0',
                     style: Theme.of(context)
@@ -127,7 +128,8 @@ class FollowupWaterIntakeContainer extends StatelessWidget {
               Baseline(
                 baselineType: TextBaseline.alphabetic,
                 baseline: 16.0,
-                child: Text(' / ${waterIntake.waterIntakeGoal.toString()} L',
+                child: Text(
+                    ' / ${waterIntake.waterIntakeGoal.round().toString()} mL',
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!

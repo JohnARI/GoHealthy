@@ -49,7 +49,7 @@ class FollowupWaterIntakeWidget extends StatelessWidget {
             baselineType: TextBaseline.alphabetic,
             baseline: 20.0,
             child: Text(
-              '${quantity.toString()} L',
+              '${quantity.round().toString()} mL',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColor.BLACK5,
                   ),
