@@ -37,7 +37,7 @@ class FollowupWaterIntakeBloc
     emit(FollowupWaterIntakeLoadingState());
 
     WaterIntakeModel waterIntakeInfo = await SharedPreference.getWaterIntake();
-    waterIntakeInfo.waterIntake.add(event.quantity);
+    waterIntakeInfo.waterIntake.add(event.quantity / 1000);
     await SharedPreference.setWaterIntake(waterIntakeInfo);
     waterIntakeInfo = await SharedPreference.getWaterIntake();
 

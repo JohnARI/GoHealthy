@@ -40,15 +40,17 @@ class FollowupMealSuccessState extends FollowupMealActionState {}
 
 class FollowupMealErrorState extends FollowupMealActionState {}
 
-class FollowupMealNavigateSelectMeal extends FollowupMealActionState {
-  FollowupMealNavigateSelectMeal({
-    required this.redirectPage,
+class FollowupMealNavigateSelectMealState extends FollowupMealActionState {
+  FollowupMealNavigateSelectMealState({
+    required this.mealType,
   });
 
-  final String redirectPage;
+  final String mealType;
+  final int id = DateTime.now().millisecondsSinceEpoch;
 
   @override
   List<Object> get props => <Object>[
-        redirectPage,
+        mealType,
+        id,
       ];
 }

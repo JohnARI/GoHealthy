@@ -13,10 +13,12 @@ class LoginButtonPressedEvent extends LoginEvent {
   const LoginButtonPressedEvent({
     required this.email,
     required this.password,
+    required this.context,
   });
 
   final String email;
   final String password;
+  final BuildContext context;
 
   @override
   List<Object> get props => <Object>[email, password];

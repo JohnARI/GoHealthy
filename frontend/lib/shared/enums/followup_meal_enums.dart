@@ -1,1 +1,1 @@
-enum FollowupMealType { Breakfast, Lunch, Snack, Dinner }
+enum FollowupMealType { breakfast, lunch, snack, dinner }

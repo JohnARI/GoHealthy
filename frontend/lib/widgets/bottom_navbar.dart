@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_healthy/shared/routes.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
-import 'package:go_router/go_router.dart';
+import 'package:go_healthy/utils/build_context_extensions.dart';
 
 import '../../shared/colors.dart';
 
@@ -35,7 +35,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
               label: '',
             ),
             BottomNavigationBarItem(
-                icon: buildIcon(SvgAssets.profile, 2), label: ''),
+              icon: buildIcon(SvgAssets.profile, 2),
+              label: '',
+            ),
           ],
           unselectedItemColor: AppColor.BLACK5,
           selectedItemColor: AppColor.GREEN4,
@@ -43,7 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             setState(() {
               pageIndex = index;
             });
-            GoRouter.of(context).go(pagesList[index]);
+            context.navigateNamedRoute(pagesList[index]);
           }),
     );
   }
@@ -75,7 +77,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 }
 
 List<String> pagesList = <String>[
-  AppRoute.HOME.path,
-  AppRoute.STATS.path,
-  AppRoute.PROFILE.path,
+  AppRoute.HOME.name,
+  AppRoute.STATS.name,
+  AppRoute.PROFILE.name,
 ];

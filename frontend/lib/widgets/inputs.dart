@@ -8,18 +8,21 @@ class InputWithLeadingIcon extends StatelessWidget {
   final TextEditingController controller;
   final Widget icon;
   final String hintText;
+  final TextInputType? keyboardType;
 
   const InputWithLeadingIcon({
     super.key,
     required this.controller,
     required this.icon,
     required this.hintText,
+    this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardType: keyboardType ?? TextInputType.text,
       decoration: InputDecoration(
         icon: icon,
         hintText: hintText,
@@ -37,6 +40,7 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
   final String hintText;
   final Function() onPressedTrailingIcon;
   final bool obscureText;
+  final TextInputType keyboardType;
 
   const InputWithLeadingAndTrailingIcon({
     super.key,
@@ -46,6 +50,7 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
     required this.hintText,
     required this.onPressedTrailingIcon,
     this.obscureText = false,
+    this.keyboardType = TextInputType.text,
   });
 
   @override
@@ -63,6 +68,7 @@ class InputWithLeadingAndTrailingIcon extends StatelessWidget {
         suffixIconColor: AppColor.BLACK1,
         iconColor: AppColor.BLACK6,
       ),
+      keyboardType: keyboardType,
     );
   }
 }

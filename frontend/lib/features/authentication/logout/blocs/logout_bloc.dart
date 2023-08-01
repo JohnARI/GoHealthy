@@ -18,6 +18,7 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
       LogoutRequestEvent event, Emitter<LogoutState> emit) async {
     emit(LogoutLoadingState());
     SharedPreference.deleteAccessToken();
+    SharedPreference.deleteRefreshToken();
     log(name: 'LogoutBLoC', 'LogoutSuccessState');
     emit(LogoutSuccessState());
   }

@@ -30,7 +30,12 @@ class AppRoute {
   );
 
   static const Route PROFILE = Route(
-    name: 'settings',
-    path: '/settings',
+    name: 'profile',
+    path: '/profile',
+  );
+
+  static const Route ADD_MEAL = Route(
+    name: 'breakfast',
+    path: '/followup/:mealType',
   );
 }

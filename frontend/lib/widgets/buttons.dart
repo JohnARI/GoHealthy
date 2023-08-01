@@ -118,13 +118,12 @@ class AppTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => onPressed(),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).primaryColor,
-            ),
-      ),
-    );
+        onPressed: () => onPressed(),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).primaryColor,
+              ),
+        ));
   }
 }

@@ -10,7 +10,7 @@ enum AppTheme {
 
 extension AppThemeExtension on AppTheme {
   // If you want to add more properties to your theme, you can add them here.
-  static ThemeData _createThemeData({required ColorScheme colorScheme}) {
+  static ThemeData _createThemeData({required ColorScheme colorScheme, required Color iconColor, required Color textColor}) {
     return ThemeData(
       colorScheme: colorScheme,
       useMaterial3: true,
@@ -46,36 +46,47 @@ extension AppThemeExtension on AppTheme {
           ),
         ),
       ),
+      cardColor: colorScheme.background,
       hintColor: AppColor.BLACK6,
       dividerTheme: const DividerThemeData(
         color: AppColor.BLACK6,
         thickness: 1.0,
       ),
-      textTheme: const TextTheme(
+      iconTheme: IconThemeData(
+        color: iconColor,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(
+            colorScheme.primary,
+          ),
+        ),
+      ),
+      textTheme: TextTheme(
         bodyMedium: TextStyle(
           fontFamily: 'fontRegular',
           fontSize: 12.0,
-          color: AppColor.BLACK1,
+          color: textColor,
         ),
         bodyLarge: TextStyle(
           fontFamily: 'fontMedium',
           fontSize: 16.0,
-          color: AppColor.BLACK1,
+          color: textColor,
         ),
         titleSmall: TextStyle(
           fontFamily: 'fontMedium',
           fontSize: 20.0,
-          color: AppColor.BLACK1,
+          color: textColor,
         ),
         titleMedium: TextStyle(
           fontFamily: 'fontSemiBold',
           fontSize: 24.0,
-          color: AppColor.BLACK1,
+          color: textColor,
         ),
         titleLarge: TextStyle(
           fontFamily: 'fontBold',
           fontSize: 28.0,
-          color: AppColor.BLACK1,
+          color: textColor,
         ),
       ),
     );
@@ -85,25 +96,34 @@ extension AppThemeExtension on AppTheme {
     switch (this) {
       case AppTheme.LIGHT_THEME:
         return _createThemeData(
-            colorScheme: const ColorScheme.light(
+          colorScheme: const ColorScheme.light(
           primary: AppColor.GREEN4,
           background: AppColor.BLACK8,
-          brightness: Brightness.light,
-        ));
+          onPrimary: Colors.white,
+        ),
+        textColor: AppColor.BLACK1,
+        iconColor: AppColor.BLACK6,
+        );
       case AppTheme.DARK_THEME:
         return _createThemeData(
             colorScheme: const ColorScheme.dark(
           primary: AppColor.GREEN4,
-          background: AppColor.BLACK1,
-          brightness: Brightness.dark,
-        ));
+          background: AppColor.DARK0,
+          onPrimary: AppColor.BLACK1,
+        ),
+        textColor: AppColor.BLACK6,
+        iconColor: AppColor.BLACK6,
+        );
       default:
         return _createThemeData(
             colorScheme: const ColorScheme.light(
           primary: AppColor.GREEN4,
           background: AppColor.BLACK8,
-          brightness: Brightness.light,
-        ));
+          onPrimary: Colors.white,
+        ),
+        textColor: AppColor.BLACK1,
+        iconColor: AppColor.BLACK6,
+        );
     }
   }
 }

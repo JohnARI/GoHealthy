@@ -77,7 +77,7 @@ class RegisterForm extends StatelessWidget {
               suffixIcon: _buildSuffixIcon(hideConfirmPassword),
               onPressedTrailingIcon: onPressedConfirmPasswordTrailingIcon,
               obscureText: hideConfirmPassword,
-              hintText: context.translate!.password,
+              hintText: context.translate!.registerConfirmPassword,
             ),
           ],
         ),
