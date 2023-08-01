@@ -45,7 +45,7 @@ export class BodyBuildService {
   }
 
   async createNeeds(createBodyBuildDto: CreateBodyBuildDto, bodyId: string) {
-    const needs = calculateNeeds(createBodyBuildDto);
+    var needs = calculateNeeds(createBodyBuildDto);
     try {
       await this.prismaService.dailyNeeds.create({
         data: {
