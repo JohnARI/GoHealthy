@@ -6,15 +6,15 @@ import 'package:http/http.dart' as http;
 
 /// This class is a singleton that provides the API Client and headers.
 ///
-/// The [APIProvider] class is responsible for creating the HTTP client and defining the headers
+/// The [ApiProvider] class is responsible for creating the HTTP client and defining the headers
 /// required for making API requests. It retrieves the base URL from the environment variables
 /// using the [dotenv] package.
-class APIProvider {
-  APIProvider._();
+class ApiProvider {
+  ApiProvider._();
 
-  static final APIProvider _instance = APIProvider._();
+  static final ApiProvider _instance = ApiProvider._();
 
-  factory APIProvider() => _instance;
+  factory ApiProvider() => _instance;
 
   static final String baseUrl = dotenv.env['API_BASE_URL']!;
   static const int timeoutDuration = 10;

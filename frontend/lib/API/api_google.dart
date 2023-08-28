@@ -4,9 +4,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 /// Provides Google Sign-In functionality for the API.
 ///
-/// The [APIGoogle] class provides methods for signing in and out with Google,
+/// The [ApiGoogle] class provides methods for signing in and out with Google,
 /// retrieving user information, and managing the Google Sign-In session.
-class APIGoogle {
+class ApiGoogle {
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   /// Signs in with Google and returns the [GoogleSignInAccount].

@@ -7,11 +7,11 @@ import 'api_providers.dart';
 
 /// A client that is used to make API requests.
 ///
-/// The [APIClient] class provides methods to make various types of API requests,
+/// The [ApiClient] class provides methods to make various types of API requests,
 /// such as GET, POST, PUT, DELETE, and PATCH. It handles sending the requests,
 /// handling the responses, and parsing the data.
-class APIClient {
-  static final http.Client _client = APIProvider.getClient();
+class ApiClient {
+  static final http.Client _client = ApiProvider.getClient();
 
   /// Sends a GET request to the specified [endpoint].
   ///
@@ -19,15 +19,15 @@ class APIClient {
   /// response body of type [T]. The [headers] and [includeHeaders] parameters
   /// can be used to specify additional headers for the request and control whether
   /// the default headers should be included.
-  static Future<T> getHttpRequest<T>(
-    String endpoint, {
+  static Future<T> getHttpRequest<T>({
+    required String endpoint,
     Map<String, String>? headers,
     bool includeHeaders = true,
   }) async {
     try {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
-          includeHeaders ? headers ?? APIProvider.headers : null;
+          includeHeaders ? headers ?? ApiProvider.headers : null;
       final http.Response response = await _client.get(
         Uri.parse(endpoint),
         headers: requestHeaders,
@@ -46,16 +46,16 @@ class APIClient {
   /// and returns the response body of type [T]. The [headers] and [includeHeaders]
   /// parameters can be used to specify additional headers for the request and control
   /// whether the default headers should be included.
-  static Future<T> postHttpRequest<T>(
-    String endpoint,
-    Map<String, dynamic> body, {
+  static Future<T> postHttpRequest<T>({
+    required String endpoint,
+    required Map<String, dynamic> body,
     Map<String, String>? headers,
     bool includeHeaders = true,
   }) async {
     try {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
-          includeHeaders ? headers ?? APIProvider.headers : null;
+          includeHeaders ? headers ?? ApiProvider.headers : null;
       log(
         name: 'APIClient',
         'Request body: $body, Request headers: $requestHeaders, Request endpoint: $endpoint',

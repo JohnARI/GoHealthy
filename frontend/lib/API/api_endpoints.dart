@@ -2,11 +2,11 @@ import 'api_providers.dart';
 
 /// Provides the API endpoints used in the application.
 ///
-/// The [APIEndpoint] class contains static methods that generate the various
+/// The [ApiEndpoint] class contains static methods that generate the various
 /// API endpoints used in the application. The base URL is obtained from the
-/// [APIProvider] class.
-class APIEndpoint {
-  static final String _baseUrl = APIProvider.baseUrl;
+/// [ApiProvider] class.
+class ApiEndpoint {
+  static final String _baseUrl = ApiProvider.baseUrl;
 
   static String example() => '$_baseUrl/example';
   static String exampleWithId(int id) => '$_baseUrl/example/$id';
@@ -17,4 +17,7 @@ class APIEndpoint {
   static String loginGoogle() => '$_baseUrl/auth/google';
 
   static String getMe() => '$_baseUrl/users/me';
+
+  static String getProductWithId(String id) => '$_baseUrl/products/$id';
+  static String createProduct() => '$_baseUrl/products';
 }

@@ -35,7 +35,13 @@ class AppRoute {
   );
 
   static const Route ADD_MEAL = Route(
-    name: 'breakfast',
+    name: 'addMeal',
     path: '/followup/:mealType',
   );
+
+  static const Route PRODUCT = Route(
+    name: 'product',
+    path: '/product/:id',
+  );
+
 }

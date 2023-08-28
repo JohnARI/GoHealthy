@@ -15,9 +15,9 @@ class LoginRepository {
         'login request started...',
       );
       final dynamic login =
-          await APIClient.postHttpRequest<Map<String, dynamic>>(
-        APIEndpoint.login(),
-        <String, dynamic>{
+          await ApiClient.postHttpRequest<Map<String, dynamic>>(
+        endpoint: ApiEndpoint.login(),
+        body: <String, dynamic>{
           'email': email,
           'password': password,
         },
@@ -45,7 +45,7 @@ class LoginRepository {
 
   Future<Login> loginGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await APIGoogle.signIn();
+      final GoogleSignInAccount? googleUser = await ApiGoogle.signIn();
 
       if (googleUser == null) {
         log(name: 'LoginBLoC', 'The user cancelled the login');
@@ -60,9 +60,10 @@ class LoginRepository {
         name: 'Login repository',
         'Google login request started...',
       );
-      final Map<String, dynamic> googleSigninRequest = await APIClient.postHttpRequest<Map<String, dynamic>>(
-        APIEndpoint.loginGoogle(),
-        <String, dynamic>{
+      final Map<String, dynamic> googleSigninRequest =
+          await ApiClient.postHttpRequest<Map<String, dynamic>>(
+        endpoint: ApiEndpoint.loginGoogle(),
+        body: <String, dynamic>{
           'access_token': accessToken,
           'id_token': idToken,
         },

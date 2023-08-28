@@ -11,8 +11,8 @@ extension BuildContextExtension on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
   void navigateNamedRoute(String routeName) =>
       GoRouter.of(this).goNamed(routeName);
-  void navigateNamedRouteWithParameter(
-          String routeName, Map<String, String> pathParameters) =>
+  void navigateNamedRouteWithParameter({
+          required String routeName, required Map<String, String> pathParameters}) =>
       GoRouter.of(this).goNamed(routeName, pathParameters: pathParameters);
   void pushNamedRoute(String routeName) => GoRouter.of(this).pushNamed(routeName);
   void pushNamedRouteWithParameter(
