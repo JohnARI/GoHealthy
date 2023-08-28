@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_healthy/features/followup/followup_add_meals/widgets/followup_add_meal_widgets.dart';
+import 'package:go_healthy/widgets/searchbar.dart';
 
 import '../blocs/followup_add_meal_bloc.dart';
 
@@ -25,8 +27,11 @@ class FollowupAddMealPage extends StatelessWidget {
   }
 
   Widget _buildInitialState(BuildContext context) {
-    return Container(
-      child: Text(mealType),
+    return const Column(
+      children: <Widget>[
+        MealListWidget(),
+        AppSearchBar(),
+      ],
     );
   }
 }

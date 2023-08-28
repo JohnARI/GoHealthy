@@ -53,37 +53,53 @@ final GoRouter router = GoRouter(
         );
       },
     ),
-    ShellRoute(
-      builder: (BuildContext context, GoRouterState state, Widget child) {
+    StatefulShellRoute.indexedStack(
+      builder: (BuildContext context, GoRouterState state,
+          StatefulNavigationShell navigationShell) {
         return Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(60.0),
             child: AppBarGeneral(name: "Follow-up"),
           ),
           body: Container(
-              decoration: const BoxDecoration(color: AppColor.WHITE),
-              child: child),
-          bottomNavigationBar: const BottomNavBar(),
+            decoration: const BoxDecoration(
+              color: AppColor.WHITE,
+            ),
+            child: navigationShell,
+          ),
+          bottomNavigationBar: BottomNavBar(
+            child: navigationShell,
+          ),
         );
       },
-      routes: <RouteBase>[
-        GoRoute(
-          name: AppRoute.HOME.name,
-          path: AppRoute.HOME.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              const HomePage(),
+      branches: <StatefulShellBranch>[
+        StatefulShellBranch(routes: <RouteBase>[
+          GoRoute(
+            name: AppRoute.HOME.name,
+            path: AppRoute.HOME.path,
+            builder: (BuildContext context, GoRouterState state) =>
+                const HomePage(),
+          ),
+        ]),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              name: AppRoute.STATS.name,
+              path: AppRoute.STATS.path,
+              builder: (BuildContext context, GoRouterState state) =>
+                  const StatisticsPage(),
+            ),
+          ],
         ),
-        GoRoute(
-          name: AppRoute.STATS.name,
-          path: AppRoute.STATS.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              const StatisticsPage(),
-        ),
-        GoRoute(
-          name: AppRoute.PROFILE.name,
-          path: AppRoute.PROFILE.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              const ProfilePage(),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              name: AppRoute.PROFILE.name,
+              path: AppRoute.PROFILE.path,
+              builder: (BuildContext context, GoRouterState state) =>
+                  const ProfilePage(),
+            ),
+          ],
         ),
       ],
     ),
