@@ -4,7 +4,6 @@ import 'package:go_healthy/features/statistics/pages/statistics_page.dart';
 import 'package:go_healthy/shared/colors.dart';
 import 'package:go_router/go_router.dart';
 
-import '/shared/routes.dart';
 import '../features/authentication/login/pages/login_page.dart';
 import '../features/authentication/register/pages/register_page.dart';
 import '../features/followup/followup_add_meals/pages/followup_add_meal_page.dart';
@@ -12,6 +11,7 @@ import '../features/home/pages/home_page.dart';
 import '../utils/shared_preference.dart';
 import '../widgets/appbar.dart';
 import '../widgets/bottom_navbar.dart';
+import '/shared/routes.dart';
 
 class RouteInitializer {
   static String determineInitialRoute() {

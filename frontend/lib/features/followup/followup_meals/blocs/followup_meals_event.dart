@@ -35,11 +35,3 @@ class FollowupMealButtonPressedEvent extends FollowupMealEvent {
   @override
   List<Object> get props => <Object>[mealType];
 }
-
-class FollowupMealShowPasswordButtonPressedEvent extends FollowupMealEvent {}
-
-class FollowupMealNavigateRegisterEvent extends FollowupMealEvent {}
-
-class FollowupMealNavigateForgotPasswordEvent extends FollowupMealEvent {}
-
-class FollowupMealNavigateGoogleEvent extends FollowupMealEvent {}

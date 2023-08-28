@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_healthy/shared/colors.dart';
 import 'package:go_healthy/shared/enums/followup_meal_enums.dart';
+import 'package:go_healthy/shared/routes.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
 
-import '../../../../shared/routes.dart';
 import '../blocs/followup_meals_bloc.dart';
 
-// ignore: must_be_immutable
-class FollouwpMealWidget extends StatelessWidget {
-  FollouwpMealWidget(
+class FollowupMealWidget extends StatelessWidget {
+  FollowupMealWidget(
       {super.key,
       required this.mealType,
       required this.meal,

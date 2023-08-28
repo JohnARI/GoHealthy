@@ -5,7 +5,6 @@ import 'package:go_healthy/shared/styles.dart';
 import 'package:go_healthy/shared/svg_assets.dart';
 import 'package:go_healthy/utils/build_context_extensions.dart';
 
-// ignore: must_be_immutable
 class FollowupMealContainer extends StatelessWidget {
   const FollowupMealContainer({super.key});
 
@@ -20,7 +19,7 @@ class FollowupMealContainer extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          FollouwpMealWidget(
+          FollowupMealWidget(
             mealType: FollowupMealType.breakfast,
             meal: context.translate!.followupBreakfast,
             svgAssets: SvgAssets.breakfast2,
@@ -28,7 +27,7 @@ class FollowupMealContainer extends StatelessWidget {
           const SizedBox(height: 5),
           const Divider(),
           const SizedBox(height: 5),
-          FollouwpMealWidget(
+          FollowupMealWidget(
             mealType: FollowupMealType.lunch,
             meal: context.translate!.followupLunch,
             svgAssets: SvgAssets.lunch2,
@@ -36,7 +35,7 @@ class FollowupMealContainer extends StatelessWidget {
           const SizedBox(height: 5),
           const Divider(),
           const SizedBox(height: 5),
-          FollouwpMealWidget(
+          FollowupMealWidget(
             mealType: FollowupMealType.snack,
             meal: context.translate!.followupSnack,
             svgAssets: SvgAssets.snack,
@@ -44,7 +43,7 @@ class FollowupMealContainer extends StatelessWidget {
           const SizedBox(height: 5),
           const Divider(),
           const SizedBox(height: 5),
-          FollouwpMealWidget(
+          FollowupMealWidget(
             mealType: FollowupMealType.dinner,
             meal: context.translate!.followupDinner,
             svgAssets: SvgAssets.dinner2,

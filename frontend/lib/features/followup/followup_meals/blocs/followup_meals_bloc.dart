@@ -26,16 +26,20 @@ class FollowupMealBloc extends Bloc<FollowupMealEvent, FollowupMealState> {
       FollowupMealButtonPressedEvent event, Emitter<FollowupMealState> emit) {
     switch (event.mealType) {
       case FollowupMealType.breakfast:
-        emit(FollowupMealNavigateSelectMealState(mealType: FollowupMealType.breakfast.name));
+        emit(FollowupMealNavigateSelectMealState(
+            mealType: FollowupMealType.breakfast.name));
         break;
       case FollowupMealType.lunch:
-        emit(FollowupMealNavigateSelectMealState(mealType: FollowupMealType.lunch.name));
+        emit(FollowupMealNavigateSelectMealState(
+            mealType: FollowupMealType.lunch.name));
         break;
       case FollowupMealType.snack:
-        emit(FollowupMealNavigateSelectMealState(mealType: FollowupMealType.snack.name));
+        emit(FollowupMealNavigateSelectMealState(
+            mealType: FollowupMealType.snack.name));
         break;
       default:
-        emit(FollowupMealNavigateSelectMealState(mealType: FollowupMealType.dinner.name));
+        emit(FollowupMealNavigateSelectMealState(
+            mealType: FollowupMealType.dinner.name));
         break;
     }
   }
