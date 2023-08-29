@@ -50,6 +50,9 @@ extension AppThemeExtension on AppTheme {
         ),
       ),
       cardColor: colorScheme.onPrimary,
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.onPrimary,
+      ),
       hintColor: AppColor.BLACK6,
       dividerTheme: const DividerThemeData(
         color: AppColor.BLACK6,
