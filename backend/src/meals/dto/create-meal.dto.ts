@@ -14,18 +14,11 @@ export class CreateMealDto {
 
   @IsNotEmpty()
   @IsArray()
-  @ValidateNested({ each: true }) // Valide chaque élément de la liste
-  products: Prisma.MealOnProductCreateInput[];
+  // @ValidateNested({ each: true }) // Valide chaque élément de la liste
+  products: any;
 
   @IsNotEmpty()
-  @IsString()
-  userId: string;
-
-  @IsOptional()
-  imagebucketId?: string;
-
-  @IsNotEmpty()
-  weightInGrams: number;
+  mass: number;
 
   @IsNotEmpty()
   mealType: MealType;

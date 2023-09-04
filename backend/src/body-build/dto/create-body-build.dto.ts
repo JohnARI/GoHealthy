@@ -19,10 +19,6 @@ export class CreateBodyBuildDto {
 
   @IsNotEmpty()
   @IsString()
-  userId: string;
-
-  @IsNotEmpty()
-  @IsString()
   sexe: Sex;
 
   @IsNotEmpty()

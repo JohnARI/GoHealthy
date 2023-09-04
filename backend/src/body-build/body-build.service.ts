@@ -2,46 +2,40 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBodyBuildDto } from './dto/create-body-build.dto';
 import { UpdateBodyBuildDto } from './dto/update-body-build.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 import { calculateNeeds } from 'src/utils/calculators/calculators.needs';
 
 @Injectable()
 export class BodyBuildService {
   constructor(private prismaService: PrismaService) {}
 
-  async create(createBodyBuildDto: CreateBodyBuildDto) {
-    try {
-      const user = await this.prismaService.user.findUnique({
-        where: { id: createBodyBuildDto.userId },
-      });
-      if (!user) {
-        throw new Error('User not found');
-      }
-
-      const bodyBuild = await this.prismaService.bodyBuild.create({
-        data: {
-          weightGoal: createBodyBuildDto.weightGoal,
-          currentWeight: createBodyBuildDto.currentWeight,
-          activityLevel: createBodyBuildDto.activityLevel,
-          height: createBodyBuildDto.height,
-          age: createBodyBuildDto.age,
-          sexe: createBodyBuildDto.sexe,
-          user: {
-            connect: {
-              id: createBodyBuildDto.userId,
-            },
+  async create(createBodyBuildDto: CreateBodyBuildDto, userId: string) {
+    return await this.prismaService.bodyBuild.create({
+      data: {
+        ...createBodyBuildDto,
+        user: {
+          connect: {
+            id: userId,
           },
-          diet: createBodyBuildDto.diet,
-          dietIntensity: createBodyBuildDto.dietIntensity,
         },
-      });
-      return bodyBuild;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+        diet: createBodyBuildDto.diet,
+        dietIntensity: createBodyBuildDto.dietIntensity,
+      },
+    });
+  }
+
+  async findOne(where: any, includes?: Prisma.BodyBuildInclude) {
+    return await this.prismaService.bodyBuild.findUnique({
+      where,
+      include: includes,
+    });
+  }
+
+  async update(where: any, updateBodyBuildDto: UpdateBodyBuildDto) {
+    return await this.prismaService.bodyBuild.update({
+      where,
+      data: updateBodyBuildDto,
+    });
   }
 
   async createNeeds(createBodyBuildDto: CreateBodyBuildDto, bodyId: string) {
@@ -69,65 +63,6 @@ export class BodyBuildService {
     }
   }
 
-  async findAll() {
-    try {
-      const bodyBuilds = await this.prismaService.bodyBuild.findMany({
-        include: {
-          user: true,
-          dailyNeeds: true,
-        },
-      });
-      return bodyBuilds;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
-
-  findOne(id: string) {
-    try {
-      const bodyBuild = this.prismaService.bodyBuild.findUnique({
-        where: { id },
-        include: {
-          user: true,
-        },
-      });
-      return bodyBuild;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
-
-  update(id: string, updateBodyBuildDto: UpdateBodyBuildDto) {
-    try {
-      const bodyBuild = this.prismaService.bodyBuild.update({
-        where: { id },
-        data: {
-          weightGoal: updateBodyBuildDto.weightGoal,
-          currentWeight: updateBodyBuildDto.currentWeight,
-          activityLevel: updateBodyBuildDto.activityLevel,
-          height: updateBodyBuildDto.height,
-          age: updateBodyBuildDto.age,
-          sexe: updateBodyBuildDto.sexe,
-        },
-      });
-      return bodyBuild;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
-
   async updateNeeds(bodyId: string) {
     try {
       const bodyBuild = await this.findOne(bodyId);
@@ -149,21 +84,6 @@ export class BodyBuildService {
       console.error(error);
       throw new HttpException(
         `Database error: ${error.message} `,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
-
-  remove(id: string) {
-    try {
-      const bodyBuild = this.prismaService.bodyBuild.delete({
-        where: { id },
-      });
-      return bodyBuild;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

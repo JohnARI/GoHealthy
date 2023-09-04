@@ -34,30 +34,28 @@ enum MealType {
   SNACK
 }
 
+enum DietIntensity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 enum Diet {
   LOWCARB
   LOWFAT
-  HIGHPROTEIN
   STANDARD
-}
-
-enum DietIntensity {
-  SLOW
-  MEDIUM
-  FAST
+  HIGHPROTEIN
 }
 
 model User {
-  id                String             @id @default(uuid())
-  accountType       AccountType        @default(DEFAULT)
-  email             String             @unique
-  username          String
-  password          String
-  connections       Connection[]
-  product           Products[]         @relation("UserProducts")
-  MealOnProduct     MealOnProduct[]
-  bodyBuild         BodyBuild?
-  MealHistory       MealHistory[]
+  id          String       @id @default(uuid())
+  accountType AccountType  @default(DEFAULT)
+  email       String       @unique
+  username    String
+  password    String
+  connections Connection[]
+  mealHistory MealHistory?
+  bodyBuild   BodyBuild?
   codeResetPassword CodeResetPassword?
 }
 
@@ -75,71 +73,56 @@ model CodeResetPassword {
   expirationDate DateTime
 }
 
-model Products {
-  id            String          @id @default(uuid())
-  title         String          @unique
-  type          String
-  description   String?
-  energy        Float           @default(0)
-  fat           Float           @default(0)
-  saturatedFat  Float           @default(0)
-  carbohydrates Float           @default(0)
-  sugars        Float           @default(0)
-  protein       Float           @default(0)
-  fiber         Float           @default(0)
-  salt          Float           @default(0)
-  averageMass   Float           @default(0)
-  imageBucketId String?
-  user          User            @relation("UserProducts", fields: [userId], references: [id])
-  meals         MealOnProduct[]
-  userId        String
+model MealHistory {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  meals  Meal[]
 }
 
-model Meals {
-  id            String          @id @default(uuid())
+model Product {
+  id            String  @id @default(uuid())
   title         String
-  products      MealOnProduct[]
-  imageBucketId String          @default("")
-  mealType      MealType
-  MealHistory   MealHistory[]
+  calories      Float   @default(0)
+  fat           Float   @default(0)
+  saturatedFat  Float   @default(0)
+  carbohydrates Float   @default(0)
+  sugars        Float   @default(0)
+  protein       Float   @default(0)
+  fiber         Float   @default(0)
+  salt          Float   @default(0)
+  massInGrams   Float   @default(0)
+  imageBucketId String?
+  EAN           String?
+  meals         Meal[]
 }
 
-model MealOnProduct {
-  id            String   @id @default(uuid())
-  mealId        String
-  productId     String
-  weightInGrams Float
-  meal          Meals    @relation(fields: [mealId], references: [id])
-  product       Products @relation(fields: [productId], references: [id])
-  user          User     @relation(fields: [userId], references: [id])
-  userId        String
+model Meal {
+  id            String       @id @default(uuid())
+  title         String
+  products      Product[]
+  imageBucketId String       @default("")
+  massInGrams   Float        @default(0)
+  mealType      MealType     @default(SNACK)
+  createdAt     DateTime     @default(now())
+  mealHistory   MealHistory? @relation(fields: [mealHistoryId], references: [id])
+  mealHistoryId String?
 }
 
 
 model BodyBuild {
   id            String        @id @default(uuid())
   user          User          @relation(fields: [userId], references: [id])
-  userId        String @unique
+  userId        String        @unique
   weightGoal    Float
   currentWeight Float
   sexe          Sex
   activityLevel ActivityLevel
   height        Float
   age           Int
-  diet          Diet
-  dietIntensity DietIntensity
-  dailyNeeds         DailyNeeds?
-}
-
-
-
-model MealHistory {
-  id     String   @id @default(uuid())
-  user   User     @relation(fields: [userId], references: [id])
-  userId String
-  meal   Meals    @relation(fields: [mealId], references: [id])
-  mealId String
-  date   DateTime
+  diet          Diet          @default(STANDARD)
+  dietIntensity DietIntensity @default(MEDIUM)
+  dailyNeeds    DailyNeeds?
 }
 
 model DailyNeeds {

@@ -4,58 +4,56 @@ import {
   Post,
   Body,
   Patch,
-  Param,
-  Delete,
   UseGuards,
-  HttpCode,
-  ParseUUIDPipe,
+  Request,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { BodyBuildService } from './body-build.service';
 import { CreateBodyBuildDto } from './dto/create-body-build.dto';
 import { UpdateBodyBuildDto } from './dto/update-body-build.dto';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
+import { RequestWithUserUniqueInput } from 'src/types/request.type';
 
+// TODO: Should serialize user.password and user.id
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('body-build')
 export class BodyBuildController {
   constructor(private readonly bodyBuildService: BodyBuildService) {}
 
   @UseGuards(JwtAccessGuard)
   @Post()
-  async create(@Body() createBodyBuildDto: CreateBodyBuildDto) {
-    const bodyBuild = await this.bodyBuildService.create(createBodyBuildDto);
+  async create(
+    @Request() req: RequestWithUserUniqueInput,
+    @Body() createBodyBuildDto: CreateBodyBuildDto,
+  ) {
+    const bodyBuild = await this.bodyBuildService.create(
+      createBodyBuildDto,
+      req.user.id,
+    );
+
     await this.bodyBuildService.createNeeds(createBodyBuildDto, bodyBuild.id);
+
     return bodyBuild;
   }
 
   @UseGuards(JwtAccessGuard)
   @Get()
-  async findAll() {
-    return this.bodyBuildService.findAll();
+  async findOne(@Request() req: RequestWithUserUniqueInput) {
+    return this.bodyBuildService.findOne({
+      userId: req.user.id,
+    });
   }
 
   @UseGuards(JwtAccessGuard)
-  @Get(':id')
-  async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.bodyBuildService.findOne(id);
-  }
-
-  @UseGuards(JwtAccessGuard)
-  @Patch(':id')
+  @Patch()
   async update(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Request() req: RequestWithUserUniqueInput,
     @Body() updateBodyBuildDto: UpdateBodyBuildDto,
   ) {
-    var updatedBodyBuild = await this.bodyBuildService.update(
-      id,
+    return this.bodyBuildService.update(
+      { userId: req.user.id },
       updateBodyBuildDto,
     );
-    return updatedBodyBuild;
-  }
-
-  @UseGuards(JwtAccessGuard)
-  @Delete(':id')
-  @HttpCode(204)
-  async remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.bodyBuildService.remove(id);
   }
 }

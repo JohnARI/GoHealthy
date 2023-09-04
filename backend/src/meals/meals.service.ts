@@ -7,160 +7,71 @@ import {
 
 import { UpdateMealDto } from './dto/update-meal.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { Meals } from '@prisma/client';
+import { Meal, MealType, Prisma } from '@prisma/client';
 import { CreateMealDto } from './dto/create-meal.dto';
 
 @Injectable()
 export class MealsService {
   constructor(private prismaService: PrismaService) {}
 
-  async create(data: CreateMealDto): Promise<Meals> {
-    try {
-      const { title, products, userId, mealType } = data;
-
-      const meal = await this.prismaService.meals.create({
-        data: {
-          title,
-          mealType,
-          products: {
-            create: products.map((product) => ({
-              productId: product.id,
-              weightInGrams: product.weightInGrams,
-              userId,
-            })),
+  async create(userId: string, data: CreateMealDto): Promise<any> {
+    return await this.prismaService.mealHistory.update({
+      where: { userId: userId },
+      data: {
+        meals: {
+          create: {
+            title: data.title,
+            massInGrams: data.mass,
+            mealType: data.mealType,
+            products: {
+              create: data.products.map((product) => ({
+                title: product.product.title,
+              })),
+            },
           },
         },
-        include: {
-          products: true,
-        },
-      });
-
-      return meal;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+      },
+    });
   }
 
-  async findAll() {
-    const meals = await this.prismaService.meals.findMany({
+  async findAll(userId: string, query: any) {
+    const mealHistory = await this.prismaService.mealHistory.findUnique({
+      where: { userId },
+    });
+
+    const { dateFrom, dateTo, ...rest } = query;
+
+    return await this.prismaService.meal.findMany({
+      where: {
+        mealHistoryId: mealHistory.id,
+        ...rest,
+        createdAt: { gte: dateFrom, lte: dateTo },
+      },
       include: {
         products: true,
       },
     });
-    return meals;
   }
 
   async findOne(id: string) {
-    try {
-      const meal = await this.prismaService.meals.findUnique({
-        where: { id },
-        include: {
-          products: true,
-        },
-      });
-      return meal;
-    } catch (error) {
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+    return await this.prismaService.meal.findUnique({
+      where: { id },
+      include: {
+        products: true,
+      },
+    });
   }
 
-  async update(id: string, data: UpdateMealDto): Promise<Meals> {
-    try {
-      const { title, products, userId } = data;
-
-      const existingMeal = await this.prismaService.meals.findUnique({
-        where: { id },
-        include: { products: true },
-      });
-
-      if (!existingMeal) {
-        throw new NotFoundException('Meal not found');
-      }
-
-      // Supprimer les produits existants du repas
-      await this.prismaService.mealOnProduct.deleteMany({
-        where: { mealId: id },
-      });
-
-      // Mettre à jour le titre du repas
-      const updatedMeal = await this.prismaService.meals.update({
-        where: { id },
-        data: { title },
-        include: { products: true },
-      });
-
-      // Vérifier si les produits existent
-      for (const product of products) {
-        const existingProduct = await this.prismaService.products.findUnique({
-          where: { id: product.id },
-        });
-
-        if (!existingProduct) {
-          throw new NotFoundException(
-            `Product with ID ${product.id} not found`,
-          );
-        }
-      }
-
-      // Créer les nouveaux produits pour le repas
-      const createdProducts = await Promise.all(
-        products.map((product) =>
-          this.prismaService.mealOnProduct.create({
-            data: {
-              weightInGrams: product.weightInGrams,
-              product: { connect: { id: product.id } },
-              meal: { connect: { id } },
-              user: { connect: { id: userId } },
-            },
-          }),
-        ),
-      );
-
-      updatedMeal.products = createdProducts;
-
-      return updatedMeal;
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+  async update(id: string, data: UpdateMealDto): Promise<Meal> {
+    return await this.prismaService.meal.update({
+      where: { id },
+      data,
+    });
   }
 
   async remove(id: string): Promise<void> {
-    try {
-      const meal = await this.prismaService.meals.findUnique({
-        where: { id },
-        include: { products: true }, // Inclure les produits associés pour supprimer les enregistrements dans MealOnProduct
-      });
-
-      if (!meal) {
-        throw new NotFoundException('Meal not found');
-      }
-
-      // Supprimer les enregistrements associés dans MealOnProduct
-      await this.prismaService.mealOnProduct.deleteMany({
-        where: { mealId: meal.id },
-      });
-
-      // Supprimer le repas lui-même
-      await this.prismaService.meals.delete({
-        where: { id },
-      });
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        `Database error: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+    await this.prismaService.meal.delete({
+      where: { id },
+    });
   }
 }

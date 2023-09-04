@@ -31,16 +31,14 @@ export class AuthService {
     const user = await this.usersService.findOne({ email });
 
     if (!user || user.accountType !== AccountType.DEFAULT) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      return;
     }
 
     const isPassCorrect = await bcrypt.compare(pass, user.password);
 
-    if (isPassCorrect) {
-      return user;
-    }
+    if (isPassCorrect) return user;
 
-    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    return;
   }
 
   async login(user: Prisma.UserWhereUniqueInput) {
@@ -83,7 +81,7 @@ export class AuthService {
     );
 
     if (!user || user.connections.length === 0) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      return;
     }
 
     const connection = user.connections.find(
@@ -92,7 +90,7 @@ export class AuthService {
     );
 
     if (!connection) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      return;
     }
 
     const payload = { email: user.email, id: user.id };

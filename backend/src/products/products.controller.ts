@@ -2,7 +2,6 @@ import {
   Controller,
   Post,
   Body,
-  Get,
   Patch,
   Delete,
   Param,
@@ -22,34 +21,25 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @UseGuards(JwtAccessGuard)
-  @Post()
-  async create(@Body() data: CreateProductDto) {
-    return this.productsService.create(data);
-  }
-
-  @Get(':id')
-  async getProductById(@Param('id', ParseUUIDPipe) id: string) {
-    return this.productsService.findOne({ id });
-  }
+  // @UseGuards(JwtAccessGuard)
+  // @Post()
+  // async create(@Body() data: CreateProductDto) {
+  //   return this.productsService.create(data);
+  // }
 
   @UseGuards(JwtAccessGuard)
   @Patch(':id')
-  async updateProduct(
+  async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body()
-    data: UpdateProductDto,
+    @Body() data: UpdateProductDto,
   ) {
-    return this.productsService.update({
-      where: { id },
-      data,
-    });
+    return this.productsService.update(id, data);
   }
 
   @UseGuards(JwtAccessGuard)
   @Delete(':id')
   @HttpCode(204)
   async deleteProduct(@Param('id', ParseUUIDPipe) id: string) {
-    return this.productsService.deleteProduct({ id });
+    return this.productsService.delete({ id });
   }
 }

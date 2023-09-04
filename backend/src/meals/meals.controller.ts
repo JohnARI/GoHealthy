@@ -9,14 +9,16 @@ import {
   UseGuards,
   HttpCode,
   ParseUUIDPipe,
+  Request,
+  Query,
 } from '@nestjs/common';
 import { MealsService } from './meals.service';
 import { CreateMealDto } from './dto/create-meal.dto';
 import { UpdateMealDto } from './dto/update-meal.dto';
 import { SkipThrottle } from '@nestjs/throttler';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
-import { ApiResponse } from '@nestjs/swagger';
-import { MealSwaggerResponses } from 'src/swagger/meals.swagger';
+import { RequestWithUserUniqueInput } from 'src/types/request.type';
+import { GetMealDto } from './dto/get-meal-dto';
 
 @SkipThrottle()
 @Controller('meals')
@@ -25,15 +27,20 @@ export class MealsController {
 
   @UseGuards(JwtAccessGuard)
   @Post()
-  @ApiResponse(MealSwaggerResponses.CREATE_SUCCESS)
-  async create(@Body() createMealDto: CreateMealDto) {
-    return this.mealsService.create(createMealDto);
+  async create(
+    @Request() req: RequestWithUserUniqueInput,
+    @Body() createMealDto: CreateMealDto,
+  ) {
+    return this.mealsService.create(req.user.id, createMealDto);
   }
 
   @UseGuards(JwtAccessGuard)
-  @Get()
-  findAll() {
-    return this.mealsService.findAll();
+  @Get('history')
+  findAll(
+    @Request() req: RequestWithUserUniqueInput,
+    @Query() query: GetMealDto,
+  ) {
+    return this.mealsService.findAll(req.user.id, query);
   }
 
   @UseGuards(JwtAccessGuard)

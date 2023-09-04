@@ -18,7 +18,6 @@ ALTER TABLE "BodyBuild" ADD COLUMN     "diet" "Diet" NOT NULL,
 ADD COLUMN     "dietIntensity" "DietIntensity" NOT NULL;
 
 -- CreateIndex
-CREATE UNIQUE INDEX "BodyBuild_userId_key" ON "BodyBuild"("userId");
-
+-- CREATE UNIQUE INDEX "BodyBuild_userId_key" ON "BodyBuild"("userId");
 -- CreateIndex
-CREATE UNIQUE INDEX "BodyNeeds_bodyId_key" ON "BodyNeeds"("bodyId");
+-- CREATE UNIQUE INDEX "BodyNeeds_bodyId_key" ON "BodyNeeds"("bodyId");

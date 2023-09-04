@@ -93,7 +93,14 @@ export class AuthController {
   @ApiResponse(AuthSwaggerResponses.REFRESH_SUCCESS)
   @ApiResponse(AuthSwaggerResponses.JWT_UNAUTHORIZED)
   refreshToken(@Request() req: Request & { user: any }) {
-    return this.authService.refreshToken(req.user.id, req.user.refreshToken);
+    const refresh = this.authService.refreshToken(
+      req.user.id,
+      req.user.refreshToken,
+    );
+
+    if (refresh) return refresh;
+
+    return new HttpException('Invalid refresh token', HttpStatus.UNAUTHORIZED);
   }
 
   @Post('sendResetPassword')
