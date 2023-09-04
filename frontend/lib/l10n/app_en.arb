@@ -45,6 +45,78 @@
     "description": "The title of the login with Google button"
   },
 
+  "loginDontHaveAnAccount": "No account yet?",
+  "@dontHaveAnAccount": {
+    "description": "The title of the register link"
+  },
+
+  "loginForgotPassword": "Forgot password?",
+  "@loginForgotPassword": {
+    "description": "The title of the forgot password link"
+  },
+
+  "registerAlreadyHaveAnAccount": "Already have an account?",
+  "@alreadyHaveAnAccount": {
+    "description": "The title of the login link"
+  },
+
+  "registerConfirmPassword": "Confirm password",
+  "@registerConfirmPassword": {
+    "description": "The title of the input confirm password"
+  },
+
+  "or": "or",
+  "@or": {
+    "description": "The title of the or text"
+  },
+
+
+  "followupPieChartTitleCarbs": "Carbs",
+  "@followupPieChartTitleCarbs" : {
+    "description" : "Sugar"
+  },
+
+  "followupPieChartTitleProteins": "Proteins",
+  "@followupPieChartTitleProteins" : {
+    "description" : "Proteins"
+  },
+
+  "followupPieChartTitleLipids": "Lipids",
+  "@followupPieChartTitleLipids" : {
+    "description" : "Fat"
+  },
+  
+  "followupPieChartTitleCalories": "Calories",
+  "@followupPieChartTitleCalories" : {
+    "description" : "Calories"
+  },
+
+  "followupAddMeal": "Add",
+  "@followupAddMeal" : {
+    "description" : "Add"
+  },
+  
+  "followupBreakfast": "Breakfast",
+  "@followupBreakfast" : {
+    "description" : "Breakfast"
+  },
+  
+  "followupLunch": "Lunch",
+  "@followupLunch" : {
+    "description" : "Lunch"
+  },
+
+  "followupSnack": "Snack",
+  "@followupSnack" : {
+    "description" : "Snack"
+  },
+
+  "followupDinner": "Dinner",
+  "@followupDinner" : {
+    "description" : "Dinner"
+  },
+
+
   "unknownErrorOccured": "An unknown error occurred",
   "@unknownErrorOccured": {
     "description": "Error message"

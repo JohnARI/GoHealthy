@@ -4,65 +4,81 @@ import 'package:http/http.dart' as http;
 
 import '../helpers/api_helper.dart';
 import 'api_providers.dart';
-// TODO: UPDATE THIS FILE WHEN THE API IS READY
 
 /// A client that is used to make API requests.
 ///
-/// The [APIClient] class provides methods to make various types of API requests,
+/// The [ApiClient] class provides methods to make various types of API requests,
 /// such as GET, POST, PUT, DELETE, and PATCH. It handles sending the requests,
 /// handling the responses, and parsing the data.
-class APIClient {
-  static late final http.Client _client;
+class ApiClient {
+  static final http.Client _client = ApiProvider.getClient();
 
-  /// Creates a new instance of [APIClient].
+  /// Sends a GET request to the specified [endpoint].
   ///
-  /// This constructor initializes the [http.Client] used for making API requests.
-  APIClient() {
-    _client = http.Client();
-  }
-
-  static Future<T> getHttpRequest<T>(
-    String endpoint, {
+  /// This method sends a GET request to the provided [endpoint] and returns the
+  /// response body of type [T]. The [headers] and [includeHeaders] parameters
+  /// can be used to specify additional headers for the request and control whether
+  /// the default headers should be included.
+  static Future<T> getHttpRequest<T>({
+    required String endpoint,
     Map<String, String>? headers,
     bool includeHeaders = true,
   }) async {
     try {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
-          includeHeaders ? headers ?? APIProvider.headers : null;
-      final http.Response response = await APIProvider().getClient().get(
-            Uri.parse(endpoint),
-            headers: requestHeaders,
-          );
+          includeHeaders ? headers ?? ApiProvider.headers : null;
+      final http.Response response = await _client.get(
+        Uri.parse(endpoint),
+        headers: requestHeaders,
+      );
       final dynamic result = handleResponse(response);
+
       return result as T;
     } catch (e) {
-      handleException(e);
       rethrow;
     }
   }
 
-  static Future<T> postHttpRequest<T>(
-    String endpoint,
-    Map<String, dynamic> body, {
+  /// Sends a POST request to the specified [endpoint] with the given [body].
+  ///
+  /// This method sends a POST request to the provided [endpoint] with the [body]
+  /// and returns the response body of type [T]. The [headers] and [includeHeaders]
+  /// parameters can be used to specify additional headers for the request and control
+  /// whether the default headers should be included.
+  static Future<T> postHttpRequest<T>({
+    required String endpoint,
+    required Map<String, dynamic> body,
     Map<String, String>? headers,
     bool includeHeaders = true,
   }) async {
     try {
       // If includeHeaders is not set to false, then the headers will be included in the request headers.
       final Map<String, String>? requestHeaders =
-          includeHeaders ? headers ?? APIProvider.headers : null;
-      log(body.toString());
-      final http.Response response = await APIProvider().getClient().post(
-            Uri.parse(endpoint),
-            headers: requestHeaders,
-            body: body,
-          );
-          log(response.body);
+          includeHeaders ? headers ?? ApiProvider.headers : null;
+      log(
+        name: 'APIClient',
+        'Request body: $body, Request headers: $requestHeaders, Request endpoint: $endpoint',
+      );
+      final http.Response response = await _client.post(
+        Uri.parse(endpoint),
+        headers: requestHeaders,
+        body: body,
+      );
+
       final dynamic result = handleResponse(response);
+      log(
+        name: 'APIClient',
+        'Converting response completed...',
+      );
+
       return result as T;
     } catch (e) {
-      handleException(e);
+      log(
+        name: 'APIClient',
+        e.toString(),
+        error: e,
+      );
       rethrow;
     }
   }

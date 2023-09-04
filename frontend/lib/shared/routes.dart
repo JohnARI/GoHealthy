@@ -1,5 +1,47 @@
+class Route {
+  final String name;
+  final String path;
+
+  const Route({
+    required this.name,
+    required this.path,
+  });
+}
+
 class AppRoute {
-  static const String HOME_ROUTE_NAME = 'home';
-  static const String LOGIN_ROUTE_NAME = 'login';
-  static const String REGISTER_ROUTE_NAME = 'register';
+  static const Route REGISTER = Route(
+    name: 'register',
+    path: '/register',
+  );
+
+  static const Route LOGIN = Route(
+    name: 'login',
+    path: '/login',
+  );
+
+  static const Route HOME = Route(
+    name: 'home',
+    path: '/home',
+  );
+
+  static const Route STATS = Route(
+    name: 'settings',
+    path: '/settings',
+  );
+
+  static const Route PROFILE = Route(
+    name: 'profile',
+    path: '/profile',
+  );
+
+  static const Route ADD_MEAL = Route(
+    name: 'addMeal',
+    path: '/followup/:mealType',
+  );
+
+  static const Route PRODUCT = Route(
+    name: 'product',
+    path: '/product/:id',
+  );
+
 }

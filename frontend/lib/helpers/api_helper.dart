@@ -1,30 +1,31 @@
-import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:http/http.dart' as http;
+
 import '../utils/api_exceptions.dart';
 
-dynamic handleResponse(http.Response response) {
-  if (response.statusCode >= 200 && response.statusCode < 300) {
-    return jsonDecode(response.body);
-  } else if (response.statusCode == 401) {
-    throw UnauthorizedException('Unauthorized');
-  } else if (response.statusCode == 404) {
-    throw NotFoundException('Resource not found');
-  } else if (response.statusCode == 400) {
-    throw BadRequestException('Bad request');
-  } else if (response.statusCode == 500) {
-    throw ServerErrorException('Server error');
-  } else {
-    throw UnknownException('Unknown error occurred');
-  }
-}
+T handleResponse<T>(http.Response response) {
+  log(
+    name: 'APIHelper',
+    'Converting response...',
+  );
 
-void handleException(dynamic e) {
-  if (e is http.ClientException) {
-    throw NoInternetException('No internet connection');
-  } else if (e is TimeoutException) {
-    throw TimeOutException('Request timed out');
+  final dynamic result = jsonDecode(response.body);
+
+  if (response.statusCode >= 200 && response.statusCode < 300) {
+    return result as T;
+  } else if (response.statusCode == 400) {
+    throw BadRequestException(result['message']);
+  } else if (response.statusCode == 401) {
+    throw UnauthorizedException(result['message']);
+  } else if (response.statusCode == 403) {
+    throw ForbiddenException(result['message']);
+  } else if (response.statusCode == 404) {
+    throw NotFoundException(result['message']);
+  } else if (response.statusCode >= 500 && response.statusCode < 600) {
+    throw ServerErrorException(result['message']);
   } else {
-    throw UnknownException('Unknown error occurred');
+    throw UnknownException(result['message']);
   }
 }

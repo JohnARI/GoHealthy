@@ -18,11 +18,7 @@ class APIException implements Exception {
 /// The [UnauthorizedException] class is a subclass of [APIException] and represents
 /// an exception that occurs when an API request is unauthorized.
 class UnauthorizedException extends APIException {
-  /// Creates a new instance of [UnauthorizedException] with the specified [message].
-  UnauthorizedException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  UnauthorizedException(super.message);
 }
 
 /// Exception thrown when the API server encounters an error.
@@ -30,11 +26,7 @@ class UnauthorizedException extends APIException {
 /// The [ServerErrorException] class is a subclass of [APIException] and represents
 /// an exception that occurs when the API server encounters an error.
 class ServerErrorException extends APIException {
-  /// Creates a new instance of [ServerErrorException] with the specified [message].
-  ServerErrorException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  ServerErrorException(super.message);
 }
 
 /// Exception thrown when the API request is invalid.
@@ -42,11 +34,7 @@ class ServerErrorException extends APIException {
 /// The [BadRequestException] class is a subclass of [APIException] and represents
 /// an exception that occurs when an API request is invalid.
 class BadRequestException extends APIException {
-  /// Creates a new instance of [BadRequestException] with the specified [message].
-  BadRequestException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  BadRequestException(super.message);
 }
 
 /// Exception thrown when the requested resource is not found.
@@ -54,11 +42,7 @@ class BadRequestException extends APIException {
 /// The [NotFoundException] class is a subclass of [APIException] and represents
 /// an exception that occurs when the requested resource is not found.
 class NotFoundException extends APIException {
-  /// Creates a new instance of [NotFoundException] with the specified [message].
-  NotFoundException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  NotFoundException(super.message);
 }
 
 /// Exception thrown when the API request is forbidden.
@@ -66,11 +50,7 @@ class NotFoundException extends APIException {
 /// The [ForbiddenException] class is a subclass of [APIException] and represents
 /// an exception that occurs when an API request is forbidden.
 class ForbiddenException extends APIException {
-  /// Creates a new instance of [ForbiddenException] with the specified [message].
-  ForbiddenException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  ForbiddenException(super.message);
 }
 
 /// Exception thrown when an unknown error occurs during the API request.
@@ -78,11 +58,7 @@ class ForbiddenException extends APIException {
 /// The [UnknownException] class is a subclass of [APIException] and represents
 /// an exception that occurs when an unknown error occurs during the API request.
 class UnknownException extends APIException {
-  /// Creates a new instance of [UnknownException] with the specified [message].
-  UnknownException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  UnknownException(super.message);
 }
 
 /// Exception thrown when there is no internet connection.
@@ -90,11 +66,7 @@ class UnknownException extends APIException {
 /// The [NoInternetException] class is a subclass of [APIException] and represents
 /// an exception that occurs when there is no internet connection.
 class NoInternetException extends APIException {
-  /// Creates a new instance of [NoInternetException] with the specified [message].
-  NoInternetException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  NoInternetException(super.message);
 }
 
 /// Exception thrown when the API request times out.
@@ -102,9 +74,5 @@ class NoInternetException extends APIException {
 /// The [TimeOutException] class is a subclass of [APIException] and represents
 /// an exception that occurs when the API request times out.
 class TimeOutException extends APIException {
-  /// Creates a new instance of [TimeOutException] with the specified [message].
-  TimeOutException(String message) : super(message);
-
-  @override
-  String toString() => message;
+  TimeOutException(super.message);
 }

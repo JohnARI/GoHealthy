@@ -6,3 +6,5 @@ abstract class LogoutEvent extends Equatable {
   @override
   List<Object> get props => <Object>[];
 }
+
+class LogoutRequestEvent extends LogoutEvent {}

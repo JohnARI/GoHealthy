@@ -1,27 +1,85 @@
 import 'dart:developer';
 
-import 'package:go_healthy/API/api_client.dart';
-import 'package:go_healthy/API/api_endpoints.dart';
+import 'package:go_healthy/apI/api_client.dart';
+import 'package:go_healthy/apI/api_endpoints.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../../apI/api_google.dart';
 import '../models/login.dart';
 
 class LoginRepository {
   Future<Login> login(String email, String password) async {
     try {
+      log(
+        name: 'Login repository',
+        'login request started...',
+      );
       final dynamic login =
-          await APIClient.postHttpRequest<Map<String, dynamic>>(
-        APIEndpoint.login(),
-        <String, dynamic>{
-          'email': 'john.aristosa@hotmail.com',
-          'password': 'John123.',
+          await ApiClient.postHttpRequest<Map<String, dynamic>>(
+        endpoint: ApiEndpoint.login(),
+        body: <String, dynamic>{
+          'email': email,
+          'password': password,
         },
         includeHeaders: false,
       );
-      log(login.toString());
+      log(
+        name: 'Login repository',
+        'login request sent successfully',
+      );
       final Login result = Login.fromMap(login);
+      log(
+        name: 'Login repository',
+        'Converting response to Login model completed',
+      );
       return result;
-    } catch (e) {
-      log(e.toString());
+    } catch (error) {
+      log(
+        name: 'Login repository',
+        error.toString(),
+        error: error,
+      );
+      rethrow;
+    }
+  }
+
+  Future<Login> loginGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await ApiGoogle.signIn();
+
+      if (googleUser == null) {
+        log(name: 'LoginBLoC', 'The user cancelled the login');
+        throw Exception('The user cancelled the login');
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final String? accessToken = googleAuth.accessToken;
+      final String? idToken = googleAuth.idToken;
+      log(
+        name: 'Login repository',
+        'Google login request started...',
+      );
+      final Map<String, dynamic> googleSigninRequest =
+
+          await ApiClient.postHttpRequest<Map<String, dynamic>>(
+        endpoint: ApiEndpoint.loginGoogle(),
+        body: <String, dynamic>{
+          'access_token': accessToken,
+          'id_token': idToken,
+        },
+        includeHeaders: false,
+      );
+
+      final Login result = Login.fromMap(googleSigninRequest);
+      // translate to login model
+      log(
+        name: 'Login repository',
+        'Google login request sent successfully',
+      );
+
+      return result;
+    } catch (error) {
       rethrow;
     }
   }
