@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    restart: always
+    volumes:
+      - .:/usr/src/app
+      # Si y'a un .env file à utiliser, decommenter
+#    env_file:
+#    - .env
+    command: npm run start:dev
+    ports:
+      - "5000:5000"
+
+  db:
+    image: postgres:15.3
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+    - db-data:/usr/share/db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+volumes:
+  db-data:

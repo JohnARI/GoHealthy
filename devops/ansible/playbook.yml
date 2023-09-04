@@ -1,0 +1,11 @@
+- name: GetHealthy Playbook
+  connection: ssh
+  gather_facts: no
+  hosts: all
+
+  roles:
+    - host-setup
+    - docker-setup
+    - jenkins-setup
+    - db-setup
+    - nest-setup

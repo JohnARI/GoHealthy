@@ -7,9 +7,130 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum AccountType {
+  DEFAULT
+  GOOGLE
+}
+
+enum ActivityLevel {
+  SEDENTARY
+  LIGHTLY_ACTIVE
+  MODERATELY_ACTIVE
+  VERY_ACTIVE
+  EXTREMELY_ACTIVE
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+  NOT_SPECIFIED
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
+enum DietIntensity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Diet {
+  LOWCARB
+  LOWFAT
+  STANDARD
+  HIGHPROTEIN
+}
+
 model User {
-  id String @default(uuid()) @id
-  email String @unique
-  username String
-  password String
+  id          String       @id @default(uuid())
+  accountType AccountType  @default(DEFAULT)
+  email       String       @unique
+  username    String
+  password    String
+  connections Connection[]
+  mealHistory MealHistory?
+  bodyBuild   BodyBuild?
+  codeResetPassword CodeResetPassword?
+}
+
+model Connection {
+  refreshToken String @unique
+  user         User   @relation(fields: [userId], references: [id])
+  userId       String
+}
+
+model CodeResetPassword {
+  id             String   @id @default(uuid())
+  code           Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String   @unique
+  expirationDate DateTime
+}
+
+model MealHistory {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  meals  Meal[]
+}
+
+model Product {
+  id            String  @id @default(uuid())
+  title         String
+  calories      Float   @default(0)
+  fat           Float   @default(0)
+  saturatedFat  Float   @default(0)
+  carbohydrates Float   @default(0)
+  sugars        Float   @default(0)
+  protein       Float   @default(0)
+  fiber         Float   @default(0)
+  salt          Float   @default(0)
+  massInGrams   Float   @default(0)
+  imageBucketId String?
+  EAN           String?
+  meals         Meal[]
+}
+
+model Meal {
+  id            String       @id @default(uuid())
+  title         String
+  products      Product[]
+  imageBucketId String       @default("")
+  massInGrams   Float        @default(0)
+  mealType      MealType     @default(SNACK)
+  createdAt     DateTime     @default(now())
+  mealHistory   MealHistory? @relation(fields: [mealHistoryId], references: [id])
+  mealHistoryId String?
+}
+
+
+model BodyBuild {
+  id            String        @id @default(uuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String        @unique
+  weightGoal    Float
+  currentWeight Float
+  sexe          Sex
+  activityLevel ActivityLevel
+  height        Float
+  age           Int
+  diet          Diet          @default(STANDARD)
+  dietIntensity DietIntensity @default(MEDIUM)
+  dailyNeeds    DailyNeeds?
+}
+
+model DailyNeeds {
+  id String @id @default(uuid())
+  body BodyBuild @relation(fields: [bodyId], references: [id], onDelete: Cascade)
+  bodyId String @unique
+  calories Int
+  proteins Int
+  carbohydrates Int
+  lipids Int
 }

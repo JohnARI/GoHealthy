@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "eca060b8-04a1-4a29-b05c-db0547b2b7ef",
+		"name": "GoHealthy Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27954769",
+		"_collection_link": "https://planetary-crater-94533.postman.co/workspace/GoHealthy~8ef3bb81-5d7b-41ed-ae00-c1e0bc2f1eec/collection/27954769-eca060b8-04a1-4a29-b05c-db0547b2b7ef?action=share&source=collection_link&creator=27954769"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"password\": \"Ludodo32@\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OAuth2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ludovic.debever@holis.earth\",\n    \"username\": \"Ludovic233\",\n    \"password\": \"Ludodo32@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiMDRkYzY3MTAtZTMxMi00NTFhLWIzMWEtM2Y5Y2YwMWUyNDI0IiwiaWF0IjoxNjg3MDc2NzM2LCJleHAiOjE2ODc2ODE1MzZ9.urky4TOdj0mLXGZ6K6CNtFOs8I6VNyTHXKerSRDGScI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiYzI2NjBiODEtYjYzOS00M2I5LWJjNzAtNjZmOTZiMDMwNjUxIiwiaWF0IjoxNjg3Nzg4NDI5LCJleHAiOjE2ODc3ODkzMjl9.iIJl2XiD_W0oPfwwLfKXMsGMywPEOKxkMX8K76hKkSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Lxdovic\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"French Spring Water\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6872c52b-96d3-43c5-8c5e-af5a81eaa4da"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "728d831b-b579-4d25-b089-41e55127e067"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OpenFoodFacts",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meals",
+			"item": [
+				{
+					"name": "Create Meal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"mealType\": \"LUNCH\",\n  \"products\": [\n    {\n        \"mass\":200,\n        \"product\": {\n            \"title\": \"Bread\"\n        }\n    },\n    {\n        \"mass\":200,\n      \"product\": {\n          \"title\": \"Bread\"\n      }}\n  ],\n      \"mass\": 400\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all meals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/history?mealType=LUNCH",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								"history"
+							],
+							"query": [
+								{
+									"key": "mealType",
+									"value": "LUNCH"
+								},
+								{
+									"key": "dateFrom",
+									"value": "2023-08-01T08:00:00.000Z",
+									"disabled": true
+								},
+								{
+									"key": "dateTo",
+									"value": "2023-08-02T10:48:00.000Z",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one meal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 1,5 L\",\n  \"products\": [\n    {\n      \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    },\n    {\n        \"id\": \"45b5e7df-d312-465b-9cea-f588a304f288\",\n      \"weightInGrams\": 200\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6e3bad32-8bd9-40af-87d4-b0d978453a69"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Meal",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Repas avec Eau de source - Cristaline - 0,5 L\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6e3bad32-8bd9-40af-87d4-b0d978453a69"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a meal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/meals/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meals",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User CRUD",
+			"item": [
+				{
+					"name": "Get Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BodyBuild",
+			"item": [
+				{
+					"name": "Get One Body-Build",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/body-build",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"body-build"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Body-Build",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1ZG92aWMuZGViZXZlckBob2xpcy5lYXJ0aCIsImlkIjoiYmIxOGYyYWQtMDQwNi00YmM1LWJkYzEtMGY1ZWUwNTkwZGI3IiwiaWF0IjoxNjg5NjY4NDEyLCJleHAiOjE2OTA5NjQ0MTJ9.etg5eQ3YfQUJinBRqmZK_OL03w1Z4cK3tKam6wR6FCg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"weightGoal\": 70.5,\n  \"currentWeight\": 75.2,\n  \"activityLevel\": \"MODERATELY_ACTIVE\",\n  \"height\": 180,\n  \"age\": 25,\n  \"diet\": \"LOWFAT\",\n  \"dietIntensity\": \"MEDIUM\",\n  \"sexe\": \"MALE\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/body-build",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"body-build"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Body-Build",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"weightGoal\": 70.5,\n  \"currentWeight\": 75.2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/body-build",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"body-build"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000"
+		}
+	]
+}
